@@ -1,231 +1,822 @@
 <style>
-  /* --- FULL WIDTH CONTAINER --- */
-  .custom-product-full-width {
-    background-color: #F5F0E3; 
-    width: 100%;
-    padding: 0;
+  /* ── ALL MY — Product Page ─────────────────────────────── */
+
+  .allmy-product {
+    background: #F5F0E3;
+    min-height: 100vh;
+    padding-bottom: 32px;
   }
 
-  /* --- MODULAR GRID --- */
-  .custom-product-wrapper {
+  .allmy-product__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 0; /* Seamless transition between blocks */
-    max-width: 1400px;
+    grid-template-columns: 52fr 48fr;
+    max-width: 1440px;
     margin: 0 auto;
-    background-color: transparent; 
+    align-items: start;
   }
 
-  /* --- LEFT: MEDIA BLOCK --- */
-  .custom-product-media {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #F5F0E3;
-    padding: 60px; 
-  }
-
-  .custom-product-media img {
-    width: 100%; 
-    max-width: 500px; 
-    height: auto;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* --- RIGHT: INFO BLOCK --- */
-  .custom-product-info {
+  /* ── LEFT: STICKY IMAGE ─────────────────────────────────── */
+  .allmy-product__media {
+    position: sticky;
+    top: 0;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    background-color: #F5F0E3; 
-    padding: 60px 80px; 
-    color: #2B2724; 
+    align-items: center;
+    justify-content: flex-start;
+    background: #EDE8D9;
+    overflow: hidden;
+    padding: 0 48px 48px;
   }
 
-  /* --- TYPOGRAPHY --- */
-  .custom-product-heading {
-    color: #2B2724; 
-    font-weight: 600;
+  .allmy-product__media::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 55% 45% at 75% 25%, rgba(226,183,134,.18) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 55% at 15% 80%, rgba(218,203,165,.12) 0%, transparent 60%);
+    pointer-events: none;
   }
 
-  .custom-product-text {
-    color: #2B2724; 
-    font-size: 14px;
-    line-height: 1.6;
+  .allmy-product__image {
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    position: relative;
+    z-index: 1;
   }
 
-  .custom-product-header {
+  .allmy-product__media-badge {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    z-index: 2;
+  }
+
+  .allmy-product__media-badge img {
+    width: 72px;
+    height: auto;
+    opacity: .8;
+  }
+
+  /* ── RIGHT: INFO ────────────────────────────────────────── */
+  .allmy-product__info {
+    padding: 0 72px 80px 60px;
+    color: #2B2724;
+  }
+
+  /* Title row */
+  .allmy-product__title-row {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: baseline;
-    margin-bottom: 10px;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+    margin-top: 0;
   }
 
-  .custom-product-title {
-    font-size: 28px;
+  .allmy-product__title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.25rem;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #2B2724;
+    margin: 0;
+    flex: 1;
+  }
+
+  .allmy-product__price {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #2B2724;
+    white-space: nowrap;
     margin: 0;
   }
 
-  .custom-product-price {
-    font-size: 18px;
+  .allmy-product__mix-ratio {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    color: rgba(43,39,36,.6);
+    letter-spacing: 0;
+    margin-bottom: 24px;
   }
 
-  .custom-product-subtitle {
-    font-size: 12px;
-    opacity: 0.8;
+  /* Description */
+  .allmy-product__description {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #2B2724;
     margin-bottom: 40px;
   }
 
-  .custom-product-description {
-    margin-bottom: 40px;
+  .allmy-product__description p { margin: 0 0 10px; }
+  .allmy-product__description a { color: inherit; text-decoration: underline; }
+
+  /* ── MISSION PILLS ──────────────────────────────────────── */
+  .allmy-product__pills {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-bottom: 28px;
   }
 
-  .custom-variant-picker {
+  .allmy-product__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 14px;
+    border: 1px solid rgba(43,39,36,.15);
+    border-radius: 100px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2B2724;
+    background: transparent;
+    white-space: nowrap;
+  }
+
+  .allmy-product__pill img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+
+  /* ── VARIANT PICKER ─────────────────────────────────────── */
+  .allmy-product__variants-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(43,39,36,.5);
+    margin-bottom: 12px;
+  }
+
+  .allmy-product__variants {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .allmy-product__variant-btn {
+    padding: 10px 20px;
+    border: 1.5px solid rgba(43,39,36,.25);
+    background: transparent;
+    color: #2B2724;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all .15s ease;
+  }
+
+  .allmy-product__variant-btn.is-selected,
+  .allmy-product__variant-btn:hover {
+    border-color: #2B2724;
+    background: #2B2724;
+    color: #F5F0E3;
+  }
+
+  /* ── CTA BUTTONS ────────────────────────────────────────── */
+  .allmy-product__actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .allmy-product__size-indicator {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 30px;
+    gap: 10px;
+    margin-bottom: 28px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: #2B2724;
   }
 
-  .custom-radio-dot {
-    width: 12px;
-    height: 12px;
-    background-color: #2B2724; 
+  .allmy-product__size-dot {
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    display: inline-block;
+    background: #2B2724;
+    flex-shrink: 0;
   }
 
-  /* --- BUTTON --- */
-  .custom-product-actions {
-    display: flex;
-    margin-bottom: 60px;
-  }
-
-  .custom-btn {
+  .allmy-product__btn-add {
     flex: 1;
-    padding: 18px 0;
-    border-radius: 50px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 13px;
-    cursor: pointer;
+    padding: 18px 24px;
+    background: #2B2724;
+    color: #F5F0E3;
     border: none;
-    transition: opacity 0.2s ease;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: opacity .2s ease;
   }
 
-  .custom-btn-primary {
-    background-color: #2B2724; 
-    color: #F5F0E3; 
+  .allmy-product__btn-add:hover { opacity: .85; }
+  .allmy-product__btn-add:disabled {
+    opacity: .4;
+    cursor: not-allowed;
   }
 
-  /* --- ACCORDIONS --- */
-  .custom-accordions-wrapper {
-    border-top: 1px solid #2B2724; 
+  .allmy-product__btn-wishlist {
+    padding: 16px 20px;
+    background: transparent;
+    color: #2B2724;
+    border: 1.5px solid rgba(43,39,36,.3);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: border-color .2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .custom-accordion {
-    border-bottom: 1px solid #2B2724; 
+  .allmy-product__btn-wishlist:hover { border-color: #2B2724; }
+
+  .allmy-product__qty-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
   }
 
-  .custom-accordion-header {
+  .allmy-product__qty-btn {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1.5px solid rgba(43,39,36,.25);
+    color: #2B2724;
+    font-size: 1.1rem;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .2s ease;
+    flex-shrink: 0;
+  }
+
+  .allmy-product__qty-btn:first-child {
+    border-radius: 100px 0 0 100px;
+    border-right: none;
+  }
+
+  .allmy-product__qty-btn:last-child {
+    border-radius: 0 100px 100px 0;
+    border-left: none;
+  }
+
+  .allmy-product__qty-btn:hover { border-color: #2B2724; }
+
+  .allmy-product__qty-input {
+    width: 52px;
+    height: 44px;
+    border: 1.5px solid rgba(43,39,36,.25);
+    border-left: none;
+    border-right: none;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #2B2724;
+    background: transparent;
+    -moz-appearance: textfield;
+  }
+
+  .allmy-product__qty-input::-webkit-outer-spin-button,
+  .allmy-product__qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+  .allmy-product__qty-input:focus { outline: none; border-color: #2B2724; }
+
+  /* ── ACCORDIONS ─────────────────────────────────────────── */
+  .allmy-product__accordions {
+    border-top: 1px solid rgba(43,39,36,.12);
+  }
+
+  .allmy-product__accordion {
+    border-bottom: 1px solid rgba(43,39,36,.12);
+  }
+
+  .allmy-product__accordion summary {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 18px 0;
     cursor: pointer;
-    text-transform: uppercase;
-    font-size: 13px;
     list-style: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #2B2724;
+    user-select: none;
   }
 
-  .custom-accordion-header::-webkit-details-marker {
-    display: none; 
+  .allmy-product__accordion summary::-webkit-details-marker { display: none; }
+
+  .allmy-product__accordion-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    flex-shrink: 0;
   }
 
-  .custom-accordion-content {
-    padding-bottom: 20px;
+  .allmy-product__accordion-icon::before,
+  .allmy-product__accordion-icon::after {
+    content: '';
+    position: absolute;
+    background: #2B2724;
+    border-radius: 1px;
+    transition: transform .25s ease, opacity .25s ease;
   }
 
+  .allmy-product__accordion-icon::before {
+    width: 12px; height: 1.5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .allmy-product__accordion-icon::after {
+    width: 1.5px; height: 12px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .allmy-product__accordion[open] .allmy-product__accordion-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0;
+  }
+
+  .allmy-product__accordion-body {
+    padding: 4px 0 24px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(43,39,36,.8);
+  }
+
+  /* Concentrate how-to hero — dosage panel */
+  .allmy-product__dosage-panel {
+    background: #EDE8D9;
+    border-radius: 2px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .allmy-product__dosage-headline {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #C9B2A3;
+    margin-bottom: 10px;
+  }
+
+  .allmy-product__dosage-ratio {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #2B2724;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .allmy-product__dosage-desc {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: rgba(43,39,36,.7);
+    line-height: 1.6;
+  }
+
+  .allmy-product__concentrate-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .allmy-product__concentrate-step {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .allmy-product__step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2B2724;
+    color: #F5F0E3;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .allmy-product__step-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(43,39,36,.8);
+    line-height: 1.6;
+  }
+
+  /* Ingredients grid */
+  .allmy-product__ingredients-panel {
+    background: #EDE8D9;
+    border-radius: 2px;
+    padding: 20px;
+  }
+
+  .allmy-product__ingredients-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(43,39,36,.45);
+    margin-bottom: 10px;
+  }
+
+  .allmy-product__ingredients-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.825rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(43,39,36,.7);
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────── */
   @media screen and (max-width: 900px) {
-    .custom-product-wrapper {
+    .allmy-product__grid {
       grid-template-columns: 1fr;
-      gap: 0;
     }
-    .custom-product-info {
-      padding: 40px 20px;
+
+    .allmy-product__media {
+      position: relative;
+      height: 60vw;
+      min-height: 320px;
+      max-height: 520px;
+      padding: 64px 24px 24px;
+      justify-content: center;
     }
+
+    .allmy-product__info {
+      padding: 40px 24px 56px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .allmy-product__actions { flex-direction: column; }
+    .allmy-product__btn-wishlist { justify-content: center; }
   }
 </style>
 
-<div class="custom-product-full-width">
-  <div class="custom-product-wrapper">
-    <div class="custom-product-media">
-      <img src="{{ product.featured_image | img_url: '1000x' }}" alt="{{ product.title }}">
-    </div>
-    <div class="custom-product-info">
-      <div class="custom-product-header">
-        <h1 class="custom-product-heading custom-product-title">{{ product.title }}</h1>
-        <span class="custom-product-heading custom-product-price">{{ product.price | money }}</span>
+<div class="allmy-product">
+  <div class="allmy-product__grid">
+
+    {%- comment -%} ── LEFT: STICKY IMAGE ─────────────────── {%- endcomment -%}
+    <div class="allmy-product__media">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | img_url: '1000x' }}"
+          alt="{{ product.featured_image.alt | default: product.title | escape }}"
+          class="allmy-product__image"
+          loading="eager"
+          fetchpriority="high"
+          width="1000"
+          height="1000"
+        >
+      {%- else -%}
+        <img
+          src="{{ 'brand-logo-ducks-amber.svg' | file_url }}"
+          alt="{{ product.title | escape }}"
+          class="allmy-product__image"
+          width="240"
+          height="240"
+          style="opacity:.35; max-width:240px;"
+        >
+      {%- endif -%}
+
+      <div class="allmy-product__media-badge">
+        <img
+          src="{{ 'brand-icon-no-water.svg' | file_url }}"
+          alt="No water shipped"
+          width="72"
+          height="72"
+        >
       </div>
-      
-      <div class="custom-product-text custom-product-subtitle">
-        {{ product.metafields.custom.mix_ratio.value | default: "Mix ratio not set" }}
+    </div>
+
+    {%- comment -%} ── RIGHT: INFO ────────────────────────── {%- endcomment -%}
+    <div class="allmy-product__info">
+
+      <div class="allmy-product__title-row">
+        <h1 class="allmy-product__title">{{ product.title }}</h1>
+        <span class="allmy-product__price">{{ product.price | money }}</span>
       </div>
 
-      <div class="custom-product-text custom-product-description">
-        {{ product.description }}
-      </div>
-      
-      <div class="custom-variant-picker">
-        <span class="custom-radio-dot"></span>
-        <span class="custom-product-heading" style="font-size: 13px;">
-          {{ product.variants.first.weight | weight_with_unit: 'g' }}
+      {%- if product.metafields.custom.mix_ratio.value != blank -%}
+        <p class="allmy-product__mix-ratio">{{ product.metafields.custom.mix_ratio.value }}</p>
+      {%- endif -%}
+
+      {%- if product.description != blank -%}
+        <div class="allmy-product__description">{{ product.description }}</div>
+      {%- endif -%}
+
+      {%- comment -%} Mission pills {%- endcomment -%}
+      <div class="allmy-product__pills">
+        <span class="allmy-product__pill">
+          <img src="{{ 'brand-icon-no-water.svg' | file_url }}" alt="" width="20" height="20">
+          No Water Shipped
+        </span>
+        <span class="allmy-product__pill">
+          <img src="{{ 'brand-icon-naturally.svg' | file_url }}" alt="" width="20" height="20">
+          Naturally Gentle
+        </span>
+        <span class="allmy-product__pill">
+          <img src="{{ 'brand-icon-recycled.svg' | file_url }}" alt="" width="20" height="20">
+          Recycled Plastic
         </span>
       </div>
-      
-      {% form 'product', product %}
-        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-        <div class="custom-product-actions">
-          <button type="submit" class="custom-btn custom-btn-primary custom-product-heading">
-            ADD TO BAG
+
+      {%- comment -%} Variant picker {%- endcomment -%}
+      {%- if product.variants.size > 1 -%}
+        <div class="allmy-product__variants-label">{{ 'allmy.product.size_label' | t: default: 'Size' }}</div>
+        <div class="allmy-product__variants" id="allmy-variants">
+          {%- for variant in product.variants -%}
+            <button
+              type="button"
+              class="allmy-product__variant-btn {% if forloop.first %}is-selected{% endif %}"
+              data-variant-id="{{ variant.id }}"
+              data-variant-available="{{ variant.available }}"
+              aria-label="{{ variant.title }}"
+            >
+              {{ variant.title }}
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="allmy-product__size-indicator">
+          <span class="allmy-product__size-dot"></span>
+          {%- if product.variants.first.title == 'Default Title' -%}
+            {{ product.variants.first.weight }}g
+          {%- else -%}
+            {{ product.variants.first.title }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Add to bag form {%- endcomment -%}
+      {% form 'product', product, id: 'allmy-product-form' %}
+        <input type="hidden" name="id" id="allmy-variant-id" value="{{ product.variants.first.id }}">
+        <div class="allmy-product__qty-row">
+          <button type="button" class="allmy-product__qty-btn" id="allmy-qty-minus" aria-label="Decrease quantity">−</button>
+          <input
+            type="number"
+            id="allmy-qty"
+            name="quantity"
+            class="allmy-product__qty-input"
+            value="1"
+            min="1"
+            aria-label="Quantity"
+          >
+          <button type="button" class="allmy-product__qty-btn" id="allmy-qty-plus" aria-label="Increase quantity">+</button>
+        </div>
+
+        <div class="allmy-product__actions">
+          <button
+            type="submit"
+            class="allmy-product__btn-add"
+            {% unless product.available %}disabled{% endunless %}
+          >
+            {%- if product.available -%}{{ 'allmy.product.add_to_bag' | t: default: 'Add to Bag' }}{%- else -%}{{ 'allmy.product.out_of_stock' | t: default: 'Out of Stock' }}{%- endif -%}
           </button>
         </div>
       {% endform %}
-      
-      <div class="custom-accordions-wrapper">
-        <details class="custom-accordion">
-          <summary class="custom-accordion-header custom-product-heading">
-            FUNCTIONS <span>+</span>
+
+      {%- comment -%} Accordions {%- endcomment -%}
+      <div class="allmy-product__accordions">
+
+        {%- comment -%} FUNCTIONS — from metafield {%- endcomment -%}
+        {%- if product.metafields.custom.functions.value != blank -%}
+          <details class="allmy-product__accordion">
+            <summary>
+              {{ 'allmy.product.accordion.functions' | t: default: 'Functions' }}
+              <span class="allmy-product__accordion-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="allmy-product__accordion-body">
+              {{ product.metafields.custom.functions.value }}
+            </div>
+          </details>
+        {%- endif -%}
+
+        {%- comment -%} DOSAGE — most critical conversion element {%- endcomment -%}
+        <details class="allmy-product__accordion" open>
+          <summary>
+            {{ 'allmy.product.accordion.dosage' | t: default: 'Dosage & How Concentrates Work' }}
+            <span class="allmy-product__accordion-icon" aria-hidden="true"></span>
           </summary>
-          <div class="custom-accordion-content custom-product-text">
-            {{ product.metafields.custom.functions.value | default: "Function details not set." }}
+          <div class="allmy-product__accordion-body">
+
+            {%- if product.metafields.custom.mix_ratio.value != blank -%}
+              <div class="allmy-product__dosage-panel">
+                <div class="allmy-product__dosage-headline">{{ 'allmy.product.accordion.mix_ratio_label' | t: default: 'Mix ratio' }}</div>
+                <div class="allmy-product__dosage-ratio">{{ product.metafields.custom.mix_ratio.value }}</div>
+                {%- if product.metafields.custom.dosage.value != blank -%}
+                  <div class="allmy-product__dosage-desc">{{ product.metafields.custom.dosage.value }}</div>
+                {%- endif -%}
+              </div>
+            {%- elsif product.metafields.custom.dosage.value != blank -%}
+              <div class="allmy-product__dosage-panel">
+                <div class="allmy-product__dosage-desc">{{ product.metafields.custom.dosage.value }}</div>
+              </div>
+            {%- endif -%}
+
+            <div class="allmy-product__concentrate-steps">
+              {%- if product.metafields.custom.dosage_steps.value != blank -%}
+                {%- for step in product.metafields.custom.dosage_steps.value -%}
+                  <div class="allmy-product__concentrate-step">
+                    <span class="allmy-product__step-num">{{ forloop.index }}</span>
+                    <span class="allmy-product__step-text">{{ step }}</span>
+                  </div>
+                {%- endfor -%}
+              {%- else -%}
+                <div class="allmy-product__concentrate-step">
+                  <span class="allmy-product__step-num">1</span>
+                  <span class="allmy-product__step-text">{{ 'allmy.product.dosage_fallback.step_1' | t: default: 'Fill your reusable bottle or foam dispenser with water.' }}</span>
+                </div>
+                <div class="allmy-product__concentrate-step">
+                  <span class="allmy-product__step-num">2</span>
+                  <span class="allmy-product__step-text">{{ 'allmy.product.dosage_fallback.step_2' | t: default: 'Add concentrate at the ratio shown above — a little goes a very long way.' }}</span>
+                </div>
+                <div class="allmy-product__concentrate-step">
+                  <span class="allmy-product__step-num">3</span>
+                  <span class="allmy-product__step-text">{{ 'allmy.product.dosage_fallback.step_3' | t: default: 'Gently swirl to mix. No shaking needed — no bubbles, no waste.' }}</span>
+                </div>
+                <div class="allmy-product__concentrate-step">
+                  <span class="allmy-product__step-num">4</span>
+                  <span class="allmy-product__step-text">{{ 'allmy.product.dosage_fallback.step_4' | t: default: 'One bottle of concentrate replaces dozens of single-use plastic bottles.' }}</span>
+                </div>
+              {%- endif -%}
+            </div>
+
           </div>
         </details>
 
-        <details class="custom-accordion">
-          <summary class="custom-accordion-header custom-product-heading">
-            DOSAGE <span>+</span>
+        {%- comment -%} ACTIVE INGREDIENTS — cream-tinted panel {%- endcomment -%}
+        {%- if product.metafields.custom.active_ingredients.value != blank -%}
+          <details class="allmy-product__accordion">
+            <summary>
+              {{ 'allmy.product.accordion.active_ingredients' | t: default: 'Active Ingredients' }}
+              <span class="allmy-product__accordion-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="allmy-product__accordion-body">
+              <div class="allmy-product__ingredients-panel">
+                <div class="allmy-product__ingredients-label">{{ 'allmy.product.accordion.inci_label' | t: default: 'Full INCI list' }}</div>
+                <div class="allmy-product__ingredients-text">{{ product.metafields.custom.active_ingredients.value }}</div>
+              </div>
+            </div>
+          </details>
+        {%- endif -%}
+
+        <details class="allmy-product__accordion">
+          <summary>
+            {{ 'allmy.product.accordion.shipping' | t: default: 'Shipping & Returns' }}
+            <span class="allmy-product__accordion-icon" aria-hidden="true"></span>
           </summary>
-          <div class="custom-accordion-content custom-product-text">
-            {{ product.metafields.custom.dosage.value | default: "Dosage details not set." }}
+          <div class="allmy-product__accordion-body">
+            {%- if product.metafields.custom.payment_delivery.value != blank -%}
+              {{ product.metafields.custom.payment_delivery.value }}
+            {%- else -%}
+              <p>{{ 'allmy.product.shipping_fallback.line_1' | t: default: 'Free EU shipping on orders over €35. Standard delivery 3–5 business days.' }}</p>
+              <p>{{ 'allmy.product.shipping_fallback.line_2' | t: default: 'Concentrates ship without the water weight — smaller parcel, lower emissions.' }}</p>
+              <p>{{ 'allmy.product.shipping_fallback.line_3' | t: default: 'Not happy? Contact us within 30 days for a full refund.' }}</p>
+            {%- endif -%}
           </div>
         </details>
 
-        <details class="custom-accordion">
-          <summary class="custom-accordion-header custom-product-heading">
-            PAYMENT & DELIVERY <span>+</span>
-          </summary>
-          <div class="custom-accordion-content custom-product-text">
-            Standard shipping times apply.
-          </div>
-        </details>
       </div>
+
     </div>
   </div>
 </div>
+
+<script>
+  (function() {
+    var hiddenInput = document.getElementById('allmy-variant-id');
+    var addBtn = document.querySelector('.allmy-product__btn-add');
+    var addLabel = '{{ 'allmy.product.add_to_bag' | t: default: 'Add to Bag' }}';
+    var outLabel = '{{ 'allmy.product.out_of_stock' | t: default: 'Out of Stock' }}';
+
+    // Variant picker
+    var variants = document.querySelectorAll('.allmy-product__variant-btn');
+    if (variants.length && hiddenInput) {
+      variants.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          variants.forEach(function(b) { b.classList.remove('is-selected'); });
+          btn.classList.add('is-selected');
+          hiddenInput.value = btn.dataset.variantId;
+          if (addBtn) {
+            if (btn.dataset.variantAvailable === 'false') {
+              addBtn.disabled = true;
+              addBtn.textContent = outLabel;
+            } else {
+              addBtn.disabled = false;
+              addBtn.textContent = addLabel;
+            }
+          }
+        });
+      });
+    }
+
+    // Quantity stepper
+    var qtyInput = document.getElementById('allmy-qty');
+    var qtyMinus = document.getElementById('allmy-qty-minus');
+    var qtyPlus  = document.getElementById('allmy-qty-plus');
+    if (qtyInput && qtyMinus && qtyPlus) {
+      qtyMinus.addEventListener('click', function() {
+        var v = parseInt(qtyInput.value) || 1;
+        if (v > 1) qtyInput.value = v - 1;
+      });
+      qtyPlus.addEventListener('click', function() {
+        qtyInput.value = (parseInt(qtyInput.value) || 1) + 1;
+      });
+      qtyInput.addEventListener('change', function() {
+        var v = parseInt(qtyInput.value);
+        if (!v || v < 1) qtyInput.value = 1;
+      });
+    }
+
+    // AJAX add to cart — no redirect
+    var form = document.getElementById('allmy-product-form');
+    if (form && addBtn) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (addBtn.disabled) return;
+        var variantId = hiddenInput ? hiddenInput.value : '{{ product.variants.first.id }}';
+        var qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+        addBtn.disabled = true;
+        addBtn.textContent = '...';
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: variantId, quantity: qty })
+        })
+        .then(function(res) { return res.json(); })
+        .then(function() {
+          addBtn.textContent = '✓  Added to bag';
+          setTimeout(function() {
+            addBtn.disabled = false;
+            addBtn.textContent = addLabel;
+          }, 2200);
+          return fetch('/cart.js');
+        })
+        .then(function(res) { return res && res.json(); })
+        .then(function(cart) {
+          if (!cart) return;
+          var cartLink = document.getElementById('custom-cart-link');
+          if (cartLink) cartLink.textContent = 'Bag (' + cart.item_count + ')';
+        })
+        .catch(function() {
+          addBtn.disabled = false;
+          addBtn.textContent = addLabel;
+        });
+      });
+    }
+  })();
+</script>
 
 {% schema %}
 {

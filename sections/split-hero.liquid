@@ -1,0 +1,272 @@
+<style>
+  .allmy-split-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 85vh;
+    overflow: hidden;
+  }
+
+  /* ── LEFT PANEL ── */
+  .allmy-split-hero__left {
+    position: relative;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  .allmy-split-hero__left-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .allmy-split-hero__left-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+  }
+
+  .allmy-split-hero__left-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 56px;
+    text-align: center;
+  }
+
+  .allmy-split-hero__eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 20px;
+  }
+
+  .allmy-split-hero__heading {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: clamp(2.4rem, 4.5vw, 5rem);
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.05;
+    margin: 0 0 28px;
+  }
+
+  .allmy-split-hero__btn {
+    display: inline-block;
+    padding: 13px 32px;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .allmy-split-hero__btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #ffffff;
+  }
+
+  .allmy-split-hero__tagline {
+    position: absolute;
+    bottom: 40px;
+    left: 44px;
+    right: 44px;
+    z-index: 2;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  /* ── RIGHT PANEL ── */
+  .allmy-split-hero__right {
+    position: relative;
+    overflow: hidden;
+    background: #EDE8D9;
+  }
+
+  .allmy-split-hero__right-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media screen and (max-width: 768px) {
+    .allmy-split-hero {
+      grid-template-columns: 1fr;
+      grid-template-rows: 55vh 45vh;
+      height: auto;
+    }
+
+    .allmy-split-hero__left-content { padding: 36px; }
+    .allmy-split-hero__tagline { bottom: 24px; left: 24px; right: 24px; font-size: 12px; }
+  }
+</style>
+
+<div class="allmy-split-hero">
+
+  {%- comment -%} ── LEFT ── {%- endcomment -%}
+  <div class="allmy-split-hero__left">
+
+    {%- if section.settings.image_left -%}
+      <img
+        class="allmy-split-hero__left-img"
+        src="{{ section.settings.image_left | image_url: width: 1400 }}"
+        alt="{{ section.settings.heading | escape }}"
+        loading="eager"
+        width="1400"
+        height="933"
+        style="{% if section.settings.grayscale %}filter: grayscale(100%);{% endif %}"
+      >
+    {%- else -%}
+      <img
+        class="allmy-split-hero__left-img"
+        src="{{ 'hero1.png' | file_url }}"
+        alt="{{ section.settings.heading | escape }}"
+        loading="eager"
+        width="1400"
+        height="933"
+        style="{% if section.settings.grayscale %}filter: grayscale(100%);{% endif %}"
+      >
+    {%- endif -%}
+
+    <div class="allmy-split-hero__left-overlay"></div>
+
+    <div class="allmy-split-hero__left-content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="allmy-split-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="allmy-split-hero__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a href="{{ section.settings.button_link }}" class="allmy-split-hero__btn">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.tagline != blank -%}
+      <p class="allmy-split-hero__tagline">{{ section.settings.tagline }}</p>
+    {%- endif -%}
+
+  </div>
+
+  {%- comment -%} ── RIGHT ── {%- endcomment -%}
+  <div class="allmy-split-hero__right">
+    {%- if section.settings.image_right -%}
+      <img
+        class="allmy-split-hero__right-img"
+        src="{{ section.settings.image_right | image_url: width: 1400 }}"
+        alt="ALL MY DUCKS"
+        loading="eager"
+        width="1400"
+        height="933"
+      >
+    {%- else -%}
+      <img
+        class="allmy-split-hero__right-img"
+        src="{{ 'hero2.png' | file_url }}"
+        alt="ALL MY DUCKS"
+        loading="eager"
+        width="1400"
+        height="933"
+      >
+    {%- endif -%}
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Split Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left panel"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_left",
+      "label": "Left image"
+    },
+    {
+      "type": "checkbox",
+      "id": "grayscale",
+      "label": "Greyscale left image",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Dark overlay strength",
+      "min": 0,
+      "max": 70,
+      "step": 5,
+      "default": 30,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "INGREDIENTS"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline (bottom of panel)",
+      "default": "Premium doesn't have to mean pretentious. It can mean purposeful. Care doesn't have to cost the world. It can heal it."
+    },
+    {
+      "type": "header",
+      "content": "Right panel"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_right",
+      "label": "Right image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Hero"
+    }
+  ]
+}
+{% endschema %}

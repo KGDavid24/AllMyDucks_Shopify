@@ -1,169 +1,228 @@
 <style>
-  .custom-brand-footer {
-    background-color: #F5F0E3; /* Warm Cream */
-    color: #2B2724; /* Deep Espresso */
-    padding: 80px 50px 30px; 
+  .allmy-footer {
+    background-color: #2B2724;
+    color: #F5F0E3;
+    padding: 72px 50px 32px;
+    font-family: 'Outfit', sans-serif;
   }
-  
-  .custom-footer-top {
+
+  .allmy-footer__top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 56px;
+  }
+
+  .allmy-footer__brand-logo {
+    height: 42px;
+    display: block;
+    margin-bottom: 20px;
+    filter: brightness(0) invert(1);
+  }
+
+  .allmy-footer__tagline {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(245, 240, 227, 0.72);
+    max-width: 280px;
+    margin-bottom: 24px;
+  }
+
+  .allmy-footer__values {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 50px;
-    margin-bottom: 60px;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
   }
-  
-  .custom-footer-col {
-    flex: 1;
-    min-width: 250px;
-  }
-  
-  .custom-footer-heading {
-    /* Controlled by Google Fonts App via .custom-footer-heading */
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 25px;
+
+  .allmy-footer__value-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #2B2724;
+    color: rgba(245, 240, 227, 0.55);
   }
-  
-  .custom-footer-brand-img {
-    height: 45px; 
-    display: block;
+
+  .allmy-footer__value-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #DACBA5;
+    flex-shrink: 0;
+  }
+
+  .allmy-footer__col-heading {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #F5F0E3;
     margin-bottom: 20px;
   }
 
-  .custom-footer-social-img {
-    height: 85px; 
-    display: block;
-    margin-bottom: 20px;
-  }
-  
-  .custom-footer-text {
-    /* Controlled by Google Fonts App via .custom-footer-text */
-    font-size: 16px;
-    line-height: 1.6;
-    color: #2B2724;
-    max-width: 320px;
-  }
-  
-  .custom-footer-link {
-    /* Controlled by Google Fonts App via .custom-footer-link */
+  .allmy-footer__link {
     display: block;
     text-decoration: none;
-    color: #2B2724;
-    font-size: 16px;
-    margin-bottom: 15px;
-    transition: opacity 0.2s ease;
-  }
-  
-  .custom-footer-link:hover {
-    opacity: 0.7;
+    color: rgba(245, 240, 227, 0.65);
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 13px;
+    transition: color 0.2s ease;
   }
 
-  /* NEW MINIMALIST ICON STYLES */
-  .custom-social-icons {
+  .allmy-footer__link:hover {
+    color: #F5F0E3;
+  }
+
+  .allmy-footer__social-row {
     display: flex;
-    gap: 24px;
-    margin-bottom: 25px;
+    gap: 20px;
+    margin-top: 4px;
+    margin-bottom: 16px;
   }
 
-  .custom-social-link {
-    color: #2B2724; /* FIX: Overrides the default browser blue for links */
+  .allmy-footer__social-link {
+    color: rgba(245, 240, 227, 0.65);
     display: inline-flex;
+    transition: color 0.2s ease;
   }
 
-  .custom-social-link svg {
-    width: 22px;
-    height: 22px;
-    fill: none; 
-    stroke: currentColor; /* Now correctly inherits Deep Espresso from .custom-social-link */
-    stroke-width: 1.5; 
+  .allmy-footer__social-link:hover {
+    color: #F5F0E3;
+  }
+
+  .allmy-footer__social-link svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: opacity 0.2s ease;
   }
 
-  .custom-social-link:hover svg {
-    opacity: 0.6;
-  }
-
-  .custom-footer-bottom {
+  .allmy-footer__bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid rgba(43, 39, 36, 0.1); 
-    padding-top: 30px;
+    border-top: 1px solid rgba(245, 240, 227, 0.12);
+    padding-top: 28px;
     flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .custom-footer-bottom-text {
-    /* Controlled by Google Fonts App via .custom-footer-text */
-    font-size: 14px;
-    color: #2B2724;
-    text-decoration: none;
+    gap: 16px;
   }
 
-  @media screen and (max-width: 768px) {
-    .custom-brand-footer {
-      padding: 50px 20px 20px;
+  .allmy-footer__bottom-text {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245, 240, 227, 0.45);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .allmy-footer__bottom-text:hover {
+    color: rgba(245, 240, 227, 0.75);
+  }
+
+  .allmy-footer__bottom-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .allmy-footer__top {
+      grid-template-columns: 1fr 1fr;
     }
-    .custom-footer-top {
-      flex-direction: column;
-      gap: 40px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .allmy-footer {
+      padding: 52px 24px 24px;
     }
-    .custom-footer-bottom {
+    .allmy-footer__top {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .allmy-footer__bottom {
       flex-direction: column;
-      text-align: center;
+      align-items: flex-start;
     }
   }
 </style>
 
-<footer class="custom-brand-footer">
-  <div class="custom-footer-top">
-    
-    <div class="custom-footer-col">
-      <img src="{{ 'icon2.png' | file_url }}" alt="All My Ducks" class="custom-footer-brand-img">
-      <p class="custom-footer-text">
-        Premium doesn't have to mean pretentious. It can mean purposeful. Care doesn't have to cost the world. It can heal it.
-      </p>
-    </div>
+<footer class="allmy-footer">
+  <div class="allmy-footer__top">
 
-    <div class="custom-footer-col">
-      <div class="custom-footer-heading">Shop</div>
-      <a href="/collections/all" class="custom-footer-link">All Products</a>
-      <a href="/pages/about" class="custom-footer-link">Our Story</a>
-      <a href="/pages/why-eco" class="custom-footer-link">Why Eco</a>
-      <a href="/pages/faqs" class="custom-footer-link">FAQs</a>
-    </div>
-
-    <div class="custom-footer-col">
-      <img src="{{ 'icon3.png' | file_url }}" alt="Follow The Ducks!" class="custom-footer-social-img">
-      
-      <div class="custom-social-icons">
-        <a href="#" class="custom-social-link" aria-label="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-        </a>
-        <a href="#" class="custom-social-link" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="#" class="custom-social-link" aria-label="TikTok">
-          <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
-        </a>
+    <div class="allmy-footer__brand-col">
+      <img
+        src="{{ 'brand-logo-standard.svg' | file_url }}"
+        alt="All My"
+        class="allmy-footer__brand-logo"
+        width="160"
+        height="42"
+      >
+      <p class="allmy-footer__tagline">{{ section.settings.tagline }}</p>
+      <div class="allmy-footer__values">
+        <span class="allmy-footer__value-pill"><span class="allmy-footer__value-dot"></span>No Water Shipped</span>
+        <span class="allmy-footer__value-pill"><span class="allmy-footer__value-dot"></span>Naturally Gentle Formula</span>
+        <span class="allmy-footer__value-pill"><span class="allmy-footer__value-dot"></span>Recycled Plastic Only</span>
       </div>
-      
-      <a href="/pages/contact" class="custom-footer-link">Contact Us</a>
     </div>
-    
+
+    {%- if section.settings.menu_shop != blank -%}
+      <div>
+        <div class="allmy-footer__col-heading">{{ section.settings.menu_shop_label }}</div>
+        {%- for link in linklists[section.settings.menu_shop].links -%}
+          <a href="{{ link.url }}" class="allmy-footer__link">{{ link.title }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.menu_company != blank -%}
+      <div>
+        <div class="allmy-footer__col-heading">{{ section.settings.menu_company_label }}</div>
+        {%- for link in linklists[section.settings.menu_company].links -%}
+          <a href="{{ link.url }}" class="allmy-footer__link">{{ link.title }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.menu_help != blank -%}
+      <div>
+        <div class="allmy-footer__col-heading">{{ section.settings.menu_help_label }}</div>
+        {%- for link in linklists[section.settings.menu_help].links -%}
+          <a href="{{ link.url }}" class="allmy-footer__link">{{ link.title }}</a>
+        {%- endfor -%}
+        <div class="allmy-footer__social-row" style="margin-top: 24px;">
+          {%- if section.settings.instagram_url != blank -%}
+            <a href="{{ section.settings.instagram_url }}" class="allmy-footer__social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.tiktok_url != blank -%}
+            <a href="{{ section.settings.tiktok_url }}" class="allmy-footer__social-link" aria-label="TikTok">
+              <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.facebook_url != blank -%}
+            <a href="{{ section.settings.facebook_url }}" class="allmy-footer__social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
   </div>
 
-  <div class="custom-footer-bottom">
-    <span class="custom-footer-bottom-text">&copy; {{ 'now' | date: "%Y" }} ALL MY DUCKS. All rights reserved.</span>
-    <div>
-      <a href="/policies/privacy-policy" class="custom-footer-bottom-text" style="margin-right: 20px;">Privacy Policy</a>
-      <a href="/policies/terms-of-service" class="custom-footer-bottom-text">Terms of Service</a>
+  <div class="allmy-footer__bottom">
+    <span class="allmy-footer__bottom-text">&copy; {{ 'now' | date: "%Y" }} {{ 'allmy.footer.copyright' | t: default: 'ALL MY DUCKS. All rights reserved.' }}</span>
+    <div class="allmy-footer__bottom-links">
+      <a href="/policies/privacy-policy" class="allmy-footer__bottom-text">{{ 'allmy.footer.privacy' | t: default: 'Privacy Policy' }}</a>
+      <a href="/policies/terms-of-service" class="allmy-footer__bottom-text">{{ 'allmy.footer.terms' | t: default: 'Terms of Service' }}</a>
     </div>
   </div>
 </footer>
@@ -171,6 +230,70 @@
 {% schema %}
 {
   "name": "Custom Brand Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Brand tagline",
+      "default": "Premium doesn't have to mean pretentious. It can mean purposeful. Care doesn't have to cost the world. It can heal it."
+    },
+    {
+      "type": "header",
+      "content": "Navigation columns"
+    },
+    {
+      "type": "text",
+      "id": "menu_shop_label",
+      "label": "Column 1 heading",
+      "default": "Shop"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_shop",
+      "label": "Column 1 menu"
+    },
+    {
+      "type": "text",
+      "id": "menu_company_label",
+      "label": "Column 2 heading",
+      "default": "Company"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_company",
+      "label": "Column 2 menu"
+    },
+    {
+      "type": "text",
+      "id": "menu_help_label",
+      "label": "Column 3 heading",
+      "default": "Help"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_help",
+      "label": "Column 3 menu"
+    },
+    {
+      "type": "header",
+      "content": "Social links"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    }
+  ],
   "presets": [
     {
       "name": "Custom Brand Footer"

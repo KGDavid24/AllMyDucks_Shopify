@@ -113,7 +113,7 @@
 
   <div class="custom-center-logo">
     <a href="/">
-      <img src="{{ 'icon1.png' | file_url }}" alt="All My Ducks Logo">
+      <img src="{{ 'brand-logo-ducks.svg' | file_url }}" alt="All My Ducks" width="120" height="70">
     </a>
   </div>
 
@@ -143,6 +143,8 @@
   </div>
 </header>
 
+<div id="cart-icon-bubble" aria-hidden="true" style="display:none"></div>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const searchToggle = document.getElementById('custom-search-toggle');
@@ -151,9 +153,7 @@
 
     searchToggle.addEventListener('click', (e) => {
       e.preventDefault();
-      
-      // If already open and there's text, submit the search.
-      // Otherwise, just toggle the input field open/closed.
+
       if (searchForm.classList.contains('is-open') && searchInput.value.trim() !== '') {
         searchForm.submit();
       } else {
@@ -164,12 +164,28 @@
       }
     });
 
-    // Close search bar if clicking outside of it
     document.addEventListener('click', (e) => {
       if (!searchForm.contains(e.target) && e.target !== searchToggle) {
         searchForm.classList.remove('is-open');
       }
     });
+
+    // Keep Bag (n) in sync after any AJAX cart change.
+    // cart.js publishes cartUpdate with parsedState after every mutation.
+    // We subscribe here; the hidden #cart-icon-bubble div above stops
+    // cart.js from throwing before it reaches publish().
+    const cartLink = document.getElementById('custom-cart-link');
+    if (cartLink && typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
+      subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
+        if (event && event.cartData && typeof event.cartData.item_count === 'number') {
+          cartLink.textContent = 'Bag (' + event.cartData.item_count + ')';
+        } else {
+          fetch('/cart.js')
+            .then((r) => r.json())
+            .then((cart) => { cartLink.textContent = 'Bag (' + cart.item_count + ')'; });
+        }
+      });
+    }
   });
 </script>
 

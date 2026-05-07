@@ -547,5 +547,61 @@
       "expanded": "Formularul pentru destinatarul cardului cadou este extins",
       "collapsed": "Formularul pentru destinatarul cardului cadou este restrâns"
     }
+  },
+  "allmy": {
+    "product": {
+      "size_label": "Size",
+      "add_to_bag": "Add to Bag",
+      "out_of_stock": "Out of Stock",
+      "accordion": {
+        "functions": "Functions",
+        "dosage": "Dosage & How Concentrates Work",
+        "mix_ratio_label": "Mix ratio",
+        "active_ingredients": "Active Ingredients",
+        "inci_label": "Full INCI list",
+        "shipping": "Shipping & Returns"
+      },
+      "dosage_fallback": {
+        "step_1": "Fill your reusable bottle or foam dispenser with water.",
+        "step_2": "Add concentrate at the ratio shown above — a little goes a very long way.",
+        "step_3": "Gently swirl to mix. No shaking needed — no bubbles, no waste.",
+        "step_4": "One bottle of concentrate replaces dozens of single-use plastic bottles."
+      },
+      "shipping_fallback": {
+        "line_1": "Free EU shipping on orders over €35. Standard delivery 3–5 business days.",
+        "line_2": "Concentrates ship without the water weight — smaller parcel, lower emissions.",
+        "line_3": "Not happy? Contact us within 30 days for a full refund."
+      }
+    },
+    "about": {
+      "story_eyebrow": "Our Story",
+      "story_heading": "Why we started with cleaning.",
+      "story_p1": "Every home goes through litres of cleaning products a year. Most of that is water — packaged, shipped, and hauled into your home at enormous carbon cost. We thought there had to be a better way.",
+      "story_p2": "ALL MY DUCKS is what happens when you decide to start from scratch. No filler. No greenwashing. Concentrated formulas that you dilute at home — in bottles you keep, refill, and rely on.",
+      "story_p3": "The result is a product that's genuinely better for you and genuinely better for the planet. Not a compromise. Just a smarter way to clean.",
+      "pillars_heading": "What we stand for",
+      "philosophy_label": "Philosophy",
+      "philosophy_quote": "Premium doesn't have to mean pretentious. It can mean purposeful.",
+      "philosophy_p1": "Care doesn't have to cost the world. It can heal it. We believe that the best products are the ones that work, last, and leave less behind.",
+      "philosophy_p2": "Concentration isn't a feature — it's a philosophy. It means every drop counts, nothing is wasted, and your home stays clean without the guilt.",
+      "cta_heading": "Ready to make the switch?",
+      "cta_sub": "Explore our concentrated cleaning range — designed to last longer, work harder, and ship smarter."
+    },
+    "contact": {
+      "form_heading": "Send us a message",
+      "name_label": "Name",
+      "name_placeholder": "Your name",
+      "email_label": "Email",
+      "email_placeholder": "your@email.com",
+      "message_label": "Message",
+      "message_placeholder": "How can we help?",
+      "submit": "Send message",
+      "success": "Thanks — we will be in touch soon."
+    },
+    "footer": {
+      "copyright": "ALL MY DUCKS. All rights reserved.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    }
   }
 }

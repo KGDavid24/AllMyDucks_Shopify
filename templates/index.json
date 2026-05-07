@@ -9,76 +9,34 @@
  */
 {
   "sections": {
-    "image-with-text": {
-      "type": "image-with-text",
-      "name": "Custom Hero Banner",
+    "split-hero": {
+      "type": "split-hero",
+      "name": "Split Hero",
       "settings": {
-        "eyebrow": "Warm Spring Light · New Collection",
-        "heading": "<p>Premium doesn't have to mean pretentious.</p>",
-        "text": "<p>Care doesn't have to cost the world. It can heal it. Concentrate cleaning that works — and nothing else.</p>",
-        "button_label": "Shop Now",
-        "button_link": "",
-        "ghost_label": "How it works",
-        "ghost_link": "",
-        "show_mission": true,
-        "mission_1_name": "No Water",
-        "mission_1_desc": "Shipped",
-        "mission_2_name": "Naturally",
-        "mission_2_desc": "Gentle Formula",
-        "mission_3_name": "Recycled",
-        "mission_3_desc": "Plastic Only",
-        "image": "shopify://shop_images/Showercreamsolution.png",
-        "label_name": "Hand Wash",
-        "label_sub": "Concentrate · 350ml ready-to-use",
-        "label_price": "17€",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "feature_7YmhYp": {
-      "type": "feature",
-      "name": "ALL MY Brand Feature",
-      "settings": {
-        "image": "shopify://shop_images/Roseshowergel.png",
-        "image_position": "left",
+        "image_left": "shopify://shop_images/Roseshowergel.png",
+        "image_right": "shopify://shop_images/Showercreamsolution.png",
+        "grayscale": true,
+        "overlay_opacity": 30,
         "heading": "INGREDIENTS",
-        "text": "<ul><li>Premium doesn't have to mean pretentious.</li><li> It can mean purposeful.</li><li> Care doesn't have to cost the world.</li><li> It can heal it.</li></ul>",
-        "padding_top": 80,
-        "padding_bottom": 80
+        "tagline": "Premium doesn't have to mean pretentious. It can mean purposeful. Care doesn't have to cost the world. It can heal it.",
+        "button_label": "Shop Now",
+        "button_link": "/collections/all"
       }
     },
-    "featured-collection": {
-      "type": "featured-collection",
+    "allmy-collection-grid": {
+      "type": "allmy-collection-grid",
       "settings": {
+        "eyebrow": "The Range",
+        "heading": "Made to last. Designed to refill.",
         "collection": "all",
-        "products_to_show": 4,
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 56,
-        "padding_bottom": 68
+        "products_to_show": 3,
+        "show_view_all": true,
+        "view_all_label": "View all products"
       }
     }
   },
   "order": [
-    "image-with-text",
-    "feature_7YmhYp",
-    "featured-collection"
+    "split-hero",
+    "allmy-collection-grid"
   ]
 }

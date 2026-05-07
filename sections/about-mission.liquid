@@ -1,397 +1,430 @@
 <style>
-  /* ── ALL MY - ABOUT MISSION & PRODUCT ─────────────────────
-     Clean layout. Generous margins. Deep Espresso on Warm Cream.
-  ─────────────────────────────────────────────────────────── */
+  /* ── ABOUT HERO ── */
+  .allmy-about__hero {
+    background-color: #2B2724;
+    color: #F5F0E3;
+    padding: 120px 50px 100px;
+    text-align: center;
+  }
 
-  .allmy-about-{{ section.id }} {
-    background-color: {{ section.settings.bg_color }};
-    color: {{ section.settings.text_color }};
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  .allmy-about__hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #DACBA5;
+    margin-bottom: 28px;
+  }
+
+  .allmy-about__hero-headline {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    font-size: clamp(32px, 5vw, 58px);
+    line-height: 1.18;
+    max-width: 820px;
+    margin: 0 auto 28px;
+    color: #F5F0E3;
+  }
+
+  .allmy-about__hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(245,240,227,0.72);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* ── STORY GRID ── */
+  .allmy-about__story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 560px;
+  }
+
+  .allmy-about__story-text {
+    background-color: #F5F0E3;
+    padding: 80px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .allmy-about__story-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #C9B2A3;
+    margin-bottom: 24px;
+  }
+
+  .allmy-about__story-heading {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.28;
+    color: #2B2724;
+    margin-bottom: 28px;
+  }
+
+  .allmy-about__story-body {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(43,39,36,0.8);
+  }
+
+  .allmy-about__story-body p + p {
+    margin-top: 20px;
+  }
+
+  .allmy-about__story-image {
+    background-color: #DACBA5;
+    position: relative;
     overflow: hidden;
   }
 
-  @media screen and (min-width: 750px) {
-    .allmy-about-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
+  .allmy-about__story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  .allmy-about__container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 60px;
-  }
-
-  @media screen and (min-width: 900px) {
-    .allmy-about__container {
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      padding: 0 56px;
-      align-items: center;
-    }
-    .allmy-about__container--reverse .allmy-about__mission {
-      order: 2;
-    }
-    .allmy-about__container--reverse .allmy-about__product {
-      order: 1;
-    }
-  }
-
-  /* ── LEFT: MISSION AREA ─────────────────────────────────── */
-  .allmy-about__mission {
+  .allmy-about__story-image-placeholder {
+    position: absolute;
+    inset: 0;
     display: flex;
-    flex-direction: column;
-    max-width: 580px;
+    align-items: center;
+    justify-content: center;
   }
 
-  .allmy-about__eyebrow {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.875rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+  .allmy-about__story-image-placeholder img {
+    width: 120px;
+    height: auto;
+    opacity: 0.3;
+    object-fit: contain;
+  }
+
+  /* ── MISSION PILLARS ── */
+  .allmy-about__pillars {
+    background-color: #F5F0E3;
+    border-top: 1px solid rgba(43,39,36,0.08);
+    padding: 80px 50px;
+    text-align: center;
+  }
+
+  .allmy-about__pillars-heading {
+    font-size: 11px;
     font-weight: 500;
-    opacity: 0.6;
-    margin-bottom: 16px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #2B2724;
+    margin-bottom: 56px;
   }
 
-  .allmy-about__heading {
-    font-family: 'Sofia Pro Soft', 'Comfortaa', sans-serif;
-    font-size: clamp(2.2rem, 4vw, 3.5rem);
-    line-height: 1.1;
-    font-weight: 700;
-    margin: 0 0 24px;
-    color: inherit;
+  .allmy-about__pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    max-width: 960px;
+    margin: 0 auto;
   }
 
-  .allmy-about__text {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(1.125rem, 2vw, 1.35rem);
-    line-height: 1.6;
-    opacity: 0.8;
-    margin-bottom: 40px;
-  }
-
-  /* Mission Value Icons */
-  .allmy-about__values {
+  .allmy-about__pillar {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-  }
-
-  .allmy-about__value-item {
-    display: flex;
     align-items: center;
     gap: 20px;
   }
 
-  .allmy-about__value-icon {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: rgba(43, 39, 36, 0.05);
+  .allmy-about__pillar-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
   }
 
-  .allmy-about__value-icon svg {
-    width: 24px;
-    height: 24px;
-    fill: currentColor;
-    opacity: 0.8;
-  }
-
-  .allmy-about__value-text {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .allmy-about__value-title {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 500;
-    font-size: 1.125rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .allmy-about__value-desc {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1rem;
-    opacity: 0.6;
-  }
-
-  /* ── RIGHT: PRODUCT HIGHLIGHT ───────────────────────────── */
-  .allmy-about__product {
-    position: relative;
-    background-color: {{ section.settings.product_bg }};
-    padding: 40px;
-    border-radius: 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    text-decoration: none;
-    color: {{ section.settings.text_color }};
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .allmy-about__product:hover {
-    transform: translateY(-8px);
-  }
-
-  .allmy-about__product-image {
-    width: 100%;
-    max-width: 320px;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    margin-bottom: 32px;
-    mix-blend-mode: multiply; 
-  }
-
-  .allmy-about__product-placeholder {
-    width: 100%;
-    max-width: 320px;
-    aspect-ratio: 4 / 5;
-    background: rgba(43, 39, 36, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 32px;
-  }
-
-  .allmy-about__product-placeholder svg {
-    width: 40%;
-    opacity: 0.2;
-  }
-
-  .allmy-about__product-title {
-    font-family: 'Sofia Pro Soft', 'Comfortaa', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 8px;
-  }
-
-  .allmy-about__product-price {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.25rem;
-    opacity: 0.8;
-    margin: 0 0 24px;
-  }
-
-  .allmy-about__btn {
-    display: inline-block;
-    background: {{ section.settings.text_color }};
-    color: {{ section.settings.bg_color }};
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.125rem;
+  .allmy-about__pillar-title {
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 18px 40px;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
+    color: #2B2724;
   }
 
-  .allmy-about__product:hover .allmy-about__btn {
-    opacity: 0.8;
+  .allmy-about__pillar-desc {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(43,39,36,0.72);
+  }
+
+  /* ── PHILOSOPHY STRIP ── */
+  .allmy-about__philosophy {
+    background-color: #2B2724;
+    padding: 80px 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .allmy-about__philosophy-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #DACBA5;
+    margin-bottom: 24px;
+  }
+
+  .allmy-about__philosophy-quote {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 36px);
+    line-height: 1.3;
+    color: #F5F0E3;
+    margin-bottom: 0;
+  }
+
+  .allmy-about__philosophy-detail {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(245,240,227,0.7);
+  }
+
+  .allmy-about__philosophy-detail p + p {
+    margin-top: 20px;
+  }
+
+  /* ── CTA STRIP ── */
+  .allmy-about__cta {
+    background-color: #F5F0E3;
+    padding: 80px 50px;
+    text-align: center;
+  }
+
+  .allmy-about__cta-heading {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: #2B2724;
+    margin-bottom: 16px;
+  }
+
+  .allmy-about__cta-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(43,39,36,0.7);
+    margin-bottom: 36px;
+  }
+
+  .allmy-about__cta-btn {
+    display: inline-block;
+    background-color: #2B2724;
+    color: #F5F0E3;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    transition: background-color 0.2s ease;
+  }
+
+  .allmy-about__cta-btn:hover {
+    background-color: #3d3532;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media screen and (max-width: 900px) {
+    .allmy-about__hero {
+      padding: 80px 28px 72px;
+    }
+    .allmy-about__story {
+      grid-template-columns: 1fr;
+    }
+    .allmy-about__story-image {
+      min-height: 320px;
+    }
+    .allmy-about__story-text {
+      padding: 56px 28px;
+    }
+    .allmy-about__pillars {
+      padding: 64px 28px;
+    }
+    .allmy-about__pillars-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .allmy-about__philosophy {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 64px 28px;
+    }
+    .allmy-about__cta {
+      padding: 64px 28px;
+    }
   }
 </style>
 
-<section class="allmy-about-{{ section.id }}">
-  <div class="allmy-about__container {% if section.settings.layout == 'right' %}allmy-about__container--reverse{% endif %}">
-    
-    {%- comment -%} ── MISSION COLUMN ── {%- endcomment -%}
-    <div class="allmy-about__mission">
-      {%- if section.settings.eyebrow != blank -%}
-        <div class="allmy-about__eyebrow">{{ section.settings.eyebrow }}</div>
-      {%- endif -%}
-      
-      {%- if section.settings.heading != blank -%}
-        <h2 class="allmy-about__heading">{{ section.settings.heading }}</h2>
-      {%- endif -%}
+<!-- HERO -->
+<section class="allmy-about__hero">
+  <p class="allmy-about__hero-eyebrow">{{ section.settings.eyebrow }}</p>
+  <h1 class="allmy-about__hero-headline">{{ section.settings.heading }}</h1>
+  <p class="allmy-about__hero-sub">{{ section.settings.text | strip_html }}</p>
+</section>
 
-      {%- if section.settings.text != blank -%}
-        <div class="allmy-about__text">{{ section.settings.text }}</div>
-      {%- endif -%}
-
-      <div class="allmy-about__values">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'value' -%}
-            <div class="allmy-about__value-item" {{ block.shopify_attributes }}>
-              <div class="allmy-about__value-icon">
-                {%- case block.settings.icon -%}
-                  {%- when 'water' -%}
-                    <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 4C14 4 7 10 7 17a7 7 0 0014 0c0-7-7-13-7-13z" opacity=".7"/><line x1="14" y1="4" x2="14" y2="24" stroke="currentColor" stroke-width="1.2"/><line x1="5" y1="5" x2="23" y2="23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                  {%- when 'nature' -%}
-                    <svg viewBox="0 0 28 28" aria-hidden="true">
-                      <rect x="12.5" y="4" width="3" height="14" rx="1.5" fill="currentColor" opacity=".6"/>
-                      <rect x="18.5" y="7" width="3" height="11" rx="1.5" fill="currentColor" opacity=".5"/>
-                      <rect x="6.5" y="7" width="3" height="11" rx="1.5" fill="currentColor" opacity=".5"/>
-                      <path d="M5 20 Q14 24 23 20" stroke="currentColor" stroke-width="1.2" fill="none" opacity=".6" stroke-linecap="round"/>
-                    </svg>
-                  {%- when 'recycle' -%}
-                    <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 5l-5 8h4l-3 10 10-12h-4l3-6z" fill="currentColor" opacity=".65"/></svg>
-                {%- endcase -%}
-              </div>
-              <div class="allmy-about__value-text">
-                <span class="allmy-about__value-title">{{ block.settings.title }}</span>
-                <span class="allmy-about__value-desc">{{ block.settings.desc }}</span>
-              </div>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
+<!-- STORY (layout toggle) -->
+{% if section.settings.layout == 'left' %}
+<section class="allmy-about__story">
+  <div class="allmy-about__story-text">
+    <p class="allmy-about__story-eyebrow">{{ 'allmy.about.story_eyebrow' | t: default: 'Our Story' }}</p>
+    <h2 class="allmy-about__story-heading">{{ 'allmy.about.story_heading' | t: default: 'Why we started with cleaning.' }}</h2>
+    <div class="allmy-about__story-body">
+      <p>{{ 'allmy.about.story_p1' | t: default: 'Every home goes through litres of cleaning products a year. Most of that is water — packaged, shipped, and hauled into your home at enormous carbon cost. We thought there had to be a better way.' }}</p>
+      <p>{{ 'allmy.about.story_p2' | t: default: 'ALL MY DUCKS is what happens when you decide to start from scratch. No filler. No greenwashing. Concentrated formulas that you dilute at home — in bottles you keep, refill, and rely on.' }}</p>
+      <p>{{ 'allmy.about.story_p3' | t: default: "The result is a product that's genuinely better for you and genuinely better for the planet. Not a compromise. Just a smarter way to clean." }}</p>
     </div>
-
-    {%- comment -%} ── PRODUCT HIGHLIGHT COLUMN ── {%- endcomment -%}
-    {%- assign product = all_products[section.settings.featured_product] -%}
-    
-    {%- if product != empty -%}
-      <a href="{{ product.url }}" class="allmy-about__product">
-        <img 
-          src="{{ product.featured_image | image_url: width: 600 }}" 
-          alt="{{ product.title | escape }}" 
-          class="allmy-about__product-image"
-          loading="lazy"
-        >
-        <h3 class="allmy-about__product-title">{{ section.settings.product_override_title | default: product.title }}</h3>
-        <p class="allmy-about__product-price">{{ product.price | money }}</p>
-        <span class="allmy-about__btn">{{ section.settings.button_label }}</span>
-      </a>
-    {%- else -%}
-      <div class="allmy-about__product">
-        <div class="allmy-about__product-placeholder">
-          {{ 'product-1' | placeholder_svg_tag }}
-        </div>
-        <h3 class="allmy-about__product-title">Hand Wash</h3>
-        <p class="allmy-about__product-price">17€</p>
-        <span class="allmy-about__btn">{{ section.settings.button_label }}</span>
-      </div>
-    {%- endif -%}
-
   </div>
+  <div class="allmy-about__story-image">
+    {% if section.settings.story_image %}
+      <img src="{{ section.settings.story_image | img_url: 'master' }}" alt="All My Ducks story" width="800" height="600">
+    {% else %}
+      <div class="allmy-about__story-image-placeholder">
+        <img src="{{ 'brand-logo-standard.svg' | file_url }}" alt="" width="160" height="42">
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% else %}
+<section class="allmy-about__story">
+  <div class="allmy-about__story-image">
+    {% if section.settings.story_image %}
+      <img src="{{ section.settings.story_image | img_url: 'master' }}" alt="All My Ducks story" width="800" height="600">
+    {% else %}
+      <div class="allmy-about__story-image-placeholder">
+        <img src="{{ 'brand-logo-standard.svg' | file_url }}" alt="" width="160" height="42">
+      </div>
+    {% endif %}
+  </div>
+  <div class="allmy-about__story-text">
+    <p class="allmy-about__story-eyebrow">{{ 'allmy.about.story_eyebrow' | t: default: 'Our Story' }}</p>
+    <h2 class="allmy-about__story-heading">{{ 'allmy.about.story_heading' | t: default: 'Why we started with cleaning.' }}</h2>
+    <div class="allmy-about__story-body">
+      <p>{{ 'allmy.about.story_p1' | t: default: 'Every home goes through litres of cleaning products a year. Most of that is water — packaged, shipped, and hauled into your home at enormous carbon cost. We thought there had to be a better way.' }}</p>
+      <p>{{ 'allmy.about.story_p2' | t: default: 'ALL MY DUCKS is what happens when you decide to start from scratch. No filler. No greenwashing. Concentrated formulas that you dilute at home — in bottles you keep, refill, and rely on.' }}</p>
+      <p>{{ 'allmy.about.story_p3' | t: default: "The result is a product that's genuinely better for you and genuinely better for the planet. Not a compromise. Just a smarter way to clean." }}</p>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- MISSION PILLARS -->
+<section class="allmy-about__pillars">
+  <p class="allmy-about__pillars-heading">{{ 'allmy.about.pillars_heading' | t: default: 'What we stand for' }}</p>
+  <div class="allmy-about__pillars-grid">
+    {% for block in section.blocks %}
+      {% if block.type == 'value' %}
+        <div class="allmy-about__pillar" {{ block.shopify_attributes }}>
+          {% case block.settings.icon %}
+            {% when 'water' %}
+              <img src="{{ 'brand-icon-no-water.svg' | file_url }}" alt="{{ block.settings.title }}" class="allmy-about__pillar-icon" width="40" height="40">
+            {% when 'nature' %}
+              <img src="{{ 'brand-icon-naturally.svg' | file_url }}" alt="{{ block.settings.title }}" class="allmy-about__pillar-icon" width="40" height="40">
+            {% when 'recycle' %}
+              <img src="{{ 'brand-icon-recycled.svg' | file_url }}" alt="{{ block.settings.title }}" class="allmy-about__pillar-icon" width="40" height="40">
+            {% else %}
+              <img src="{{ 'brand-icon-cleaning.svg' | file_url }}" alt="{{ block.settings.title }}" class="allmy-about__pillar-icon" width="40" height="40">
+          {% endcase %}
+          <p class="allmy-about__pillar-title">{{ block.settings.title }}</p>
+          <p class="allmy-about__pillar-desc">{{ block.settings.desc }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="allmy-about__philosophy">
+  <div>
+    <p class="allmy-about__philosophy-label">{{ 'allmy.about.philosophy_label' | t: default: 'Philosophy' }}</p>
+    <p class="allmy-about__philosophy-quote">{{ 'allmy.about.philosophy_quote' | t: default: "Premium doesn't have to mean pretentious. It can mean purposeful." }}</p>
+  </div>
+  <div class="allmy-about__philosophy-detail">
+    <p>{{ 'allmy.about.philosophy_p1' | t: default: "Care doesn't have to cost the world. It can heal it. We believe that the best products are the ones that work, last, and leave less behind." }}</p>
+    <p>{{ 'allmy.about.philosophy_p2' | t: default: "Concentration isn't a feature — it's a philosophy. It means every drop counts, nothing is wasted, and your home stays clean without the guilt." }}</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="allmy-about__cta">
+  <h2 class="allmy-about__cta-heading">{{ 'allmy.about.cta_heading' | t: default: 'Ready to make the switch?' }}</h2>
+  <p class="allmy-about__cta-sub">{{ 'allmy.about.cta_sub' | t: default: 'Explore our concentrated cleaning range — designed to last longer, work harder, and ship smarter.' }}</p>
+  {% if section.settings.featured_product != blank %}
+    {% assign featured = all_products[section.settings.featured_product] %}
+    <a href="{{ featured.url }}" class="allmy-about__cta-btn">{{ section.settings.button_label | default: 'DISCOVER' }}</a>
+  {% else %}
+    <a href="/collections/all" class="allmy-about__cta-btn">{{ section.settings.button_label | default: 'SHOP ALL PRODUCTS' }}</a>
+  {% endif %}
 </section>
 
 {% schema %}
 {
   "name": "Mission & Product Funnel",
-  "tag": "section",
+  "tag": "div",
   "settings": [
-    {
-      "type": "header",
-      "content": "Mission Settings"
-    },
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow Text",
+      "label": "Eyebrow text",
       "default": "OUR PHILOSOPHY"
     },
     {
-      "type": "textarea",
+      "type": "text",
       "id": "heading",
-      "label": "Heading",
+      "label": "Hero headline",
       "default": "Premium doesn't have to mean pretentious. It can mean purposeful."
     },
     {
       "type": "richtext",
       "id": "text",
-      "label": "Text",
-      "default": "<p>Care doesn't have to cost the world. It can heal it. We create concentrate cleaning that works, shipping no water, and using strictly recycled materials.</p>"
+      "label": "Hero subtext",
+      "default": "<p>Care doesn't have to cost the world. It can heal it. We create concentrated cleaning that works, shipping no water, and using strictly recycled materials.</p>"
     },
     {
       "type": "select",
       "id": "layout",
-      "label": "Mission Position (Desktop)",
+      "label": "Story image position",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "right", "label": "Right" }
+        { "value": "left", "label": "Image right" },
+        { "value": "right", "label": "Image left" }
       ],
       "default": "left"
     },
     {
-      "type": "header",
-      "content": "Product Highlight"
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Story image"
     },
     {
       "type": "product",
       "id": "featured_product",
-      "label": "Select Product"
-    },
-    {
-      "type": "text",
-      "id": "product_override_title",
-      "label": "Custom Product Title",
-      "info": "Leave blank to use the default Shopify product title."
+      "label": "Featured product (CTA)"
     },
     {
       "type": "text",
       "id": "button_label",
-      "label": "Button Label",
+      "label": "CTA button label",
       "default": "DISCOVER"
-    },
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background Color",
-      "default": "#F5F0E3",
-      "info": "Warm Cream"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#2B2724",
-      "info": "Deep Espresso"
-    },
-    {
-      "type": "color",
-      "id": "product_bg",
-      "label": "Product Card Background",
-      "default": "#DACBA5",
-      "info": "Warm Beige Sand"
-    },
-    {
-      "type": "header",
-      "content": "Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 160,
-      "step": 8,
-      "unit": "px",
-      "label": "Padding Top",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 160,
-      "step": 8,
-      "unit": "px",
-      "label": "Padding Bottom",
-      "default": 80
     }
   ],
   "blocks": [
     {
       "type": "value",
-      "name": "Value Icon",
-      "limit": 3,
+      "name": "Value pillar",
       "settings": [
         {
           "type": "select",
@@ -400,7 +433,8 @@
           "options": [
             { "value": "water", "label": "No Water" },
             { "value": "nature", "label": "Naturally Gentle" },
-            { "value": "recycle", "label": "Recycled Plastic" }
+            { "value": "recycle", "label": "Recycled" },
+            { "value": "cleaning", "label": "Cleaning" }
           ],
           "default": "water"
         },
@@ -414,7 +448,7 @@
           "type": "text",
           "id": "desc",
           "label": "Description",
-          "default": "Concentrated formulas to reduce weight."
+          "default": "Concentrated formula."
         }
       ]
     }
@@ -423,9 +457,9 @@
     {
       "name": "Mission & Product Funnel",
       "blocks": [
-        { "type": "value", "settings": { "icon": "water", "title": "No Water Shipped", "desc": "Concentrated formula." } },
-        { "type": "value", "settings": { "icon": "nature", "title": "Naturally Gentle", "desc": "Safe for skin and earth." } },
-        { "type": "value", "settings": { "icon": "recycle", "title": "Recycled Plastic Only", "desc": "Giving materials a second life, thoughtfully." } }
+        { "type": "value", "settings": { "icon": "water", "title": "No Water Shipped", "desc": "Concentrated formula means zero water shipped in every bottle." } },
+        { "type": "value", "settings": { "icon": "nature", "title": "Naturally Gentle", "desc": "Safe for skin and earth. No harsh chemicals, ever." } },
+        { "type": "value", "settings": { "icon": "recycle", "title": "Recycled Plastic Only", "desc": "Thoughtfully repurposed for a cleaner tomorrow." } }
       ]
     }
   ]

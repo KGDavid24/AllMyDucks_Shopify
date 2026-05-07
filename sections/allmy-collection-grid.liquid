@@ -1,0 +1,325 @@
+<style>
+  .allmy-grid {
+    background: #F5F0E3;
+    padding: 96px 50px 112px;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .allmy-grid__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 16px;
+  }
+
+  .allmy-grid__eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C9B2A3;
+    margin-bottom: 6px;
+  }
+
+  .allmy-grid__heading {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 3vw, 40px);
+    line-height: 1.2;
+    color: #2B2724;
+  }
+
+  .allmy-grid__header-link {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(43,39,36,0.45);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+    margin-bottom: 4px;
+    flex-shrink: 0;
+  }
+
+  .allmy-grid__header-link:hover {
+    color: #2B2724;
+    border-color: rgba(43,39,36,0.4);
+  }
+
+  /* ── Grid ── */
+  .allmy-grid__products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  /* ── Card ── */
+  .allmy-grid__card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    padding: 0 16px 0;
+    border-right: 1px solid rgba(43,39,36,0.1);
+  }
+
+  .allmy-grid__card:last-child,
+  .allmy-grid__card:nth-child(3n) {
+    border-right: none;
+  }
+
+  /* ── Image + overlay container ── */
+  .allmy-grid__image-wrap {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: rgba(43,39,36,0.06);
+    position: relative;
+  }
+
+  .allmy-grid__image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .allmy-grid__card:hover .allmy-grid__image-wrap img {
+    transform: scale(1.05);
+  }
+
+  /* gradient scrim so text is always legible */
+  .allmy-grid__image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(43,39,36,0.72) 0%,
+      rgba(43,39,36,0.18) 42%,
+      transparent 68%
+    );
+    pointer-events: none;
+  }
+
+  /* ── Sold out badge ── */
+  .allmy-grid__badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(245,240,227,0.18);
+    border: 1px solid rgba(245,240,227,0.4);
+    color: #F5F0E3;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    pointer-events: none;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── Meta — sits inside the image at the bottom ── */
+  .allmy-grid__meta {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 20px 20px 22px;
+    pointer-events: none;
+  }
+
+  .allmy-grid__title {
+    font-size: 15px;
+    font-weight: 400;
+    color: #F5F0E3;
+    line-height: 1.4;
+  }
+
+  .allmy-grid__price {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(245,240,227,0.8);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .allmy-grid__price s {
+    text-decoration: line-through;
+    margin-right: 4px;
+    opacity: 0.55;
+  }
+
+  .allmy-grid__price--sale {
+    color: #DACBA5;
+    font-weight: 500;
+  }
+
+  /* ── Footer CTA ── */
+  .allmy-grid__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
+  }
+
+  .allmy-grid__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 48px;
+    background: #2B2724;
+    color: #F5F0E3;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    transition: opacity 0.2s ease;
+  }
+
+  .allmy-grid__btn:hover { opacity: 0.82; }
+
+  .allmy-grid__btn-arrow {
+    font-size: 14px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+
+  .allmy-grid__btn:hover .allmy-grid__btn-arrow { transform: translateX(4px); }
+
+  /* ── Responsive ── */
+  @media screen and (max-width: 900px) {
+    .allmy-grid { padding: 72px 28px 88px; }
+    .allmy-grid__products { grid-template-columns: repeat(2, 1fr); gap: 0; }
+    .allmy-grid__card:nth-child(3n) { border-right: 1px solid rgba(43,39,36,0.1); }
+    .allmy-grid__card:nth-child(2n) { border-right: none; }
+  }
+
+  @media screen and (max-width: 540px) {
+    .allmy-grid__header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .allmy-grid__products { grid-template-columns: repeat(2, 1fr); }
+    .allmy-grid__card { padding: 0 10px 36px; }
+    .allmy-grid__meta { flex-direction: column; gap: 4px; }
+  }
+</style>
+
+<section class="allmy-grid">
+
+  <div class="allmy-grid__header">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="allmy-grid__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="allmy-grid__heading">{{ section.settings.heading }}</h2>
+    </div>
+    {%- assign col = collections[section.settings.collection] -%}
+    {%- if col != blank and section.settings.show_view_all -%}
+      <a href="{{ col.url }}" class="allmy-grid__header-link">{{ section.settings.view_all_label }} →</a>
+    {%- endif -%}
+  </div>
+
+  <div class="allmy-grid__products">
+    {%- for product in col.products limit: section.settings.products_to_show -%}
+      <a href="{{ product.url }}" class="allmy-grid__card">
+
+        <div class="allmy-grid__image-wrap">
+          {%- if product.featured_image -%}
+            <img
+              src="{{ product.featured_image | image_url: width: 800 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}"
+              width="800"
+              height="{{ 800 | divided_by: product.featured_image.aspect_ratio | ceil }}"
+            >
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag }}
+          {%- endif -%}
+          {%- unless product.available -%}
+            <span class="allmy-grid__badge">Sold out</span>
+          {%- endunless -%}
+          <div class="allmy-grid__meta">
+            <span class="allmy-grid__title">{{ product.title }}</span>
+            <span class="allmy-grid__price{% if product.compare_at_price > product.price %} allmy-grid__price--sale{% endif %}">
+              {%- if product.compare_at_price > product.price -%}
+                <s>{{ product.compare_at_price | money }}</s>
+              {%- endif -%}
+              {{ product.price | money }}
+            </span>
+          </div>
+        </div>
+
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.show_view_all and col != blank -%}
+    <div class="allmy-grid__footer">
+      <a href="{{ col.url }}" class="allmy-grid__btn">
+        {{ section.settings.view_all_label }}
+        <span class="allmy-grid__btn-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  {%- endif -%}
+
+</section>
+
+{% schema %}
+{
+  "name": "Product Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Range"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Made to last. Designed to refill."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 9,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' link & button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all products"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Grid"
+    }
+  ]
+}
+{% endschema %}
