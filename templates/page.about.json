@@ -1,0 +1,76 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "product_limit": 12,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "about_mission_dGA4X3": {
+      "type": "about-mission",
+      "blocks": {
+        "value_RtxNUj": {
+          "type": "value",
+          "settings": {
+            "icon": "water",
+            "title": "No Water Shipped",
+            "desc": "Concentrated formula."
+          }
+        },
+        "value_qrpDtp": {
+          "type": "value",
+          "settings": {
+            "icon": "nature",
+            "title": "Naturally Gentle",
+            "desc": "Safe for skin and earth."
+          }
+        },
+        "value_Ua8GNa": {
+          "type": "value",
+          "settings": {
+            "icon": "recycle",
+            "title": "Recycled Plastic Only",
+            "desc": "Thoughtfully repurposed for a cleaner tomorrow."
+          }
+        }
+      },
+      "block_order": [
+        "value_RtxNUj",
+        "value_qrpDtp",
+        "value_Ua8GNa"
+      ],
+      "name": "Mission & Product Funnel",
+      "settings": {
+        "eyebrow": "OUR PHILOSOPHY",
+        "heading": "Premium doesn't have to mean pretentious. It can mean purposeful.",
+        "text": "<p>Care doesn't have to cost the world. It can heal it. We create concentrate cleaning that works, shipping no water, and using strictly recycled materials.</p>",
+        "layout": "left",
+        "featured_product": "shower-cream-solution-test-item",
+        "product_override_title": "",
+        "button_label": "DISCOVER",
+        "bg_color": "#F5F0E3",
+        "text_color": "#2B2724",
+        "product_bg": "#DACBA5",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "main",
+    "about_mission_dGA4X3"
+  ]
+}

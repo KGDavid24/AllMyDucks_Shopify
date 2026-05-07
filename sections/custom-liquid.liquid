@@ -1,0 +1,184 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: #F5F0E3; 
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .custom-related-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .custom-related-heading {
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    color: #2B2724; 
+    margin-bottom: 40px;
+  }
+
+  .custom-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 8px; 
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .custom-related-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    min-height: 500px;
+    padding: 25px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    background-color: #E5E5E5; /* Light grey fallback while image loads */
+  }
+
+  .custom-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .custom-card-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .custom-card-content {
+    position: relative;
+    z-index: 2; 
+    width: 100%;
+  }
+
+  .custom-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    text-transform: capitalize;
+  }
+
+  .custom-card-details-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .custom-card-weight {
+    font-size: 12px;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .custom-card-price {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 900px) {
+    .custom-related-grid {
+      grid-template-columns: 1fr;
+    }
+    .custom-related-card {
+      min-height: 450px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="custom-related-wrapper">
+    <h2 class="custom-related-heading">{{ section.settings.heading }}</h2>
+    
+    <div class="custom-related-grid">
+      {%- comment -%} 
+        LOGIC: Use the manually selected collection from the sidebar first.
+        If nothing is selected, try the automatic product collection.
+      {%- endcomment -%}
+      {%- assign target_collection = section.settings.collection | default: collection -%}
+      
+      {%- if target_collection == nil -%}
+        {%- assign target_collection = product.collections.first -%}
+      {%- endif -%}
+
+      {%- assign count = 0 -%}
+      
+      {%- for prod in target_collection.products -%}
+        {%- if prod.id != product.id and count < 3 -%}
+          
+          {%- assign meta_color = prod.metafields.custom.card_text_color.value | downcase -%}
+          {%- case meta_color -%}
+            {%- when 'warm cream' -%} {%- assign card_text_color = '#F5F0E3' -%}
+            {%- when 'clay blush' -%} {%- assign card_text_color = '#BEA99E' -%}
+            {%- when 'warm beige sand' -%} {%- assign card_text_color = '#D8C9AE' -%}
+            {%- when 'sage water' -%} {%- assign card_text_color = '#DEE5E3' -%}
+            {%- when 'warm amber light' -%} {%- assign card_text_color = '#E1B183' -%}
+            {%- else -%} {%- assign card_text_color = '#2B2724' -%}
+          {%- endcase -%}
+
+          <a href="{{ prod.url }}" class="custom-related-card">
+            <div class="custom-card-bg">
+              {%- if prod.featured_image -%}
+                <img src="{{ prod.featured_image | img_url: '800x' }}" alt="{{ prod.title | escape }}" loading="lazy">
+              {%- endif -%}
+            </div>
+
+            <div class="custom-card-content" style="color: {{ card_text_color }};">
+                <p class="custom-card-title">{{ prod.title }}</p>
+                <div class="custom-card-details-row">
+                  <p class="custom-card-weight">
+                    {{ prod.variants.first.weight | weight_with_unit: 'g' }}
+                  </p>
+                  <p class="custom-card-price">
+                    {{ prod.price | money_without_trailing_zeros }}
+                  </p>
+                </div>
+            </div>
+          </a>
+          {%- assign count = count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Related Bento",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "See also"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Fallback Collection",
+      "info": "Select a collection (like 'All Products') to ensure this section always shows products."
+    },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top Padding", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom Padding", "default": 52 }
+  ],
+  "presets": [{ "name": "Custom Related Bento" }]
+}
+{% endschema %}

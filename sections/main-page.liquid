@@ -1,0 +1,283 @@
+{%- style -%}
+  .mosaic-section-{{ section.id }} {
+    background-color: #F5F0E3; 
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    color: #2B2724;
+  }
+
+  .mosaic-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* --- TOP SEARCH BAR --- */
+  .mosaic-search-wrapper {
+    margin-bottom: 60px;
+    border-bottom: 2px solid #2B2724; /* Heavy brand line */
+    padding-bottom: 10px;
+  }
+
+  .mosaic-search-form {
+    display: flex;
+    align-items: center;
+  }
+
+  .mosaic-search-input {
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #2B2724;
+    width: 100%;
+    outline: none;
+    padding: 0;
+  }
+
+  .mosaic-search-input::placeholder {
+    color: rgba(43, 39, 36, 0.3);
+  }
+
+  /* --- MAIN SPLIT LAYOUT --- */
+  .mosaic-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr; /* Sidebar width */
+    gap: 40px;
+  }
+
+  /* --- LEFT SIDEBAR GRID --- */
+  .mosaic-sidebar-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    letter-spacing: 0.1em;
+  }
+
+  .mosaic-category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Mini bento grid for categories */
+    gap: 8px;
+  }
+
+  .mosaic-category-link {
+    background-color: rgba(43, 39, 36, 0.05);
+    padding: 15px 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #2B2724;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+  }
+
+  .mosaic-category-link:hover, .mosaic-category-link.is-active {
+    background-color: #2B2724;
+    color: #F5F0E3;
+  }
+
+  /* --- RIGHT MOSAIC GRID --- */
+  .mosaic-grid-title {
+    font-size: 42px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 40px 0;
+  }
+
+  .mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns in the split view */
+    grid-auto-rows: 300px;
+    gap: 12px;
+  }
+
+  .mosaic-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 25px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+
+  .mosaic-card:hover {
+    transform: scale(0.99);
+  }
+
+  .mosaic-card.size-hero {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .mosaic-card.size-tall {
+    grid-row: span 2;
+  }
+
+  .mosaic-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .mosaic-card-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .mosaic-info {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .mosaic-product-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+  }
+
+  .mosaic-details-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .mosaic-weight {
+    font-size: 12px;
+  }
+
+  .mosaic-price {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* --- RESPONSIVENESS --- */
+  @media screen and (max-width: 1100px) {
+    .mosaic-layout {
+      grid-template-columns: 1fr;
+    }
+    .mosaic-category-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .mosaic-search-input { font-size: 24px; }
+    .mosaic-category-grid { grid-template-columns: 1fr 1fr; }
+    .mosaic-grid { grid-template-columns: 1fr; grid-auto-rows: 400px; }
+    .mosaic-card.size-hero, .mosaic-card.size-tall { grid-column: span 1; grid-row: span 1; }
+  }
+{%- endstyle -%}
+
+<div class="mosaic-section-{{ section.id }}">
+  <div class="mosaic-container">
+    
+    <div class="mosaic-search-wrapper">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="mosaic-search-form">
+        <input 
+          type="text" 
+          name="q" 
+          class="mosaic-search-input" 
+          placeholder="SEARCH PRODUCTS..." 
+          aria-label="Search"
+        >
+      </form>
+    </div>
+
+    <div class="mosaic-layout">
+      
+      <aside class="mosaic-sidebar">
+        <h2 class="mosaic-sidebar-title">Categories</h2>
+        <div class="mosaic-category-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'category' -%}
+              <a href="{{ block.settings.collection.url }}" class="mosaic-category-link">
+                {{ block.settings.collection.title | default: block.settings.title_override }}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </aside>
+
+      <main class="mosaic-content">
+        <h1 class="mosaic-grid-title">
+          {{ section.settings.collection.title | default: "All Products" }}
+        </h1>
+
+        <div class="mosaic-grid">
+          {%- assign target_collection = section.settings.collection -%}
+          {%- if target_collection == nil -%}{%- assign target_collection = collections.all -%}{%- endif -%}
+
+          {%- for product in target_collection.products limit: section.settings.product_limit -%}
+            {%- assign mod = forloop.index | modulo: 6 -%}
+            {%- assign size_class = "" -%}
+            {%- if forloop.index == 1 or mod == 0 -%}{%- assign size_class = "size-hero" -%}{%- elsif mod == 3 -%}{%- assign size_class = "size-tall" -%}{%- endif -%}
+
+            {%- assign meta_color = product.metafields.custom.card_text_color.value | downcase -%}
+            {%- case meta_color -%}
+              {%- when 'warm cream' -%} {%- assign card_color = '#F5F0E3' -%}
+              {%- when 'clay blush' -%} {%- assign card_color = '#BEA99E' -%}
+              {%- when 'warm beige sand' -%} {%- assign card_color = '#D8C9AE' -%}
+              {%- when 'sage water' -%} {%- assign card_color = '#DEE5E3' -%}
+              {%- when 'warm amber light' -%} {%- assign card_color = '#E1B183' -%}
+              {%- else -%} {%- assign card_color = '#2B2724' -%}
+            {%- endcase -%}
+
+            <a href="{{ product.url }}" class="mosaic-card {{ size_class }}">
+              <div class="mosaic-card-bg">
+                <img src="{{ product.featured_image | img_url: '1000x' }}" alt="{{ product.title }}" loading="lazy">
+              </div>
+              <div class="mosaic-info" style="color: {{ card_color }};">
+                <h2 class="mosaic-product-name">{{ product.title }}</h2>
+                <div class="mosaic-details-row">
+                  <span class="mosaic-weight">{{ product.variants.first.weight | weight_with_unit: 'g' }}</span>
+                  <span class="mosaic-price">{{ product.price | money_without_trailing_zeros }}</span>
+                </div>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+      </main>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Mosaic Hub",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Main Display Collection" },
+    { "type": "range", "id": "product_limit", "min": 4, "max": 24, "step": 1, "label": "Product Limit", "default": 12 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Top Padding", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Bottom Padding", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Link",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title_override", "label": "Custom Title (Optional)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Mosaic Hub" }]
+}
+{% endschema %}

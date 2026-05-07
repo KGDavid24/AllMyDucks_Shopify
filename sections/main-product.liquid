@@ -1,0 +1,239 @@
+<style>
+  /* --- FULL WIDTH CONTAINER --- */
+  .custom-product-full-width {
+    background-color: #F5F0E3; 
+    width: 100%;
+    padding: 0;
+  }
+
+  /* --- MODULAR GRID --- */
+  .custom-product-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 0; /* Seamless transition between blocks */
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: transparent; 
+  }
+
+  /* --- LEFT: MEDIA BLOCK --- */
+  .custom-product-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F5F0E3;
+    padding: 60px; 
+  }
+
+  .custom-product-media img {
+    width: 100%; 
+    max-width: 500px; 
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* --- RIGHT: INFO BLOCK --- */
+  .custom-product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #F5F0E3; 
+    padding: 60px 80px; 
+    color: #2B2724; 
+  }
+
+  /* --- TYPOGRAPHY --- */
+  .custom-product-heading {
+    color: #2B2724; 
+    font-weight: 600;
+  }
+
+  .custom-product-text {
+    color: #2B2724; 
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .custom-product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  .custom-product-title {
+    font-size: 28px;
+    margin: 0;
+  }
+
+  .custom-product-price {
+    font-size: 18px;
+  }
+
+  .custom-product-subtitle {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-bottom: 40px;
+  }
+
+  .custom-product-description {
+    margin-bottom: 40px;
+  }
+
+  .custom-variant-picker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .custom-radio-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #2B2724; 
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* --- BUTTON --- */
+  .custom-product-actions {
+    display: flex;
+    margin-bottom: 60px;
+  }
+
+  .custom-btn {
+    flex: 1;
+    padding: 18px 0;
+    border-radius: 50px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 13px;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .custom-btn-primary {
+    background-color: #2B2724; 
+    color: #F5F0E3; 
+  }
+
+  /* --- ACCORDIONS --- */
+  .custom-accordions-wrapper {
+    border-top: 1px solid #2B2724; 
+  }
+
+  .custom-accordion {
+    border-bottom: 1px solid #2B2724; 
+  }
+
+  .custom-accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 13px;
+    list-style: none;
+  }
+
+  .custom-accordion-header::-webkit-details-marker {
+    display: none; 
+  }
+
+  .custom-accordion-content {
+    padding-bottom: 20px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .custom-product-wrapper {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .custom-product-info {
+      padding: 40px 20px;
+    }
+  }
+</style>
+
+<div class="custom-product-full-width">
+  <div class="custom-product-wrapper">
+    <div class="custom-product-media">
+      <img src="{{ product.featured_image | img_url: '1000x' }}" alt="{{ product.title }}">
+    </div>
+    <div class="custom-product-info">
+      <div class="custom-product-header">
+        <h1 class="custom-product-heading custom-product-title">{{ product.title }}</h1>
+        <span class="custom-product-heading custom-product-price">{{ product.price | money }}</span>
+      </div>
+      
+      <div class="custom-product-text custom-product-subtitle">
+        {{ product.metafields.custom.mix_ratio.value | default: "Mix ratio not set" }}
+      </div>
+
+      <div class="custom-product-text custom-product-description">
+        {{ product.description }}
+      </div>
+      
+      <div class="custom-variant-picker">
+        <span class="custom-radio-dot"></span>
+        <span class="custom-product-heading" style="font-size: 13px;">
+          {{ product.variants.first.weight | weight_with_unit: 'g' }}
+        </span>
+      </div>
+      
+      {% form 'product', product %}
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        <div class="custom-product-actions">
+          <button type="submit" class="custom-btn custom-btn-primary custom-product-heading">
+            ADD TO BAG
+          </button>
+        </div>
+      {% endform %}
+      
+      <div class="custom-accordions-wrapper">
+        <details class="custom-accordion">
+          <summary class="custom-accordion-header custom-product-heading">
+            FUNCTIONS <span>+</span>
+          </summary>
+          <div class="custom-accordion-content custom-product-text">
+            {{ product.metafields.custom.functions.value | default: "Function details not set." }}
+          </div>
+        </details>
+
+        <details class="custom-accordion">
+          <summary class="custom-accordion-header custom-product-heading">
+            DOSAGE <span>+</span>
+          </summary>
+          <div class="custom-accordion-content custom-product-text">
+            {{ product.metafields.custom.dosage.value | default: "Dosage details not set." }}
+          </div>
+        </details>
+
+        <details class="custom-accordion">
+          <summary class="custom-accordion-header custom-product-heading">
+            PAYMENT & DELIVERY <span>+</span>
+          </summary>
+          <div class="custom-accordion-content custom-product-text">
+            Standard shipping times apply.
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Product Info",
+  "presets": [
+    {
+      "name": "Custom Product Info"
+    }
+  ]
+}
+{% endschema %}

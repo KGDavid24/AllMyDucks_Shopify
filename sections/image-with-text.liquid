@@ -1,0 +1,674 @@
+{{ 'section-allmy-hero.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<style>
+  /* ── ALL MY HERO — Brand Styles ─────────────────────────────
+     Scoped to this section only via .allmy-hero
+  ─────────────────────────────────────────────────────────── */
+
+  .allmy-hero {
+    position: relative;
+    width: 100%;
+    height: 85svh;
+    max-height: 85svh;
+    display: grid;
+    grid-template-columns: 58fr 42fr;
+    overflow: hidden;
+    background: #F5F0E3;
+  }
+
+  /* ── LEFT PANEL ─────────────────────────────────────────── */
+  .allmy-hero__left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 56px 80px 72px;
+    z-index: 2;
+  }
+
+  .allmy-hero__left::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -60px; bottom: 0;
+    width: 120px;
+    background: radial-gradient(ellipse at right center,
+      rgba(226,183,134,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ── RIGHT PANEL ────────────────────────────────────────── */
+  .allmy-hero__right {
+    position: relative;
+    overflow: hidden;
+    background: #EDE8D9;
+    height: 100%;
+    opacity: 0;
+    animation: allmy-revealRight .9s cubic-bezier(0.16,1,0.3,1) .05s forwards;
+  }
+
+  .allmy-hero__right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 30%, rgba(226,183,134,.22) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(218,203,165,.15) 0%, transparent 60%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* ── IMAGE ──────────────────────────────────────────────── */
+  .allmy-hero__image-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .allmy-hero__image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Placeholder when no image set */
+  .allmy-hero__image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #EDE8D9;
+  }
+
+  .allmy-hero__image-placeholder svg {
+    width: 50%;
+    max-width: 260px;
+    opacity: .35;
+    animation: allmy-float 6s ease-in-out infinite;
+  }
+
+  /* Watermark background text */
+  .allmy-hero__bg-text {
+    position: absolute;
+    bottom: 48px;
+    right: -10px;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 10.5rem;
+    color: rgba(43,39,36,.04);
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    user-select: none;
+  }
+
+  /* Product label chip */
+  .allmy-hero__label {
+    position: absolute;
+    bottom: 36px;
+    left: 36px;
+    z-index: 3;
+    opacity: 0;
+    animation: allmy-revealUp .8s cubic-bezier(0.16,1,0.3,1) .7s forwards;
+  }
+
+  .allmy-hero__label-inner {
+    background: rgba(43,39,36,.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #F5F0E3;
+    padding: 10px 16px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .allmy-hero__label-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .allmy-hero__label-sub {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.975rem;
+    opacity: .5;
+  }
+
+  .allmy-hero__label-price {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 4px;
+  }
+
+  /* ── EYEBROW ────────────────────────────────────────────── */
+  .allmy-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px; /* Tightened spacing */
+    opacity: 0;
+    animation: allmy-revealUp .8s cubic-bezier(0.16,1,0.3,1) .1s forwards;
+  }
+
+  .allmy-hero__eyebrow-line {
+    width: 32px;
+    height: 1px;
+    background: #E2B786;
+    flex-shrink: 0;
+  }
+
+  .allmy-hero__eyebrow-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #C9B2A3;
+  }
+
+  /* ── HEADLINE ───────────────────────────────────────────── */
+  .allmy-hero__heading {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: clamp(2.8rem, 4.5vw, 5.2rem);
+    line-height: 1.1;
+    color: #2B2724;
+    margin: 0 0 16px; /* Tightened spacing */
+    opacity: 0;
+    animation: allmy-revealUp .9s cubic-bezier(0.16,1,0.3,1) .2s forwards;
+  }
+
+  /* ── BODY TEXT ──────────────────────────────────────────── */
+  .allmy-hero__text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.875rem;
+    line-height: 1.8;
+    color: #2B2724;
+    opacity: 0;
+    max-width: 480px;
+    margin-bottom: 80px; /* Increased to push the text cluster up and keep the mission down */
+    animation: allmy-revealUp .9s cubic-bezier(0.16,1,0.3,1) .3s forwards;
+  }
+
+  .allmy-hero__text p {
+    opacity: .65;
+    margin: 0;
+  }
+
+  /* ── MISSION STRIP ──────────────────────────────────────── */
+  .allmy-hero__mission {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: allmy-revealUp .9s cubic-bezier(0.16,1,0.3,1) .4s forwards;
+  }
+
+  .allmy-hero__mission-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .allmy-hero__mission-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    opacity: .7;
+  }
+
+  .allmy-hero__mission-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.425rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #2B2724;
+  }
+
+  .allmy-hero__mission-desc {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.35rem;
+    color: #C9B2A3;
+    line-height: 1.4;
+  }
+
+  /* ── CTA ────────────────────────────────────────────────── */
+  .allmy-hero__cta {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    opacity: 0;
+    animation: allmy-revealUp .9s cubic-bezier(0.16,1,0.3,1) .5s forwards;
+  }
+
+  .allmy-hero__btn-primary {
+    background: #2B2724;
+    color: #F5F0E3;
+    border: none;
+    padding: 30px 66px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .allmy-hero__btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg,
+      transparent 40%, rgba(226,183,134,.25) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform .5s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .allmy-hero__btn-primary:hover { transform: translateY(-2px); }
+  .allmy-hero__btn-primary:hover::after { transform: translateX(100%); }
+  .allmy-hero__btn-primary:active { transform: translateY(0); }
+
+  .allmy-hero__btn-ghost {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #2B2724;
+    text-decoration: none;
+    opacity: .5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity .2s, gap .3s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .allmy-hero__btn-ghost:hover { opacity: 1; gap: 14px; }
+
+  /* ── KEYFRAMES ──────────────────────────────────────────── */
+  @keyframes allmy-revealUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes allmy-revealRight {
+    from { opacity: 0; transform: translateX(16px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes allmy-float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────── */
+  @media screen and (max-width: 899px) {
+    .allmy-hero {
+      grid-template-columns: 1fr;
+      grid-template-rows: 55vw auto;
+      min-height: auto;
+    }
+
+    .allmy-hero__right { order: 1; }
+    .allmy-hero__left  { order: 2; padding: 48px 32px 56px; }
+    .allmy-hero__left::after { display: none; }
+    .allmy-hero__heading { font-size: 2.2rem; }
+  }
+
+  @media screen and (max-width: 479px) {
+    .allmy-hero__left { padding: 36px 24px 48px; }
+    .allmy-hero__heading { font-size: 1.9rem; }
+    .allmy-hero__mission { gap: 16px; }
+    .allmy-hero__cta { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<section
+  class="allmy-hero section-{{ section.id }}"
+  aria-label="{{ section.settings.heading | escape }}"
+>
+
+  {%- comment -%} ── LEFT: CONTENT ──────────────────────────── {%- endcomment -%}
+  <div class="allmy-hero__left">
+
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="allmy-hero__eyebrow">
+        <div class="allmy-hero__eyebrow-line"></div>
+        <span class="allmy-hero__eyebrow-text">{{ section.settings.eyebrow | escape }}</span>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="allmy-hero__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <div class="allmy-hero__text">{{ section.settings.text }}</div>
+    {%- endif -%}
+
+    {%- comment -%} Mission strip — show if at least one is enabled {%- endcomment -%}
+    {%- if section.settings.show_mission -%}
+      <div class="allmy-hero__mission" aria-label="Brand values">
+
+        {%- if section.settings.mission_1_name != blank -%}
+          <div class="allmy-hero__mission-item">
+            <svg class="allmy-hero__mission-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path d="M14 4C14 4 7 10 7 17a7 7 0 0014 0c0-7-7-13-7-13z" fill="#2B2724" opacity=".7"/>
+              <line x1="14" y1="4" x2="14" y2="24" stroke="#F5F0E3" stroke-width="1.2"/>
+              <line x1="5" y1="5" x2="23" y2="23" stroke="#2B2724" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="allmy-hero__mission-name">{{ section.settings.mission_1_name | escape }}</span>
+            <span class="allmy-hero__mission-desc">{{ section.settings.mission_1_desc | escape }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.mission_2_name != blank -%}
+          <div class="allmy-hero__mission-item">
+            <svg class="allmy-hero__mission-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <rect x="11" y="4"  width="3" height="14" rx="1.5" fill="#2B2724" opacity=".6"/>
+              <rect x="16" y="7"  width="3" height="11" rx="1.5" fill="#2B2724" opacity=".5"/>
+              <rect x="6"  y="7"  width="3" height="11" rx="1.5" fill="#2B2724" opacity=".5"/>
+              <path d="M5 20 Q14 24 23 20" stroke="#2B2724" stroke-width="1.2" fill="none" opacity=".6" stroke-linecap="round"/>
+            </svg>
+            <span class="allmy-hero__mission-name">{{ section.settings.mission_2_name | escape }}</span>
+            <span class="allmy-hero__mission-desc">{{ section.settings.mission_2_desc | escape }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.mission_3_name != blank -%}
+          <div class="allmy-hero__mission-item">
+            <svg class="allmy-hero__mission-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path d="M14 5l-5 8h4l-3 10 10-12h-4l3-6z" fill="#2B2724" opacity=".65"/>
+            </svg>
+            <span class="allmy-hero__mission-name">{{ section.settings.mission_3_name | escape }}</span>
+            <span class="allmy-hero__mission-desc">{{ section.settings.mission_3_desc | escape }}</span>
+          </div>
+        {%- endif -%}
+
+      </div>
+    {%- endif -%}
+
+    <div class="allmy-hero__cta">
+      {%- if section.settings.button_label != blank -%}
+        <a
+          href="{{ section.settings.button_link | default: '#' }}"
+          class="allmy-hero__btn-primary"
+        >
+          {{- section.settings.button_label | escape -}}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.ghost_label != blank -%}
+        <a
+          href="{{ section.settings.ghost_link | default: '#' }}"
+          class="allmy-hero__btn-ghost"
+        >
+          {{- section.settings.ghost_label | escape -}} →
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  {%- comment -%} ── RIGHT: IMAGE ────────────────────────────── {%- endcomment -%}
+  <div class="allmy-hero__right">
+
+    <div class="allmy-hero__image-wrap">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1400
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '600, 800, 1000, 1400',
+            sizes: '(max-width: 899px) 100vw, 50vw',
+            alt: section.settings.image.alt | default: section.settings.heading
+        }}
+      {%- else -%}
+        <div class="allmy-hero__image-placeholder">
+          {%- comment -%} Amber bottle placeholder SVG — replace with real product photo {%- endcomment -%}
+          <svg viewBox="0 0 260 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="hBottleBody-{{ section.id }}" cx="35%" cy="40%" r="55%">
+                <stop offset="0%"   stop-color="#C17F3A"/>
+                <stop offset="50%"  stop-color="#8B5A1E"/>
+                <stop offset="100%" stop-color="#5C3810"/>
+              </radialGradient>
+              <radialGradient id="hBottleShine-{{ section.id }}" cx="25%" cy="25%" r="40%">
+                <stop offset="0%"   stop-color="#E8A84A" stop-opacity=".4"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+            </defs>
+            <rect x="62" y="165" width="136" height="218" rx="22" fill="url(#hBottleBody-{{ section.id }})"/>
+            <rect x="62" y="165" width="136" height="218" rx="22" fill="url(#hBottleShine-{{ section.id }})"/>
+            <rect x="62" y="165" width="22" height="218" rx="11" fill="rgba(0,0,0,.12)"/>
+            <rect x="176" y="165" width="22" height="218" rx="11" fill="rgba(0,0,0,.10)"/>
+            <rect x="80" y="175" width="7" height="200" rx="3.5" fill="rgba(240,192,80,.16)"/>
+            <rect x="98" y="112" width="64" height="62" rx="12" fill="#4A2E0C"/>
+            <rect x="62" y="158" width="136" height="22" rx="8" fill="#7A4A18" opacity=".8"/>
+            <rect x="124" y="52" width="12" height="66" rx="6" fill="#3A2008"/>
+            <rect x="110" y="42" width="40" height="18" rx="9" fill="#2E1A06"/>
+            <path d="M150 51 Q188 46 192 64" stroke="#2E1A06" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <text x="86" y="238" font-family="Comfortaa,sans-serif" font-size="24" font-weight="700" fill="rgba(245,240,227,.9)">ALL</text>
+            <text x="86" y="268" font-family="Comfortaa,sans-serif" font-size="24" font-weight="700" fill="rgba(245,240,227,.9)">MY</text>
+            <text x="86" y="300" font-family="Outfit,sans-serif" font-size="9" font-weight="500" fill="rgba(245,240,227,.55)" letter-spacing="2.5">HAND WASH</text>
+            <ellipse cx="130" cy="390" rx="55" ry="6" fill="rgba(218,203,165,.2)"/>
+          </svg>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="allmy-hero__bg-text" aria-hidden="true">ALL MY</div>
+
+    {%- if section.settings.label_name != blank -%}
+      <div class="allmy-hero__label">
+        <div class="allmy-hero__label-inner">
+          <span class="allmy-hero__label-name">{{ section.settings.label_name | escape }}</span>
+          {%- if section.settings.label_sub != blank -%}
+            <span class="allmy-hero__label-sub">{{ section.settings.label_sub | escape }}</span>
+          {%- endif -%}
+          {%- if section.settings.label_price != blank -%}
+            <span class="allmy-hero__label-price">{{ section.settings.label_price | escape }}</span>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "ALL MY Hero",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Warm Spring Light · New Collection"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Headline",
+      "default": "<p>Premium doesn't have to mean pretentious.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body text",
+      "default": "<p>Care doesn't have to cost the world. It can heal it. Concentrate cleaning that works — and nothing else.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Primary button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary button"
+    },
+    {
+      "type": "text",
+      "id": "ghost_label",
+      "label": "Ghost button label",
+      "default": "How it works"
+    },
+    {
+      "type": "url",
+      "id": "ghost_link",
+      "label": "Ghost button link"
+    },
+    {
+      "type": "header",
+      "content": "Mission strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mission",
+      "label": "Show mission strip",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "mission_1_name",
+      "label": "Value 1 — name",
+      "default": "No Water"
+    },
+    {
+      "type": "text",
+      "id": "mission_1_desc",
+      "label": "Value 1 — description",
+      "default": "Shipped"
+    },
+    {
+      "type": "text",
+      "id": "mission_2_name",
+      "label": "Value 2 — name",
+      "default": "Naturally"
+    },
+    {
+      "type": "text",
+      "id": "mission_2_desc",
+      "label": "Value 2 — description",
+      "default": "Gentle Formula"
+    },
+    {
+      "type": "text",
+      "id": "mission_3_name",
+      "label": "Value 3 — name",
+      "default": "Recycled"
+    },
+    {
+      "type": "text",
+      "id": "mission_3_desc",
+      "label": "Value 3 — description",
+      "default": "Plastic Only"
+    },
+    {
+      "type": "header",
+      "content": "Image panel"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image",
+      "info": "Recommended: portrait orientation, min 1400px tall. Use a lifestyle or product shot."
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "Product label — name",
+      "default": "Hand Wash",
+      "info": "Appears as a frosted chip over the image bottom-left."
+    },
+    {
+      "type": "text",
+      "id": "label_sub",
+      "label": "Product label — subtitle",
+      "default": "Concentrate · 350ml ready-to-use"
+    },
+    {
+      "type": "text",
+      "id": "label_price",
+      "label": "Product label — price",
+      "default": "17€"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "ALL MY Hero"
+    }
+  ]
+}
+{% endschema %}

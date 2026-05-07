@@ -1,0 +1,185 @@
+<style>
+  .custom-brand-header {
+    position: relative; /* Added to map the absolute centering */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 50px; 
+    background-color: #F5F0E3; /* Warm Cream */
+    color: #2B2724; /* Deep Espresso */
+  }
+  
+  .custom-header-left, .custom-header-right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  .custom-brand-name {
+    /* Font-family removed: controlled by Google Fonts App via .custom-brand-name */
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #2B2724;
+  }
+  
+  .custom-menu-nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  
+  .custom-menu-link {
+    /* Font-family removed: controlled by Google Fonts App via .custom-menu-link */
+    text-decoration: none;
+    color: #2B2724; 
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .custom-center-logo {
+    position: absolute; /* Pulls logo out of the standard flex flow */
+    left: 50%; /* Pushes to the middle */
+    transform: translateX(-50%); /* Centers perfectly on its own axis */
+  }
+
+  .custom-center-logo img {
+    height: 70px; /* Enlarged pictogram size */
+    display: block;
+  }
+
+  /* ── SEARCH BAR STYLES ── */
+  .custom-search-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .custom-search-form {
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+  }
+
+  .custom-search-form.is-open {
+    width: 180px;
+    opacity: 1;
+    margin-right: 15px; /* Space between input and button */
+  }
+
+  .custom-search-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #2B2724;
+    color: #2B2724;
+    font-size: 16px;
+    padding: 4px 0;
+    outline: none;
+  }
+
+  .custom-search-input::placeholder {
+    color: rgba(43, 39, 36, 0.5);
+  }
+
+  /* Reset button styles to match regular links */
+  button.custom-search-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+  }
+
+  @media screen and (max-width: 989px) {
+    .custom-brand-header {
+      display: none;
+    }
+  }
+</style>
+
+<header class="custom-brand-header">
+  <div class="custom-header-left">
+    <a href="/" class="custom-brand-name">ALL MY DUCKS</a>
+    <nav class="custom-menu-nav">
+      {% for link in linklists['left-menu'].links %}
+        <a href="{{ link.url }}" class="custom-menu-link">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+
+  <div class="custom-center-logo">
+    <a href="/">
+      <img src="{{ 'icon1.png' | file_url }}" alt="All My Ducks Logo">
+    </a>
+  </div>
+
+  <div class="custom-header-right">
+    <nav class="custom-menu-nav">
+     
+      <div class="custom-search-container">
+        <form action="{{ routes.search_url }}" method="get" class="custom-search-form" id="custom-search-form">
+          <input type="text" name="q" placeholder="Search..." class="custom-search-input" id="custom-search-input">
+          <input type="hidden" name="type" value="product">
+        </form>
+        <button type="button" class="custom-menu-link custom-search-toggle" id="custom-search-toggle">Search</button>
+      </div>
+
+      {% for link in linklists['right-menu'].links %}
+        {% assign link_title_down = link.title | downcase %}
+        {% if link_title_down == 'search' %}
+          {% continue %}
+        {% endif %}
+        <a href="{{ link.url }}" class="custom-menu-link">{{ link.title }}</a>
+      {% endfor %}
+      
+      <a href="{{ routes.cart_url }}" class="custom-menu-link" id="custom-cart-link">
+        Bag ({{ cart.item_count }})
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchToggle = document.getElementById('custom-search-toggle');
+    const searchForm = document.getElementById('custom-search-form');
+    const searchInput = document.getElementById('custom-search-input');
+
+    searchToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // If already open and there's text, submit the search.
+      // Otherwise, just toggle the input field open/closed.
+      if (searchForm.classList.contains('is-open') && searchInput.value.trim() !== '') {
+        searchForm.submit();
+      } else {
+        searchForm.classList.toggle('is-open');
+        if (searchForm.classList.contains('is-open')) {
+          searchInput.focus();
+        }
+      }
+    });
+
+    // Close search bar if clicking outside of it
+    document.addEventListener('click', (e) => {
+      if (!searchForm.contains(e.target) && e.target !== searchToggle) {
+        searchForm.classList.remove('is-open');
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Brand Header",
+  "presets": [
+    {
+      "name": "Custom Brand Header"
+    }
+  ]
+}
+{% endschema %}
