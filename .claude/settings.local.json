@@ -3,7 +3,8 @@
     "allow": [
       "Bash(Get-Content \"C:\\\\Projects\\\\AllMyDucks\\\\locales\\\\ro.json\")",
       "Bash(Measure-Object -Line)",
-      "Bash(Select-Object -ExpandProperty Lines)"
+      "Bash(Select-Object -ExpandProperty Lines)",
+      "PowerShell(Copy-Item \"C:\\\\Projects\\\\AllMyDucks\\\\brand media\\\\allmyducks_brand\\\\ALL MY_ducks only_yellow middle.png\" \"C:\\\\Projects\\\\AllMyDucks\\\\assets\\\\brand-logo-ducks-mid-amber.png\")"
     ]
   }
 }

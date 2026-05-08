@@ -40,14 +40,33 @@
   }
   
   .custom-center-logo {
-    position: absolute; /* Pulls logo out of the standard flex flow */
-    left: 50%; /* Pushes to the middle */
-    transform: translateX(-50%); /* Centers perfectly on its own axis */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .custom-center-logo a {
+    display: block;
+    position: relative;
   }
 
   .custom-center-logo img {
-    height: 70px; /* Enlarged pictogram size */
+    height: 70px;
     display: block;
+  }
+
+  .custom-center-logo__hover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .custom-center-logo a:hover .custom-center-logo__hover {
+    opacity: 1;
   }
 
   /* ── SEARCH BAR STYLES ── */
@@ -114,6 +133,7 @@
   <div class="custom-center-logo">
     <a href="/">
       <img src="{{ 'brand-logo-ducks.svg' | file_url }}" alt="All My Ducks" width="120" height="70">
+      <img src="{{ 'brand-logo-ducks-mid-amber.png' | file_url }}" alt="" width="120" height="70" class="custom-center-logo__hover" aria-hidden="true">
     </a>
   </div>
 

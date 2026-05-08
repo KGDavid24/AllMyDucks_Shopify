@@ -30,14 +30,14 @@
 
   .allmy-split-hero__left-content {
     position: absolute;
-    inset: 0;
+    left: 0;
+    right: 0;
+    top: var(--heading-top, 42%);
+    transform: translateY(-50%);
     z-index: 2;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 56px;
-    text-align: center;
+    padding: 0 56px;
   }
 
   .allmy-split-hero__eyebrow {
@@ -46,7 +46,8 @@
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--hero-text, #ffffff);
+    opacity: 0.65;
     margin-bottom: 20px;
   }
 
@@ -54,7 +55,7 @@
     font-family: 'Comfortaa', sans-serif;
     font-size: clamp(2.4rem, 4.5vw, 5rem);
     font-weight: 700;
-    color: #ffffff;
+    color: var(--hero-text, #ffffff);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     line-height: 1.05;
@@ -62,36 +63,39 @@
   }
 
   .allmy-split-hero__btn {
-    display: inline-block;
+    position: absolute;
+    z-index: 3;
     padding: 13px 32px;
-    border: 1.5px solid rgba(255, 255, 255, 0.7);
-    color: #ffffff;
+    border: 2.5px solid var(--hero-text, #ffffff);
+    color: var(--hero-text, #ffffff);
     text-decoration: none;
     font-family: 'Outfit', sans-serif;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
   }
 
   .allmy-split-hero__btn:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: #ffffff;
+    opacity: 1;
   }
 
   .allmy-split-hero__tagline {
     position: absolute;
-    bottom: 40px;
     left: 44px;
     right: 44px;
+    top: var(--tagline-top, 88%);
+    transform: translateY(-50%);
     z-index: 2;
     font-family: 'Outfit', sans-serif;
     font-size: 13px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.65);
+    color: var(--hero-text, #ffffff);
+    opacity: 0.65;
     line-height: 1.7;
-    text-align: center;
   }
 
   /* ── RIGHT PANEL ── */
@@ -116,15 +120,15 @@
       height: auto;
     }
 
-    .allmy-split-hero__left-content { padding: 36px; }
-    .allmy-split-hero__tagline { bottom: 24px; left: 24px; right: 24px; font-size: 12px; }
+    .allmy-split-hero__left-content { padding: 0 24px; }
+    .allmy-split-hero__tagline { left: 24px; right: 24px; font-size: 12px; }
   }
 </style>
 
 <div class="allmy-split-hero">
 
   {%- comment -%} ── LEFT ── {%- endcomment -%}
-  <div class="allmy-split-hero__left">
+  <div class="allmy-split-hero__left" style="--hero-text: {{ section.settings.text_color }}; --heading-top: {{ section.settings.heading_top }}%; --tagline-top: {{ section.settings.tagline_top }}%;">
 
     {%- if section.settings.image_left -%}
       <img
@@ -150,7 +154,12 @@
 
     <div class="allmy-split-hero__left-overlay"></div>
 
-    <div class="allmy-split-hero__left-content">
+    {%- assign _ha = section.settings.heading_align -%}
+    {%- if _ha == 'left' -%}{%- assign _halign_style = 'align-items: flex-start; text-align: left;' -%}
+    {%- elsif _ha == 'right' -%}{%- assign _halign_style = 'align-items: flex-end; text-align: right;' -%}
+    {%- else -%}{%- assign _halign_style = 'align-items: center; text-align: center;' -%}
+    {%- endif -%}
+    <div class="allmy-split-hero__left-content" style="{{ _halign_style }}">
       {%- if section.settings.eyebrow != blank -%}
         <p class="allmy-split-hero__eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
@@ -158,16 +167,35 @@
       {%- if section.settings.heading != blank -%}
         <h2 class="allmy-split-hero__heading">{{ section.settings.heading }}</h2>
       {%- endif -%}
-
-      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
-        <a href="{{ section.settings.button_link }}" class="allmy-split-hero__btn">
-          {{ section.settings.button_label }}
-        </a>
-      {%- endif -%}
     </div>
 
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      {%- assign _h = section.settings.button_halign -%}
+      {%- assign _v = section.settings.button_valign -%}
+      {%- if _h == 'center' and _v == 'middle' -%}
+        {%- assign _btn_transform = 'transform: translate(-50%, -50%);' -%}
+      {%- elsif _h == 'center' -%}
+        {%- assign _btn_transform = 'transform: translateX(-50%);' -%}
+      {%- elsif _v == 'middle' -%}
+        {%- assign _btn_transform = 'transform: translateY(-50%);' -%}
+      {%- else -%}
+        {%- assign _btn_transform = '' -%}
+      {%- endif -%}
+      {%- if _h == 'left' -%}{%- assign _btn_h = 'left: 56px;' -%}
+      {%- elsif _h == 'right' -%}{%- assign _btn_h = 'right: 56px;' -%}
+      {%- else -%}{%- assign _btn_h = 'left: 50%;' -%}
+      {%- endif -%}
+      {%- if _v == 'top' -%}{%- assign _btn_v = 'top: 56px;' -%}
+      {%- elsif _v == 'bottom' -%}{%- assign _btn_v = 'bottom: 56px;' -%}
+      {%- else -%}{%- assign _btn_v = 'top: 50%;' -%}
+      {%- endif -%}
+      <a href="{{ section.settings.button_link }}" class="allmy-split-hero__btn" style="{{ _btn_h }} {{ _btn_v }} {{ _btn_transform }}">
+        {{ section.settings.button_label }}
+      </a>
+    {%- endif -%}
+
     {%- if section.settings.tagline != blank -%}
-      <p class="allmy-split-hero__tagline">{{ section.settings.tagline }}</p>
+      <p class="allmy-split-hero__tagline" style="text-align: {{ section.settings.tagline_align }};">{{ section.settings.tagline }}</p>
     {%- endif -%}
 
   </div>
@@ -248,10 +276,88 @@
       "label": "Button link"
     },
     {
+      "type": "select",
+      "id": "button_halign",
+      "label": "Button — horizontal position",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_valign",
+      "label": "Button — vertical position",
+      "default": "middle",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_top",
+      "label": "Heading — vertical position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "default": 42,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading — text alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
       "type": "text",
       "id": "tagline",
-      "label": "Tagline (bottom of panel)",
+      "label": "Tagline",
       "default": "Premium doesn't have to mean pretentious. It can mean purposeful. Care doesn't have to cost the world. It can heal it."
+    },
+    {
+      "type": "range",
+      "id": "tagline_top",
+      "label": "Tagline — vertical position",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "default": 88,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "tagline_align",
+      "label": "Tagline — text alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ffffff",
+      "options": [
+        { "value": "#ffffff", "label": "White" },
+        { "value": "#F5F0E3", "label": "Warm Cream" },
+        { "value": "#dde6e3", "label": "Sage Water" },
+        { "value": "#e2b786", "label": "Warm Amber Light" },
+        { "value": "#C9B2A3", "label": "Clay Blush" },
+        { "value": "#2B2724", "label": "Deep Espresso" }
+      ]
     },
     {
       "type": "header",
