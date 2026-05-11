@@ -4,11 +4,12 @@
     color: #F5F0E3;
     text-align: center;
     padding: 10px 24px;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+    position: relative;
   }
 
   .allmy-announcement__inner {
@@ -16,7 +17,6 @@
     align-items: center;
     justify-content: center;
     gap: 28px;
-    flex-wrap: wrap;
   }
 
   .allmy-announcement__item {
@@ -24,27 +24,72 @@
     align-items: center;
     gap: 8px;
     color: #F5F0E3;
+    white-space: nowrap;
   }
 
   .allmy-announcement__sep {
     width: 3px;
     height: 3px;
     border-radius: 50%;
-    background: #DACBA5;
+    background: #e2b786;
     flex-shrink: 0;
   }
 
+  .allmy-announcement__dupe { display: none; }
+
+  /* ── MOBILE: horizontal marquee ── */
   @media screen and (max-width: 600px) {
+    .allmy-announcement__dupe { display: flex; }
+
     .allmy-announcement {
-      font-size: 11px;
-      padding: 9px 16px;
+      padding: 9px 0;
+      overflow: hidden;
     }
-    .allmy-announcement__sep {
-      display: none;
+
+    .allmy-announcement::before,
+    .allmy-announcement::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 48px;
+      z-index: 2;
+      pointer-events: none;
     }
+
+    .allmy-announcement::before {
+      left: 0;
+      background: linear-gradient(to right, #2B2724 0%, transparent 100%);
+    }
+
+    .allmy-announcement::after {
+      right: 0;
+      background: linear-gradient(to left, #2B2724 0%, transparent 100%);
+    }
+
     .allmy-announcement__inner {
-      gap: 6px;
-      flex-direction: column;
+      width: max-content;
+      gap: 0;
+      justify-content: flex-start;
+      animation: allmy-ticker 18s linear infinite;
+    }
+
+    .allmy-announcement__inner:hover {
+      animation-play-state: paused;
+    }
+
+    .allmy-announcement__item {
+      padding: 0 20px;
+    }
+
+    .allmy-announcement__sep {
+      width: 3px;
+      height: 3px;
+    }
+
+    @keyframes allmy-ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
   }
 </style>
@@ -56,6 +101,14 @@
     <span class="allmy-announcement__item">0% filler</span>
     <span class="allmy-announcement__sep" aria-hidden="true"></span>
     <span class="allmy-announcement__item">Free EU shipping over &euro;35</span>
+    <span class="allmy-announcement__sep" aria-hidden="true"></span>
+    {%- comment -%} Duplicate set for seamless mobile loop — hidden on desktop {%- endcomment -%}
+    <span class="allmy-announcement__item allmy-announcement__dupe" aria-hidden="true">No water shipped</span>
+    <span class="allmy-announcement__sep allmy-announcement__dupe" aria-hidden="true"></span>
+    <span class="allmy-announcement__item allmy-announcement__dupe" aria-hidden="true">0% filler</span>
+    <span class="allmy-announcement__sep allmy-announcement__dupe" aria-hidden="true"></span>
+    <span class="allmy-announcement__item allmy-announcement__dupe" aria-hidden="true">Free EU shipping over &euro;35</span>
+    <span class="allmy-announcement__sep allmy-announcement__dupe" aria-hidden="true"></span>
   </div>
 </div>
 

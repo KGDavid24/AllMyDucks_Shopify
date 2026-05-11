@@ -13,14 +13,22 @@
       "type": "split-hero",
       "name": "Split Hero",
       "settings": {
-        "image_left": "shopify://shop_images/Roseshowergel.png",
-        "image_right": "shopify://shop_images/Showercreamsolution.png",
+        "image_left": "shopify://shop_images/hero1.png",
         "grayscale": true,
         "overlay_opacity": 30,
+        "eyebrow": "",
         "heading": "INGREDIENTS",
-        "tagline": "Premium doesn't have to mean pretentious. It can mean purposeful. Care doesn't have to cost the world. It can heal it.",
         "button_label": "Shop Now",
-        "button_link": "/collections/all"
+        "button_link": "/collections/all",
+        "button_halign": "left",
+        "button_valign": "top",
+        "heading_top": 19,
+        "heading_align": "left",
+        "tagline": "Premium doesn't have to mean pretentious. It can mean purposeful. Care doesn't have to cost the world. It can heal it.",
+        "tagline_top": 89,
+        "tagline_align": "right",
+        "text_color": "#2B2724",
+        "image_right": "shopify://shop_images/hero2.png"
       }
     },
     "allmy-collection-grid": {

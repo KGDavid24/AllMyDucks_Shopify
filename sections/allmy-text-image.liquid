@@ -1,0 +1,273 @@
+<style>
+  .allmy-ti-{{ section.id }} {
+    background: {{ section.settings.bg_color }};
+  }
+
+  .allmy-ti-{{ section.id }}__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: {{ section.settings.min_height }}px;
+  }
+
+  .allmy-ti-{{ section.id }}__media {
+    overflow: hidden;
+    position: relative;
+    {%- if section.settings.image_side == 'right' %}order: 1;{%- endif %}
+  }
+
+  .allmy-ti-{{ section.id }}__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.image_focus }};
+    display: block;
+  }
+
+  .allmy-ti-{{ section.id }}__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: {{ section.settings.pad_v }}px {{ section.settings.pad_h }}px;
+    {%- if section.settings.image_side == 'right' %}order: 0;{%- endif %}
+  }
+
+  .allmy-ti-{{ section.id }}__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: clamp(26px, 3.5vw, 46px);
+    line-height: 1.15;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 22px;
+  }
+
+  .allmy-ti-{{ section.id }}__body {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: {{ section.settings.text_color }};
+    opacity: 0.8;
+    margin: 0 0 32px;
+  }
+
+  .allmy-ti-{{ section.id }}__body p { margin: 0 0 12px; }
+  .allmy-ti-{{ section.id }}__body p:last-child { margin-bottom: 0; }
+
+  .allmy-ti-{{ section.id }}__stat {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding: 20px 24px;
+    background: {{ section.settings.stat_bg }};
+    border-left: 3px solid {{ section.settings.accent_color }};
+  }
+
+  .allmy-ti-{{ section.id }}__stat-value {
+    font-family: var(--font-heading-family);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: {{ section.settings.accent_color }};
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .allmy-ti-{{ section.id }}__stat-label {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: {{ section.settings.text_color }};
+    opacity: 0.7;
+  }
+
+  .allmy-ti-{{ section.id }}__image--mobile { display: none; }
+
+  @media screen and (max-width: 900px) {
+    .allmy-ti-{{ section.id }}__grid {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .allmy-ti-{{ section.id }}__media {
+      order: {%- if section.settings.image_mobile == 'below' %} 1{%- else %} 0{%- endif %};
+      height: {{ section.settings.img_mobile_height }}px;
+      min-height: 200px;
+    }
+    .allmy-ti-{{ section.id }}__text {
+      order: {%- if section.settings.image_mobile == 'below' %} 0{%- else %} 1{%- endif %};
+      padding: {{ section.settings.pad_v_mobile }}px 24px;
+    }
+    {%- if section.settings.mobile_image != blank -%}
+      .allmy-ti-{{ section.id }}__image--desktop { display: none; }
+      .allmy-ti-{{ section.id }}__image--mobile { display: block; }
+    {%- endif -%}
+  }
+</style>
+
+<section class="allmy-ti-{{ section.id }}">
+  <div class="allmy-ti-{{ section.id }}__grid">
+
+    <div class="allmy-ti-{{ section.id }}__media">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1400 }}"
+          alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+          class="allmy-ti-{{ section.id }}__image allmy-ti-{{ section.id }}__image--desktop"
+          loading="lazy"
+          width="1400"
+          height="1000"
+        >
+      {%- else -%}
+        <div style="width:100%;height:100%;min-height:400px;background:#EDE8D9;display:flex;align-items:center;justify-content:center;opacity:.4;">
+          {{ 'image' | placeholder_svg_tag }}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.mobile_image != blank -%}
+        <img
+          src="{{ section.settings.mobile_image | image_url: width: 800 }}"
+          alt="{{ section.settings.mobile_image.alt | default: section.settings.heading | escape }}"
+          class="allmy-ti-{{ section.id }}__image allmy-ti-{{ section.id }}__image--mobile"
+          loading="lazy"
+          width="800"
+          height="800"
+        >
+      {%- endif -%}
+    </div>
+
+    <div class="allmy-ti-{{ section.id }}__text">
+      {% render 'allmy-eyebrow', text: section.settings.eyebrow, color: section.settings.eyebrow_color %}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="allmy-ti-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.stat_value != blank -%}
+        <div class="allmy-ti-{{ section.id }}__stat">
+          <span class="allmy-ti-{{ section.id }}__stat-value">{{ section.settings.stat_value }}</span>
+          <span class="allmy-ti-{{ section.id }}__stat-label">{{ section.settings.stat_label }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <div class="allmy-ti-{{ section.id }}__body">{{ section.settings.body }}</div>
+      {%- endif -%}
+
+      {% render 'allmy-btn-link', label: section.settings.btn_label, url: section.settings.btn_url, style: section.settings.btn_style %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.allmy-text-image.name",
+  "settings": [
+    { "type": "header", "content": "t:sections.allmy-text-image.settings.header__content.content" },
+    { "type": "text", "id": "eyebrow", "label": "t:sections.allmy-text-image.settings.eyebrow.label" },
+    { "type": "text", "id": "heading", "label": "t:sections.allmy-text-image.settings.heading.label", "default": "A different kind of clean." },
+    { "type": "richtext", "id": "body", "label": "t:sections.allmy-text-image.settings.body.label" },
+    { "type": "header", "content": "t:sections.allmy-text-image.settings.header__stat.content" },
+    { "type": "text", "id": "stat_value", "label": "t:sections.allmy-text-image.settings.stat_value.label" },
+    { "type": "text", "id": "stat_label", "label": "t:sections.allmy-text-image.settings.stat_label.label" },
+    { "type": "header", "content": "t:sections.allmy-text-image.settings.header__button.content" },
+    { "type": "text", "id": "btn_label", "label": "t:sections.allmy-text-image.settings.btn_label.label" },
+    { "type": "url", "id": "btn_url", "label": "t:sections.allmy-text-image.settings.btn_url.label" },
+    {
+      "type": "select", "id": "btn_style", "label": "t:sections.allmy-text-image.settings.btn_style.label",
+      "options": [
+        { "value": "dark", "label": "t:sections.allmy-text-image.settings.btn_style.options__1.label" },
+        { "value": "light", "label": "t:sections.allmy-text-image.settings.btn_style.options__2.label" },
+        { "value": "amber", "label": "t:sections.allmy-text-image.settings.btn_style.options__3.label" },
+        { "value": "outline-dark", "label": "t:sections.allmy-text-image.settings.btn_style.options__4.label" },
+        { "value": "outline-light", "label": "t:sections.allmy-text-image.settings.btn_style.options__5.label" }
+      ],
+      "default": "outline-dark"
+    },
+    { "type": "header", "content": "t:sections.allmy-text-image.settings.header__image.content" },
+    { "type": "image_picker", "id": "image", "label": "t:sections.allmy-text-image.settings.image.label" },
+    { "type": "image_picker", "id": "mobile_image", "label": "t:sections.allmy-text-image.settings.mobile_image.label" },
+    {
+      "type": "select", "id": "image_side", "label": "t:sections.allmy-text-image.settings.image_side.label",
+      "options": [
+        { "value": "left", "label": "t:sections.allmy-text-image.settings.image_side.options__1.label" },
+        { "value": "right", "label": "t:sections.allmy-text-image.settings.image_side.options__2.label" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select", "id": "image_focus", "label": "t:sections.allmy-text-image.settings.image_focus.label",
+      "options": [
+        { "value": "center center", "label": "t:sections.allmy-text-image.settings.image_focus.options__1.label" },
+        { "value": "top center", "label": "t:sections.allmy-text-image.settings.image_focus.options__2.label" },
+        { "value": "bottom center", "label": "t:sections.allmy-text-image.settings.image_focus.options__3.label" },
+        { "value": "left center", "label": "t:sections.allmy-text-image.settings.image_focus.options__4.label" },
+        { "value": "right center", "label": "t:sections.allmy-text-image.settings.image_focus.options__5.label" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "select", "id": "image_mobile", "label": "t:sections.allmy-text-image.settings.image_mobile.label",
+      "options": [
+        { "value": "above", "label": "t:sections.allmy-text-image.settings.image_mobile.options__1.label" },
+        { "value": "below", "label": "t:sections.allmy-text-image.settings.image_mobile.options__2.label" }
+      ],
+      "default": "above"
+    },
+    { "type": "header", "content": "t:sections.allmy-text-image.settings.header__layout.content" },
+    { "type": "range", "id": "min_height", "label": "t:sections.allmy-text-image.settings.min_height.label", "min": 300, "max": 900, "step": 20, "default": 560 },
+    { "type": "range", "id": "pad_v", "label": "t:sections.allmy-text-image.settings.pad_v.label", "min": 32, "max": 120, "step": 8, "default": 80 },
+    { "type": "range", "id": "pad_h", "label": "t:sections.allmy-text-image.settings.pad_h.label", "min": 24, "max": 120, "step": 8, "default": 72 },
+    { "type": "header", "content": "t:sections.allmy-text-image.settings.header__mobile.content" },
+    { "type": "range", "id": "img_mobile_height", "label": "t:sections.allmy-text-image.settings.img_mobile_height.label", "min": 200, "max": 600, "step": 20, "default": 320 },
+    { "type": "range", "id": "pad_v_mobile", "label": "t:sections.allmy-text-image.settings.pad_v_mobile.label", "min": 24, "max": 96, "step": 8, "default": 48 },
+    { "type": "header", "content": "t:sections.allmy-text-image.settings.header__colors.content" },
+    {
+      "type": "select", "id": "bg_color", "label": "t:sections.allmy-text-image.settings.bg_color.label",
+      "options": [
+        { "value": "#F5F0E3", "label": "t:sections.allmy-text-image.settings.bg_color.options__1.label" },
+        { "value": "#2B2724", "label": "t:sections.allmy-text-image.settings.bg_color.options__2.label" },
+        { "value": "#dde6e3", "label": "t:sections.allmy-text-image.settings.bg_color.options__3.label" },
+        { "value": "#EDE8D9", "label": "t:sections.allmy-text-image.settings.bg_color.options__4.label" }
+      ],
+      "default": "#F5F0E3"
+    },
+    {
+      "type": "select", "id": "text_color", "label": "t:sections.allmy-text-image.settings.text_color.label",
+      "options": [
+        { "value": "#2B2724", "label": "t:sections.allmy-text-image.settings.text_color.options__1.label" },
+        { "value": "#F5F0E3", "label": "t:sections.allmy-text-image.settings.text_color.options__2.label" }
+      ],
+      "default": "#2B2724"
+    },
+    {
+      "type": "select", "id": "eyebrow_color", "label": "t:sections.allmy-text-image.settings.eyebrow_color.label",
+      "options": [
+        { "value": "#C9B2A3", "label": "t:sections.allmy-text-image.settings.eyebrow_color.options__1.label" },
+        { "value": "#e2b786", "label": "t:sections.allmy-text-image.settings.eyebrow_color.options__2.label" },
+        { "value": "#dde6e3", "label": "t:sections.allmy-text-image.settings.eyebrow_color.options__3.label" }
+      ],
+      "default": "#C9B2A3"
+    },
+    {
+      "type": "select", "id": "accent_color", "label": "t:sections.allmy-text-image.settings.accent_color.label",
+      "options": [
+        { "value": "#e2b786", "label": "t:sections.allmy-text-image.settings.accent_color.options__1.label" },
+        { "value": "#C9B2A3", "label": "t:sections.allmy-text-image.settings.accent_color.options__2.label" },
+        { "value": "#dde6e3", "label": "t:sections.allmy-text-image.settings.accent_color.options__3.label" },
+        { "value": "#2B2724", "label": "t:sections.allmy-text-image.settings.accent_color.options__4.label" }
+      ],
+      "default": "#e2b786"
+    },
+    {
+      "type": "select", "id": "stat_bg", "label": "t:sections.allmy-text-image.settings.stat_bg.label",
+      "options": [
+        { "value": "#EDE8D9", "label": "t:sections.allmy-text-image.settings.stat_bg.options__1.label" },
+        { "value": "#dde6e3", "label": "t:sections.allmy-text-image.settings.stat_bg.options__2.label" },
+        { "value": "rgba(43,39,36,0.06)", "label": "t:sections.allmy-text-image.settings.stat_bg.options__3.label" }
+      ],
+      "default": "#EDE8D9"
+    }
+  ],
+  "presets": [{ "name": "t:sections.allmy-text-image.presets__1.name" }]
+}
+{% endschema %}

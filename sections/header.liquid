@@ -69,7 +69,7 @@
     opacity: 1;
   }
 
-  /* ── SEARCH BAR STYLES ── */
+  /* -- SEARCH BAR STYLES -- */
   .custom-search-container {
     display: flex;
     align-items: center;
@@ -114,9 +114,192 @@
   }
 
   @media screen and (max-width: 989px) {
-    .custom-brand-header {
-      display: none;
-    }
+    .custom-brand-header { display: none; }
+  }
+
+  /* -- MOBILE HEADER BAR -- */
+  .custom-mobile-header {
+    display: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #F5F0E3;
+    padding: 14px 24px;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+
+  .custom-mobile-logo {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+  }
+
+  .custom-mobile-logo a {
+    display: block;
+    position: relative;
+  }
+
+  .custom-mobile-logo img {
+    height: 48px;
+    display: block;
+  }
+
+  .custom-mobile-logo__hover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .custom-mobile-logo.is-active .custom-mobile-logo__hover {
+    opacity: 1;
+  }
+
+  .custom-mobile-cart {
+    grid-column: 3;
+    justify-self: end;
+    text-decoration: none;
+    color: #2B2724;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .custom-mobile-burger {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .custom-mobile-burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #2B2724;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .custom-mobile-burger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .custom-mobile-burger.is-open span:nth-child(2) { opacity: 0; }
+  .custom-mobile-burger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* -- MOBILE NAV OVERLAY -- */
+  .custom-mobile-nav {
+    position: fixed;
+    inset: 0;
+    background: #2B2724;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding-top: 96px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+
+  .custom-mobile-nav.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .custom-mobile-nav__link {
+    font-family: var(--font-heading-family);
+    font-size: clamp(28px, 7vw, 42px);
+    font-weight: 700;
+    color: #F5F0E3;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s ease;
+  }
+
+  .custom-mobile-nav__link:hover { color: #e2b786; }
+
+  .custom-mobile-nav__divider {
+    width: 32px;
+    height: 1px;
+    background: rgba(245,240,227,0.15);
+    margin: 12px 0;
+  }
+
+  .custom-mobile-nav__secondary {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,240,227,0.5);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .custom-mobile-nav__secondary:hover { color: #F5F0E3; }
+
+  /* -- MOBILE NAV SEARCH -- */
+  .custom-mobile-nav__search {
+    width: calc(100% - 80px);
+    max-width: 360px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(245,240,227,0.2);
+    padding-bottom: 14px;
+    margin-bottom: 36px;
+  }
+
+  .custom-mobile-nav__search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: var(--font-body-family);
+    font-size: 18px;
+    font-weight: 300;
+    color: #F5F0E3;
+  }
+
+  .custom-mobile-nav__search-input::placeholder {
+    color: rgba(245,240,227,0.35);
+  }
+
+  .custom-mobile-nav__search-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    color: rgba(245,240,227,0.45);
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .custom-mobile-nav__search-btn:hover { color: #F5F0E3; }
+
+  .custom-mobile-nav__search-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media screen and (max-width: 989px) {
+    .custom-mobile-header { display: grid; }
   }
 </style>
 
@@ -163,6 +346,50 @@
   </div>
 </header>
 
+<!-- -- MOBILE HEADER -- -->
+<header class="custom-mobile-header">
+  <button class="custom-mobile-burger" id="custom-mobile-burger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="custom-mobile-logo">
+    <a href="/">
+      <img src="{{ 'brand-logo-ducks.svg' | file_url }}" alt="All My Ducks" width="80" height="48">
+      <img src="{{ 'brand-logo-ducks-mid-amber.png' | file_url }}" alt="" width="80" height="48" class="custom-mobile-logo__hover" aria-hidden="true">
+    </a>
+  </div>
+  <a href="{{ routes.cart_url }}" class="custom-mobile-cart" id="custom-mobile-cart-link">
+    Bag ({{ cart.item_count }})
+  </a>
+</header>
+
+<!-- -- MOBILE NAV OVERLAY -- -->
+<nav class="custom-mobile-nav" id="custom-mobile-nav" aria-hidden="true">
+  <form action="{{ routes.search_url }}" method="get" class="custom-mobile-nav__search" id="custom-mobile-search-form">
+    <input
+      type="text"
+      name="q"
+      placeholder="Search..."
+      class="custom-mobile-nav__search-input"
+      id="custom-mobile-search-input"
+      autocomplete="off"
+    >
+    <input type="hidden" name="type" value="product">
+    <button type="submit" class="custom-mobile-nav__search-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </button>
+  </form>
+  {% for link in linklists['left-menu'].links %}
+    <a href="{{ link.url }}" class="custom-mobile-nav__link">{{ link.title }}</a>
+  {% endfor %}
+  <div class="custom-mobile-nav__divider"></div>
+  {% for link in linklists['right-menu'].links %}
+    {% assign link_title_down = link.title | downcase %}
+    {% if link_title_down == 'search' %}{% continue %}{% endif %}
+    <a href="{{ link.url }}" class="custom-mobile-nav__secondary">{{ link.title }}</a>
+  {% endfor %}
+  <a href="{{ routes.cart_url }}" class="custom-mobile-nav__secondary">Bag ({{ cart.item_count }})</a>
+</nav>
+
 <div id="cart-icon-bubble" aria-hidden="true" style="display:none"></div>
 
 <script>
@@ -171,38 +398,74 @@
     const searchForm = document.getElementById('custom-search-form');
     const searchInput = document.getElementById('custom-search-input');
 
-    searchToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      if (searchForm.classList.contains('is-open') && searchInput.value.trim() !== '') {
-        searchForm.submit();
-      } else {
-        searchForm.classList.toggle('is-open');
-        if (searchForm.classList.contains('is-open')) {
-          searchInput.focus();
+    if (searchToggle && searchForm && searchInput) {
+      searchToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (searchForm.classList.contains('is-open') && searchInput.value.trim() !== '') {
+          searchForm.submit();
+        } else {
+          searchForm.classList.toggle('is-open');
+          if (searchForm.classList.contains('is-open')) searchInput.focus();
         }
-      }
-    });
+      });
 
-    document.addEventListener('click', (e) => {
-      if (!searchForm.contains(e.target) && e.target !== searchToggle) {
-        searchForm.classList.remove('is-open');
-      }
-    });
+      document.addEventListener('click', (e) => {
+        if (!searchForm.contains(e.target) && e.target !== searchToggle) {
+          searchForm.classList.remove('is-open');
+        }
+      });
+    }
+
+    // Mobile burger menu
+    const burger = document.getElementById('custom-mobile-burger');
+    const mobileNav = document.getElementById('custom-mobile-nav');
+    if (burger && mobileNav) {
+      const mobileSearchInput = document.getElementById('custom-mobile-search-input');
+      burger.addEventListener('click', () => {
+        const isOpen = mobileNav.classList.toggle('is-open');
+        burger.classList.toggle('is-open', isOpen);
+        burger.setAttribute('aria-expanded', isOpen);
+        mobileNav.setAttribute('aria-hidden', !isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+      mobileNav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('is-open');
+          burger.classList.remove('is-open');
+          burger.setAttribute('aria-expanded', 'false');
+          mobileNav.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+
+    // Mobile logo tap -> amber flash
+    const mobileLogo = document.querySelector('.custom-mobile-logo');
+    if (mobileLogo) {
+      let revertTimer;
+      mobileLogo.addEventListener('touchstart', () => {
+        mobileLogo.classList.add('is-active');
+        clearTimeout(revertTimer);
+        revertTimer = setTimeout(() => mobileLogo.classList.remove('is-active'), 900);
+      }, { passive: true });
+    }
 
     // Keep Bag (n) in sync after any AJAX cart change.
-    // cart.js publishes cartUpdate with parsedState after every mutation.
-    // We subscribe here; the hidden #cart-icon-bubble div above stops
-    // cart.js from throwing before it reaches publish().
-    const cartLink = document.getElementById('custom-cart-link');
-    if (cartLink && typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
+    const cartLinks = [
+      document.getElementById('custom-cart-link'),
+      document.getElementById('custom-mobile-cart-link')
+    ].filter(Boolean);
+
+    const updateCartCount = (count) => {
+      cartLinks.forEach((el) => { el.textContent = 'Bag (' + count + ')'; });
+    };
+
+    if (cartLinks.length && typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
       subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
         if (event && event.cartData && typeof event.cartData.item_count === 'number') {
-          cartLink.textContent = 'Bag (' + event.cartData.item_count + ')';
+          updateCartCount(event.cartData.item_count);
         } else {
-          fetch('/cart.js')
-            .then((r) => r.json())
-            .then((cart) => { cartLink.textContent = 'Bag (' + cart.item_count + ')'; });
+          fetch('/cart.js').then((r) => r.json()).then((cart) => updateCartCount(cart.item_count));
         }
       });
     }

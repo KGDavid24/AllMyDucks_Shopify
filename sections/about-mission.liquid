@@ -1,5 +1,5 @@
 <style>
-  /* ── ABOUT HERO ── */
+  /* ABOUT HERO */
   .allmy-about__hero {
     background-color: #2B2724;
     color: #F5F0E3;
@@ -17,7 +17,7 @@
   }
 
   .allmy-about__hero-headline {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: var(--font-heading-family);
     font-weight: 700;
     font-size: clamp(32px, 5vw, 58px);
     line-height: 1.18;
@@ -35,7 +35,7 @@
     margin: 0 auto;
   }
 
-  /* ── STORY GRID ── */
+  /* STORY GRID */
   .allmy-about__story {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -60,7 +60,7 @@
   }
 
   .allmy-about__story-heading {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: var(--font-heading-family);
     font-weight: 700;
     font-size: 32px;
     line-height: 1.28;
@@ -107,7 +107,7 @@
     object-fit: contain;
   }
 
-  /* ── MISSION PILLARS ── */
+  /* MISSION PILLARS */
   .allmy-about__pillars {
     background-color: #dde6e3;
     border-top: 1px solid rgba(43,39,36,0.06);
@@ -160,7 +160,7 @@
     color: rgba(43,39,36,0.72);
   }
 
-  /* ── PHILOSOPHY STRIP ── */
+  /* PHILOSOPHY STRIP */
   .allmy-about__philosophy {
     background-color: #2B2724;
     padding: 80px 50px;
@@ -180,7 +180,7 @@
   }
 
   .allmy-about__philosophy-quote {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: var(--font-heading-family);
     font-weight: 700;
     font-size: clamp(22px, 3vw, 36px);
     line-height: 1.3;
@@ -199,7 +199,7 @@
     margin-top: 20px;
   }
 
-  /* ── CTA STRIP ── */
+  /* CTA STRIP */
   .allmy-about__cta {
     background-color: #F5F0E3;
     padding: 80px 50px;
@@ -207,7 +207,7 @@
   }
 
   .allmy-about__cta-heading {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: var(--font-heading-family);
     font-weight: 700;
     font-size: 28px;
     color: #2B2724;
@@ -238,23 +238,15 @@
     background-color: #d9a96f;
   }
 
-  /* ── RESPONSIVE ── */
+  /* RESPONSIVE */
   @media screen and (max-width: 900px) {
-    .allmy-about__hero {
-      padding: 80px 28px 72px;
-    }
-    .allmy-about__story {
-      grid-template-columns: 1fr;
-    }
-    .allmy-about__story-image {
-      min-height: 320px;
-    }
-    .allmy-about__story-text {
-      padding: 56px 28px;
-    }
-    .allmy-about__pillars {
-      padding: 64px 28px;
-    }
+    .allmy-about__hero { padding: 72px 28px 64px; }
+    .allmy-about__story { grid-template-columns: 1fr; }
+    .allmy-about__story-image { min-height: 320px; }
+    .allmy-about__story-text { padding: 56px 28px; }
+    .allmy-about__pillars { padding: 64px 28px; }
+    .allmy-about__philosophy { grid-template-columns: 1fr; gap: 40px; padding: 64px 28px; }
+    .allmy-about__cta { padding: 64px 28px; }
     .allmy-about__pillars-grid {
       grid-template-columns: 1fr;
       gap: 40px;
@@ -264,9 +256,17 @@
       gap: 40px;
       padding: 64px 28px;
     }
-    .allmy-about__cta {
-      padding: 64px 28px;
-    }
+    .allmy-about__cta { padding: 64px 28px; }
+  }
+
+  @media screen and (max-width: 480px) {
+    .allmy-about__hero { padding: 56px 20px 48px; }
+    .allmy-about__hero-headline { font-size: clamp(26px, 8vw, 40px); }
+    .allmy-about__story-text { padding: 40px 20px; }
+    .allmy-about__pillars { padding: 48px 20px; }
+    .allmy-about__philosophy { padding: 48px 20px; }
+    .allmy-about__cta { padding: 48px 20px; }
+    .allmy-about__cta-btn { width: 100%; text-align: center; }
   }
 </style>
 
@@ -291,7 +291,7 @@
   </div>
   <div class="allmy-about__story-image">
     {% if section.settings.story_image %}
-      <img src="{{ section.settings.story_image | img_url: 'master' }}" alt="All My Ducks story" width="800" height="600">
+      <img src="{{ section.settings.story_image | image_url: width: 1400 }}" alt="All My Ducks story" width="800" height="600">
     {% else %}
       <div class="allmy-about__story-image-placeholder">
         <img src="{{ 'brand-logo-standard.svg' | file_url }}" alt="" width="160" height="42">
@@ -303,7 +303,7 @@
 <section class="allmy-about__story">
   <div class="allmy-about__story-image">
     {% if section.settings.story_image %}
-      <img src="{{ section.settings.story_image | img_url: 'master' }}" alt="All My Ducks story" width="800" height="600">
+      <img src="{{ section.settings.story_image | image_url: width: 1400 }}" alt="All My Ducks story" width="800" height="600">
     {% else %}
       <div class="allmy-about__story-image-placeholder">
         <img src="{{ 'brand-logo-standard.svg' | file_url }}" alt="" width="160" height="42">

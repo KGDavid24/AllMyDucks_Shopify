@@ -1,0 +1,36 @@
+{%- comment -%}
+  Usage: {% render 'allmy-btn-link', label: 'Shop Now', url: '/', style: 'dark' %}
+  Styles: dark | light | amber | outline-dark | outline-light
+{%- endcomment -%}
+{%- if label != blank and url != blank -%}
+  {%- liquid
+    case style
+      when 'light'
+        assign _bg     = '#F5F0E3'
+        assign _color  = '#2B2724'
+        assign _border = '#F5F0E3'
+      when 'amber'
+        assign _bg     = '#e2b786'
+        assign _color  = '#2B2724'
+        assign _border = '#e2b786'
+      when 'outline-dark'
+        assign _bg     = 'transparent'
+        assign _color  = '#2B2724'
+        assign _border = '#2B2724'
+      when 'outline-light'
+        assign _bg     = 'transparent'
+        assign _color  = '#F5F0E3'
+        assign _border = '#F5F0E3'
+      else
+        assign _bg     = '#2B2724'
+        assign _color  = '#F5F0E3'
+        assign _border = '#2B2724'
+    endcase
+  -%}
+  <style>.allmy-btn:hover{opacity:.82}</style>
+  <a
+    href="{{ url }}"
+    class="allmy-btn"
+    style="display:inline-block;padding:15px 44px;background:{{ _bg }};color:{{ _color }};border:1.5px solid {{ _border }};font-family:var(--font-body-family);font-size:13px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;transition:opacity .2s ease;"
+  >{{ label }}</a>
+{%- endif -%}

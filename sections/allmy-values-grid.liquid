@@ -1,0 +1,244 @@
+<style>
+  .allmy-vg-{{ section.id }} {
+    background: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top }}px 80px {{ section.settings.padding_bottom }}px;
+  }
+
+  .allmy-vg-{{ section.id }}__header {
+    text-align: {{ section.settings.header_align }};
+    margin-bottom: 56px;
+    max-width: 680px;
+    {%- if section.settings.header_align == 'center' %}margin-left: auto; margin-right: auto;{%- endif %}
+  }
+
+  .allmy-vg-{{ section.id }}__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: clamp(26px, 3vw, 42px);
+    line-height: 1.18;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 16px;
+  }
+
+  .allmy-vg-{{ section.id }}__subtext {
+    font-family: var(--font-body-family);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: {{ section.settings.text_color }};
+    opacity: 0.72;
+    margin: 0;
+  }
+
+  .allmy-vg-{{ section.id }}__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+    gap: {{ section.settings.gap }}px;
+  }
+
+  .allmy-vg-{{ section.id }}__card {
+    {%- if section.settings.card_style == 'outlined' %}
+      border: 1px solid rgba(43,39,36,0.12);
+      padding: 36px 28px;
+    {%- elsif section.settings.card_style == 'filled' %}
+      background: {{ section.settings.card_fill }};
+      padding: 36px 28px;
+    {%- else %}
+      padding: 0 0 8px;
+      border-bottom: 1px solid rgba(43,39,36,0.1);
+    {%- endif %}
+  }
+
+  .allmy-vg-{{ section.id }}__icon {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 20px;
+    {%- if section.settings.icon_filter == 'dark' %}filter: brightness(0);
+    {%- elsif section.settings.icon_filter == 'light' %}filter: brightness(0) invert(1);
+    {%- endif %}
+  }
+
+  .allmy-vg-{{ section.id }}__card-heading {
+    font-family: var(--font-body-family);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 12px;
+  }
+
+  .allmy-vg-{{ section.id }}__card-body {
+    font-family: var(--font-body-family);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.72;
+    color: {{ section.settings.text_color }};
+    opacity: 0.72;
+  }
+
+  .allmy-vg-{{ section.id }}__card-body p { margin: 0 0 10px; }
+  .allmy-vg-{{ section.id }}__card-body p:last-child { margin-bottom: 0; }
+
+  @media screen and (max-width: 900px) {
+    .allmy-vg-{{ section.id }} { padding: 64px 24px; }
+    .allmy-vg-{{ section.id }}__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: {{ section.settings.gap | times: 0.75 | round }}px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .allmy-vg-{{ section.id }}__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="allmy-vg-{{ section.id }}">
+  {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subtext != blank -%}
+    <div class="allmy-vg-{{ section.id }}__header">
+      {% render 'allmy-eyebrow', text: section.settings.eyebrow, color: section.settings.eyebrow_color %}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="allmy-vg-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtext != blank -%}
+        <p class="allmy-vg-{{ section.id }}__subtext">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="allmy-vg-{{ section.id }}__grid">
+    {%- for block in section.blocks -%}
+      <div class="allmy-vg-{{ section.id }}__card" {{ block.shopify_attributes }}>
+        {%- if block.settings.icon != blank -%}
+          <img
+            src="{{ block.settings.icon | image_url: width: 96 }}"
+            alt="{{ block.settings.heading | escape }}"
+            class="allmy-vg-{{ section.id }}__icon"
+            width="44"
+            height="44"
+            loading="lazy"
+          >
+        {%- endif -%}
+        {%- if block.settings.heading != blank -%}
+          <h3 class="allmy-vg-{{ section.id }}__card-heading">{{ block.settings.heading }}</h3>
+        {%- endif -%}
+        {%- if block.settings.body != blank -%}
+          <div class="allmy-vg-{{ section.id }}__card-body">{{ block.settings.body }}</div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.allmy-values-grid.name",
+  "settings": [
+    { "type": "header", "content": "t:sections.allmy-values-grid.settings.header__header.content" },
+    { "type": "text", "id": "eyebrow", "label": "t:sections.allmy-values-grid.settings.eyebrow.label" },
+    { "type": "text", "id": "heading", "label": "t:sections.allmy-values-grid.settings.heading.label" },
+    { "type": "textarea", "id": "subtext", "label": "t:sections.allmy-values-grid.settings.subtext.label" },
+    {
+      "type": "select", "id": "header_align", "label": "t:sections.allmy-values-grid.settings.header_align.label",
+      "options": [
+        { "value": "left", "label": "t:sections.allmy-values-grid.settings.header_align.options__1.label" },
+        { "value": "center", "label": "t:sections.allmy-values-grid.settings.header_align.options__2.label" }
+      ],
+      "default": "center"
+    },
+    { "type": "header", "content": "t:sections.allmy-values-grid.settings.header__grid.content" },
+    {
+      "type": "select", "id": "columns", "label": "t:sections.allmy-values-grid.settings.columns.label",
+      "options": [
+        { "value": "2", "label": "t:sections.allmy-values-grid.settings.columns.options__1.label" },
+        { "value": "3", "label": "t:sections.allmy-values-grid.settings.columns.options__2.label" },
+        { "value": "4", "label": "t:sections.allmy-values-grid.settings.columns.options__3.label" }
+      ],
+      "default": "3"
+    },
+    { "type": "range", "id": "gap", "label": "t:sections.allmy-values-grid.settings.gap.label", "min": 8, "max": 64, "step": 4, "default": 36 },
+    {
+      "type": "select", "id": "card_style", "label": "t:sections.allmy-values-grid.settings.card_style.label",
+      "options": [
+        { "value": "lined", "label": "t:sections.allmy-values-grid.settings.card_style.options__1.label" },
+        { "value": "outlined", "label": "t:sections.allmy-values-grid.settings.card_style.options__2.label" },
+        { "value": "filled", "label": "t:sections.allmy-values-grid.settings.card_style.options__3.label" }
+      ],
+      "default": "lined"
+    },
+    {
+      "type": "select", "id": "card_fill", "label": "t:sections.allmy-values-grid.settings.card_fill.label",
+      "options": [
+        { "value": "#EDE8D9", "label": "t:sections.allmy-values-grid.settings.card_fill.options__1.label" },
+        { "value": "#F5F0E3", "label": "t:sections.allmy-values-grid.settings.card_fill.options__2.label" },
+        { "value": "#dde6e3", "label": "t:sections.allmy-values-grid.settings.card_fill.options__3.label" },
+        { "value": "#2B2724", "label": "t:sections.allmy-values-grid.settings.card_fill.options__4.label" }
+      ],
+      "default": "#EDE8D9"
+    },
+    {
+      "type": "select", "id": "icon_filter", "label": "t:sections.allmy-values-grid.settings.icon_filter.label",
+      "options": [
+        { "value": "none", "label": "t:sections.allmy-values-grid.settings.icon_filter.options__1.label" },
+        { "value": "dark", "label": "t:sections.allmy-values-grid.settings.icon_filter.options__2.label" },
+        { "value": "light", "label": "t:sections.allmy-values-grid.settings.icon_filter.options__3.label" }
+      ],
+      "default": "dark"
+    },
+    { "type": "header", "content": "t:sections.allmy-values-grid.settings.header__spacing.content" },
+    { "type": "range", "id": "padding_top", "label": "t:sections.allmy-values-grid.settings.padding_top.label", "min": 40, "max": 160, "step": 8, "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "t:sections.allmy-values-grid.settings.padding_bottom.label", "min": 40, "max": 160, "step": 8, "default": 96 },
+    { "type": "header", "content": "t:sections.allmy-values-grid.settings.header__colors.content" },
+    {
+      "type": "select", "id": "bg_color", "label": "t:sections.allmy-values-grid.settings.bg_color.label",
+      "options": [
+        { "value": "#F5F0E3", "label": "t:sections.allmy-values-grid.settings.bg_color.options__1.label" },
+        { "value": "#2B2724", "label": "t:sections.allmy-values-grid.settings.bg_color.options__2.label" },
+        { "value": "#dde6e3", "label": "t:sections.allmy-values-grid.settings.bg_color.options__3.label" },
+        { "value": "#EDE8D9", "label": "t:sections.allmy-values-grid.settings.bg_color.options__4.label" }
+      ],
+      "default": "#F5F0E3"
+    },
+    {
+      "type": "select", "id": "text_color", "label": "t:sections.allmy-values-grid.settings.text_color.label",
+      "options": [
+        { "value": "#2B2724", "label": "t:sections.allmy-values-grid.settings.text_color.options__1.label" },
+        { "value": "#F5F0E3", "label": "t:sections.allmy-values-grid.settings.text_color.options__2.label" }
+      ],
+      "default": "#2B2724"
+    },
+    {
+      "type": "select", "id": "eyebrow_color", "label": "t:sections.allmy-values-grid.settings.eyebrow_color.label",
+      "options": [
+        { "value": "#C9B2A3", "label": "t:sections.allmy-values-grid.settings.eyebrow_color.options__1.label" },
+        { "value": "#e2b786", "label": "t:sections.allmy-values-grid.settings.eyebrow_color.options__2.label" },
+        { "value": "#dde6e3", "label": "t:sections.allmy-values-grid.settings.eyebrow_color.options__3.label" }
+      ],
+      "default": "#C9B2A3"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "t:sections.allmy-values-grid.blocks.value.name",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "t:sections.allmy-values-grid.blocks.value.settings.icon.label" },
+        { "type": "text", "id": "heading", "label": "t:sections.allmy-values-grid.blocks.value.settings.heading.label", "default": "No water shipped" },
+        { "type": "richtext", "id": "body", "label": "t:sections.allmy-values-grid.blocks.value.settings.body.label", "default": "<p>Concentrates skip the water so you only pay for the active ingredients that actually do the work.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.allmy-values-grid.presets__1.name",
+      "blocks": [
+        { "type": "value", "settings": { "heading": "No Water Shipped", "body": "<p>Up to 90% of most cleaning products is water. We skip it. You add tap water at home and get the same performance — without the weight, waste, or emissions of shipping liquid.</p>" } },
+        { "type": "value", "settings": { "heading": "Naturally Gentle Formula", "body": "<p>No harsh sulfates, synthetic fragrances, or aggressive preservatives. Every ingredient earns its place — effective on the surface, kind on skin, safe down the drain.</p>" } },
+        { "type": "value", "settings": { "heading": "Recycled Plastic Only", "body": "<p>Every bottle we send out is made from post-consumer recycled plastic. We refuse to introduce new plastic into the world for something people throw away.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

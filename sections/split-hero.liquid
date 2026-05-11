@@ -2,8 +2,10 @@
   .allmy-split-hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 7px;
     height: 85vh;
     overflow: hidden;
+    background: #F5F0E3;
   }
 
   /* ── LEFT PANEL ── */
@@ -41,7 +43,7 @@
   }
 
   .allmy-split-hero__eyebrow {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.2em;
@@ -52,7 +54,7 @@
   }
 
   .allmy-split-hero__heading {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: var(--font-heading-family);
     font-size: clamp(2.4rem, 4.5vw, 5rem);
     font-weight: 700;
     color: var(--hero-text, #ffffff);
@@ -69,7 +71,7 @@
     border: 2.5px solid var(--hero-text, #ffffff);
     color: var(--hero-text, #ffffff);
     text-decoration: none;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.16em;
@@ -90,7 +92,7 @@
     top: var(--tagline-top, 88%);
     transform: translateY(-50%);
     z-index: 2;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 13px;
     font-weight: 300;
     color: var(--hero-text, #ffffff);
@@ -116,12 +118,26 @@
   @media screen and (max-width: 768px) {
     .allmy-split-hero {
       grid-template-columns: 1fr;
-      grid-template-rows: 55vh 45vh;
+      grid-template-rows: {{ section.settings.mobile_left_vh }}vh {{ section.settings.mobile_right_vh }}vh;
       height: auto;
     }
 
-    .allmy-split-hero__left-content { padding: 0 24px; }
-    .allmy-split-hero__tagline { left: 24px; right: 24px; font-size: 12px; }
+    .allmy-split-hero__left-content {
+      padding: 0 24px;
+      top: {{ section.settings.mobile_heading_top }}% !important;
+    }
+    .allmy-split-hero__tagline {
+      left: 20px;
+      right: 20px;
+      font-size: 12px;
+      top: {{ section.settings.mobile_tagline_top }}% !important;
+    }
+    .allmy-split-hero__btn { padding: 11px 24px; font-size: 11px; }
+    {%- if section.settings.button_halign == 'left' -%}
+      .allmy-split-hero__btn { left: 24px !important; }
+    {%- elsif section.settings.button_halign == 'right' -%}
+      .allmy-split-hero__btn { right: 24px !important; left: auto !important; }
+    {%- endif -%}
   }
 </style>
 
@@ -141,15 +157,7 @@
         style="{% if section.settings.grayscale %}filter: grayscale(100%);{% endif %}"
       >
     {%- else -%}
-      <img
-        class="allmy-split-hero__left-img"
-        src="{{ 'hero1.png' | file_url }}"
-        alt="{{ section.settings.heading | escape }}"
-        loading="eager"
-        width="1400"
-        height="933"
-        style="{% if section.settings.grayscale %}filter: grayscale(100%);{% endif %}"
-      >
+      {{ 'image' | placeholder_svg_tag: 'allmy-split-hero__left-img' }}
     {%- endif -%}
 
     <div class="allmy-split-hero__left-overlay"></div>
@@ -212,14 +220,7 @@
         height="933"
       >
     {%- else -%}
-      <img
-        class="allmy-split-hero__right-img"
-        src="{{ 'hero2.png' | file_url }}"
-        alt="ALL MY DUCKS"
-        loading="eager"
-        width="1400"
-        height="933"
-      >
+      {{ 'image' | placeholder_svg_tag: 'allmy-split-hero__right-img' }}
     {%- endif -%}
   </div>
 
@@ -367,6 +368,48 @@
       "type": "image_picker",
       "id": "image_right",
       "label": "Right image"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "mobile_left_vh",
+      "label": "Left panel height (vh)",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "mobile_right_vh",
+      "label": "Right panel height (vh)",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_top",
+      "label": "Heading — vertical position on mobile",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "default": 42,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "mobile_tagline_top",
+      "label": "Tagline — vertical position on mobile",
+      "min": 5,
+      "max": 95,
+      "step": 1,
+      "default": 88,
+      "unit": "%"
     }
   ],
   "presets": [

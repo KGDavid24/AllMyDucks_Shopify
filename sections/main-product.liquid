@@ -1,5 +1,6 @@
 <style>
-  /* ── ALL MY — Product Page ─────────────────────────────── */
+  
+
 
   .allmy-product {
     background: #F5F0E3;
@@ -15,54 +16,118 @@
     align-items: start;
   }
 
-  /* ── LEFT: STICKY IMAGE ─────────────────────────────────── */
+  
+
   .allmy-product__media {
     position: sticky;
     top: 0;
-    height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background: #EDE8D9;
-    overflow: hidden;
-    padding: 0 48px 48px;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 48px 0;
   }
 
-  .allmy-product__media::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 55% 45% at 75% 25%, rgba(226,183,134,.18) 0%, transparent 65%),
-      radial-gradient(ellipse 40% 55% at 15% 80%, rgba(218,203,165,.12) 0%, transparent 60%);
-    pointer-events: none;
+  /* Vertical thumbnail strip */
+  .allmy-product__thumbs-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 12px 0 20px;
+    width: 80px;
+    flex-shrink: 0;
+    overflow-y: auto;
+    scrollbar-width: none;
+    align-items: center;
+  }
+
+  .allmy-product__thumbs-col::-webkit-scrollbar { display: none; }
+
+  .allmy-product__thumb {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 2px;
+    overflow: hidden;
+    opacity: 0.42;
+    transition: opacity .2s ease;
+  }
+
+  .allmy-product__thumb.is-active { opacity: 1; }
+
+  .allmy-product__thumb:hover:not(.is-active) { opacity: 0.72; }
+
+  .allmy-product__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Main image area */
+  .allmy-product__main-img-wrap {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    padding: 0 48px 0 0;
+    overflow: hidden;
+    height: min(85vh, 640px);
   }
 
   .allmy-product__image {
     width: 100%;
-    max-width: 440px;
-    height: auto;
+    height: 100%;
     object-fit: contain;
     display: block;
-    position: relative;
-    z-index: 1;
   }
 
-  .allmy-product__media-badge {
+  .allmy-product__arrow {
     position: absolute;
-    bottom: 32px;
-    left: 32px;
-    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.82);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(43,39,36,.16);
+    transition: background .15s ease, opacity .15s ease;
+    color: #2B2724;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
   }
 
-  .allmy-product__media-badge img {
-    width: 72px;
-    height: auto;
-    opacity: .8;
+  .allmy-product__main-img-wrap:hover .allmy-product__arrow { opacity: 1; pointer-events: auto; }
+  .allmy-product__arrow:hover { background: #fff; }
+  .allmy-product__arrow--prev { left: 14px; }
+  .allmy-product__arrow--next { right: 14px; }
+
+  .allmy-product__arrow svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    display: block;
   }
 
-  /* ── RIGHT: INFO ────────────────────────────────────────── */
+  @media screen and (max-width: 900px) {
+    .allmy-product__arrow { opacity: 1; }
+  }
+
+  
+
   .allmy-product__info {
     padding: 0 72px 80px 60px;
     color: #2B2724;
@@ -80,7 +145,7 @@
   }
 
   .allmy-product__title {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 2.25rem;
     font-weight: 600;
     line-height: 1.15;
@@ -90,7 +155,7 @@
   }
 
   .allmy-product__price {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 2.4rem;
     font-weight: 600;
     line-height: 1.15;
@@ -100,7 +165,7 @@
   }
 
   .allmy-product__mix-ratio {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 1.35rem;
     font-weight: 300;
     color: rgba(43,39,36,.6);
@@ -110,7 +175,7 @@
 
   /* Description */
   .allmy-product__description {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 1.6rem;
     font-weight: 300;
     line-height: 1.7;
@@ -121,10 +186,11 @@
   .allmy-product__description p { margin: 0 0 10px; }
   .allmy-product__description a { color: inherit; text-decoration: underline; }
 
-  /* ── MISSION PILLS ──────────────────────────────────────── */
+  
+
   .allmy-product__pills {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 28px;
   }
@@ -136,7 +202,7 @@
     padding: 6px 14px;
     border: 1px solid rgba(43,39,36,.15);
     border-radius: 100px;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -152,9 +218,10 @@
     object-fit: contain;
   }
 
-  /* ── VARIANT PICKER ─────────────────────────────────────── */
+  
+
   .allmy-product__variants-label {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.12em;
@@ -175,7 +242,7 @@
     border: 1.5px solid rgba(43,39,36,.25);
     background: transparent;
     color: #2B2724;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 0.875rem;
     font-weight: 500;
     letter-spacing: 0.08em;
@@ -191,7 +258,8 @@
     color: #F5F0E3;
   }
 
-  /* ── CTA BUTTONS ────────────────────────────────────────── */
+  
+
   .allmy-product__actions {
     display: flex;
     gap: 12px;
@@ -203,7 +271,7 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 28px;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 1.75rem;
     font-weight: 500;
     color: #2B2724;
@@ -223,7 +291,7 @@
     background: #2B2724;
     color: #F5F0E3;
     border: none;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 0.875rem;
     font-weight: 500;
     letter-spacing: 0.14em;
@@ -244,7 +312,7 @@
     background: transparent;
     color: #2B2724;
     border: 1.5px solid rgba(43,39,36,.3);
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 0.875rem;
     font-weight: 500;
     letter-spacing: 0.08em;
@@ -271,7 +339,7 @@
     border: 1.5px solid rgba(43,39,36,.25);
     color: #2B2724;
     font-size: 1.1rem;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -299,7 +367,7 @@
     border-left: none;
     border-right: none;
     text-align: center;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 0.95rem;
     font-weight: 500;
     color: #2B2724;
@@ -312,7 +380,8 @@
 
   .allmy-product__qty-input:focus { outline: none; border-color: #2B2724; }
 
-  /* ── ACCORDIONS ─────────────────────────────────────────── */
+  
+
   .allmy-product__accordions {
     border-top: 1px solid rgba(43,39,36,.12);
   }
@@ -325,10 +394,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 0;
+    padding: 14px 0;
     cursor: pointer;
     list-style: none;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.14em;
@@ -374,11 +443,11 @@
   }
 
   .allmy-product__accordion-body {
-    padding: 4px 0 24px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.9rem;
+    padding: 2px 0 16px;
+    font-family: var(--font-body-family);
+    font-size: 1.3rem;
     font-weight: 300;
-    line-height: 1.75;
+    line-height: 1.7;
     color: rgba(43,39,36,.8);
   }
 
@@ -386,12 +455,12 @@
   .allmy-product__dosage-panel {
     background: #EDE8D9;
     border-radius: 2px;
-    padding: 24px;
-    margin-bottom: 16px;
+    padding: 16px;
+    margin-bottom: 10px;
   }
 
   .allmy-product__dosage-headline {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.14em;
@@ -401,7 +470,7 @@
   }
 
   .allmy-product__dosage-ratio {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: var(--font-heading-family);
     font-size: 2.4rem;
     font-weight: 700;
     color: #2B2724;
@@ -410,7 +479,7 @@
   }
 
   .allmy-product__dosage-desc {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 0.875rem;
     font-weight: 300;
     color: rgba(43,39,36,.7);
@@ -420,7 +489,7 @@
   .allmy-product__concentrate-steps {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
   }
 
   .allmy-product__concentrate-step {
@@ -435,7 +504,7 @@
     border-radius: 50%;
     background: #2B2724;
     color: #F5F0E3;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 11px;
     font-weight: 500;
     display: flex;
@@ -445,7 +514,7 @@
   }
 
   .allmy-product__step-text {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 1.2rem;
     font-weight: 300;
     color: rgba(43,39,36,.8);
@@ -456,11 +525,11 @@
   .allmy-product__ingredients-panel {
     background: #EDE8D9;
     border-radius: 2px;
-    padding: 20px;
+    padding: 14px 16px;
   }
 
   .allmy-product__ingredients-label {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.14em;
@@ -470,14 +539,15 @@
   }
 
   .allmy-product__ingredients-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.825rem;
+    font-family: var(--font-body-family);
+    font-size: 1.15rem;
     font-weight: 300;
     line-height: 1.7;
     color: rgba(43,39,36,.7);
   }
 
-  /* ── RESPONSIVE ─────────────────────────────────────────── */
+  
+
   @media screen and (max-width: 900px) {
     .allmy-product__grid {
       grid-template-columns: 1fr;
@@ -485,11 +555,27 @@
 
     .allmy-product__media {
       position: relative;
-      height: 60vw;
-      min-height: 320px;
-      max-height: 520px;
-      padding: 64px 24px 24px;
-      justify-content: center;
+      flex-direction: column;
+      padding: 24px 0;
+    }
+
+    .allmy-product__thumbs-col {
+      order: 1;
+      flex-direction: row;
+      width: auto;
+      padding: 12px 20px 0;
+      overflow-x: auto;
+      overflow-y: visible;
+      align-items: center;
+    }
+
+    .allmy-product__main-img-wrap {
+      order: 0;
+      width: 100%;
+      padding: 0 24px;
+      height: 70vw;
+      min-height: 280px;
+      max-height: 480px;
     }
 
     .allmy-product__info {
@@ -498,6 +584,8 @@
   }
 
   @media screen and (max-width: 480px) {
+    .allmy-product__title-row { flex-wrap: wrap; }
+    .allmy-product__price { width: 100%; }
     .allmy-product__actions { flex-direction: column; }
     .allmy-product__btn-wishlist { justify-content: center; }
   }
@@ -508,35 +596,62 @@
 
     {%- comment -%} ── LEFT: STICKY IMAGE ─────────────────── {%- endcomment -%}
     <div class="allmy-product__media">
-      {%- if product.featured_image -%}
-        <img
-          src="{{ product.featured_image | img_url: '1000x' }}"
-          alt="{{ product.featured_image.alt | default: product.title | escape }}"
-          class="allmy-product__image"
-          loading="eager"
-          fetchpriority="high"
-          width="1000"
-          height="1000"
-        >
-      {%- else -%}
-        <img
-          src="{{ 'brand-logo-ducks-amber.svg' | file_url }}"
-          alt="{{ product.title | escape }}"
-          class="allmy-product__image"
-          width="240"
-          height="240"
-          style="opacity:.35; max-width:240px;"
-        >
+
+      {%- if product.images.size > 1 -%}
+        <div class="allmy-product__thumbs-col">
+          {%- for image in product.images -%}
+            <button
+              type="button"
+              class="allmy-product__thumb{% if forloop.first %} is-active{% endif %}"
+              data-src="{{ image | image_url: width: 1000 }}"
+              data-alt="{{ image.alt | default: product.title | escape }}"
+              aria-label="View image {{ forloop.index }}"
+            >
+              <img
+                src="{{ image | image_url: width: 200 }}"
+                alt=""
+                width="48"
+                height="48"
+                loading="lazy"
+              >
+            </button>
+          {%- endfor -%}
+        </div>
       {%- endif -%}
 
-      <div class="allmy-product__media-badge">
-        <img
-          src="{{ 'brand-icon-no-water.svg' | file_url }}"
-          alt="No water shipped"
-          width="72"
-          height="72"
-        >
+      <div class="allmy-product__main-img-wrap">
+        {%- if product.featured_image -%}
+          <img
+            id="allmy-main-img"
+            src="{{ product.featured_image | image_url: width: 1000 }}"
+            alt="{{ product.featured_image.alt | default: product.title | escape }}"
+            class="allmy-product__image"
+            loading="eager"
+            fetchpriority="high"
+            width="1000"
+            height="1000"
+          >
+        {%- else -%}
+          <img
+            id="allmy-main-img"
+            src="{{ 'brand-logo-ducks-amber.svg' | file_url }}"
+            alt="{{ product.title | escape }}"
+            class="allmy-product__image"
+            width="240"
+            height="240"
+            style="opacity:.35; max-width:240px;"
+          >
+        {%- endif -%}
+        {%- if product.images.size > 1 -%}
+          <button type="button" class="allmy-product__arrow allmy-product__arrow--prev" aria-label="Previous image">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="allmy-product__arrow allmy-product__arrow--next" aria-label="Next image">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        {%- endif -%}
       </div>
+
     </div>
 
     {%- comment -%} ── RIGHT: INFO ────────────────────────── {%- endcomment -%}
@@ -806,14 +921,84 @@
         .then(function(res) { return res && res.json(); })
         .then(function(cart) {
           if (!cart) return;
-          var cartLink = document.getElementById('custom-cart-link');
-          if (cartLink) cartLink.textContent = 'Bag (' + cart.item_count + ')';
+          ['custom-cart-link', 'custom-mobile-cart-link'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.textContent = 'Bag (' + cart.item_count + ')';
+          });
         })
         .catch(function() {
           addBtn.disabled = false;
           addBtn.textContent = addLabel;
         });
       });
+    }
+
+    // Image gallery — thumbnails, arrows, touch swipe
+    var mainImg = document.getElementById('allmy-main-img');
+    var thumbs = Array.from(document.querySelectorAll('.allmy-product__thumb'));
+    var imgWrap = document.querySelector('.allmy-product__main-img-wrap');
+    var currentIdx = 0;
+    var animating = false;
+
+    function goTo(idx) {
+      if (!thumbs.length || animating) return;
+      var prevIdx = currentIdx;
+      currentIdx = (idx % thumbs.length + thumbs.length) % thumbs.length;
+      if (currentIdx === prevIdx) return;
+
+      thumbs.forEach(function(t, i) { t.classList.toggle('is-active', i === currentIdx); });
+
+      var forward = currentIdx > prevIdx;
+      if (prevIdx === thumbs.length - 1 && currentIdx === 0) forward = true;
+      if (prevIdx === 0 && currentIdx === thumbs.length - 1) forward = false;
+
+      animating = true;
+      var dur = 380;
+
+      var nextEl = document.createElement('img');
+      nextEl.src = thumbs[currentIdx].dataset.src;
+      nextEl.alt = thumbs[currentIdx].dataset.alt;
+      nextEl.className = mainImg.className;
+      nextEl.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;transform:translateX(' + (forward ? '100%' : '-100%') + ');';
+      imgWrap.appendChild(nextEl);
+
+      void nextEl.offsetWidth;
+
+      var tr = 'transform ' + dur + 'ms cubic-bezier(0.4,0,0.2,1)';
+      mainImg.style.transition = tr;
+      mainImg.style.transform = 'translateX(' + (forward ? '-100%' : '100%') + ')';
+      nextEl.style.transition = tr;
+      nextEl.style.transform = 'translateX(0)';
+
+      function onDone() {
+        nextEl.removeEventListener('transitionend', onDone);
+        var old = mainImg;
+        mainImg = nextEl;
+        mainImg.style.transition = '';  // drop transition, keep position/transform intact
+        imgWrap.removeChild(old);
+        animating = false;
+      }
+      nextEl.addEventListener('transitionend', onDone);
+    }
+
+    if (mainImg && thumbs.length) {
+      thumbs.forEach(function(thumb, idx) {
+        thumb.addEventListener('click', function() { goTo(idx); });
+      });
+
+      var prevBtn = document.querySelector('.allmy-product__arrow--prev');
+      var nextBtn = document.querySelector('.allmy-product__arrow--next');
+      if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIdx - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function() { goTo(currentIdx + 1); });
+
+      var touchStartX = 0;
+      imgWrap.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      imgWrap.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) goTo(dx < 0 ? currentIdx + 1 : currentIdx - 1);
+      }, { passive: true });
     }
   })();
 </script>

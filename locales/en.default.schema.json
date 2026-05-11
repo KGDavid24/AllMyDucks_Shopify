@@ -3176,6 +3176,362 @@
         "name": "Slideshow"
       }
     },
+    "allmy-page-hero": {
+      "name": "Page Hero",
+      "settings": {
+        "header__content": { "content": "Content" },
+        "eyebrow": { "label": "Eyebrow" },
+        "heading": { "label": "Heading" },
+        "subtext": { "label": "Subtext" },
+        "header__button": { "content": "Button (optional)" },
+        "btn_label": { "label": "Label" },
+        "btn_url": { "label": "URL" },
+        "btn_style": {
+          "label": "Style",
+          "options__1": { "label": "Solid espresso" },
+          "options__2": { "label": "Solid cream" },
+          "options__3": { "label": "Solid amber" },
+          "options__4": { "label": "Outline espresso" },
+          "options__5": { "label": "Outline cream" }
+        },
+        "header__layout": { "content": "Layout" },
+        "text_align": {
+          "label": "Text alignment",
+          "options__1": { "label": "Left" },
+          "options__2": { "label": "Center" },
+          "options__3": { "label": "Right" }
+        },
+        "vertical_align": {
+          "label": "Vertical alignment",
+          "options__1": { "label": "Top" },
+          "options__2": { "label": "Middle" },
+          "options__3": { "label": "Bottom" }
+        },
+        "min_height": { "label": "Min height (px)" },
+        "content_width": { "label": "Content max-width (px)" },
+        "padding_top": { "label": "Padding top (px)" },
+        "padding_bottom": { "label": "Padding bottom (px)" },
+        "header__background": { "content": "Background" },
+        "bg_image": { "label": "Background image (optional)" },
+        "image_focus": {
+          "label": "Image focal point",
+          "options__1": { "label": "Center" },
+          "options__2": { "label": "Top" },
+          "options__3": { "label": "Bottom" }
+        },
+        "overlay_opacity": { "label": "Color overlay opacity (%)" },
+        "header__colors": { "content": "Colors" },
+        "bg_color": {
+          "label": "Background color",
+          "options__1": { "label": "Deep Espresso" },
+          "options__2": { "label": "Warm Cream" },
+          "options__3": { "label": "Sage Water" },
+          "options__4": { "label": "Accent Cream" },
+          "options__5": { "label": "Warm Amber" }
+        },
+        "text_color": {
+          "label": "Text color",
+          "options__1": { "label": "Cream" },
+          "options__2": { "label": "Espresso" }
+        },
+        "eyebrow_color": {
+          "label": "Eyebrow color",
+          "options__1": { "label": "Warm Amber" },
+          "options__2": { "label": "Clay Blush" },
+          "options__3": { "label": "Sage Water" },
+          "options__4": { "label": "Cream" }
+        }
+      },
+      "presets__1": { "name": "Page Hero" }
+    },
+    "allmy-text-image": {
+      "name": "Text + Image",
+      "settings": {
+        "header__content": { "content": "Content" },
+        "eyebrow": { "label": "Eyebrow" },
+        "heading": { "label": "Heading" },
+        "body": { "label": "Body text" },
+        "header__stat": { "content": "Stat callout (optional)" },
+        "stat_value": { "label": "Value (e.g. 90%)" },
+        "stat_label": { "label": "Label" },
+        "header__button": { "content": "Button (optional)" },
+        "btn_label": { "label": "Label" },
+        "btn_url": { "label": "URL" },
+        "btn_style": {
+          "label": "Style",
+          "options__1": { "label": "Solid espresso" },
+          "options__2": { "label": "Solid cream" },
+          "options__3": { "label": "Solid amber" },
+          "options__4": { "label": "Outline espresso" },
+          "options__5": { "label": "Outline cream" }
+        },
+        "header__image": { "content": "Image" },
+        "image": { "label": "Image" },
+        "mobile_image": { "label": "Mobile image (optional — replaces desktop image on small screens)" },
+        "image_side": {
+          "label": "Image side (desktop)",
+          "options__1": { "label": "Left" },
+          "options__2": { "label": "Right" }
+        },
+        "image_focus": {
+          "label": "Focal point",
+          "options__1": { "label": "Center" },
+          "options__2": { "label": "Top" },
+          "options__3": { "label": "Bottom" },
+          "options__4": { "label": "Left" },
+          "options__5": { "label": "Right" }
+        },
+        "image_mobile": {
+          "label": "Image position (mobile)",
+          "options__1": { "label": "Above text" },
+          "options__2": { "label": "Below text" }
+        },
+        "header__layout": { "content": "Layout" },
+        "min_height": { "label": "Min height (px)" },
+        "pad_v": { "label": "Text padding vertical (px)" },
+        "pad_h": { "label": "Text padding horizontal (px)" },
+        "header__mobile": { "content": "Mobile" },
+        "img_mobile_height": { "label": "Image height on mobile (px)" },
+        "pad_v_mobile": { "label": "Text padding vertical on mobile (px)" },
+        "header__colors": { "content": "Colors" },
+        "bg_color": {
+          "label": "Background",
+          "options__1": { "label": "Warm Cream" },
+          "options__2": { "label": "Deep Espresso" },
+          "options__3": { "label": "Sage Water" },
+          "options__4": { "label": "Accent Cream" }
+        },
+        "text_color": {
+          "label": "Text color",
+          "options__1": { "label": "Espresso" },
+          "options__2": { "label": "Cream" }
+        },
+        "eyebrow_color": {
+          "label": "Eyebrow color",
+          "options__1": { "label": "Clay Blush" },
+          "options__2": { "label": "Warm Amber" },
+          "options__3": { "label": "Sage Water" }
+        },
+        "accent_color": {
+          "label": "Stat accent color",
+          "options__1": { "label": "Warm Amber" },
+          "options__2": { "label": "Clay Blush" },
+          "options__3": { "label": "Sage Water" },
+          "options__4": { "label": "Espresso" }
+        },
+        "stat_bg": {
+          "label": "Stat panel background",
+          "options__1": { "label": "Accent Cream" },
+          "options__2": { "label": "Sage Water" },
+          "options__3": { "label": "Subtle tint" }
+        }
+      },
+      "presets__1": { "name": "Text + Image" }
+    },
+    "allmy-stat-row": {
+      "name": "Stat Row",
+      "settings": {
+        "eyebrow": { "label": "Eyebrow" },
+        "heading": { "label": "Heading" },
+        "card_bordered": { "label": "Show card borders" },
+        "padding_top": { "label": "Padding top (px)" },
+        "padding_bottom": { "label": "Padding bottom (px)" },
+        "bg_color": {
+          "label": "Background",
+          "options__1": { "label": "Sage Water" },
+          "options__2": { "label": "Warm Cream" },
+          "options__3": { "label": "Deep Espresso" },
+          "options__4": { "label": "Accent Cream" }
+        },
+        "text_color": {
+          "label": "Text color",
+          "options__1": { "label": "Espresso" },
+          "options__2": { "label": "Cream" }
+        },
+        "eyebrow_color": {
+          "label": "Eyebrow color",
+          "options__1": { "label": "Clay Blush" },
+          "options__2": { "label": "Warm Amber" },
+          "options__3": { "label": "Espresso" }
+        },
+        "accent_color": {
+          "label": "Accent line color",
+          "options__1": { "label": "Warm Amber" },
+          "options__2": { "label": "Clay Blush" },
+          "options__3": { "label": "Espresso" }
+        }
+      },
+      "blocks": {
+        "stat": {
+          "name": "Stat",
+          "settings": {
+            "value": { "label": "Value" },
+            "label": { "label": "Label" },
+            "description": { "label": "Description (optional)" }
+          }
+        }
+      },
+      "presets__1": { "name": "Stat Row" }
+    },
+    "allmy-values-grid": {
+      "name": "Values Grid",
+      "settings": {
+        "header__header": { "content": "Header" },
+        "eyebrow": { "label": "Eyebrow" },
+        "heading": { "label": "Heading" },
+        "subtext": { "label": "Subtext" },
+        "header_align": {
+          "label": "Header alignment",
+          "options__1": { "label": "Left" },
+          "options__2": { "label": "Center" }
+        },
+        "header__grid": { "content": "Grid" },
+        "columns": {
+          "label": "Columns (desktop)",
+          "options__1": { "label": "2" },
+          "options__2": { "label": "3" },
+          "options__3": { "label": "4" }
+        },
+        "gap": { "label": "Gap (px)" },
+        "card_style": {
+          "label": "Card style",
+          "options__1": { "label": "Bottom-lined" },
+          "options__2": { "label": "Outlined box" },
+          "options__3": { "label": "Filled box" }
+        },
+        "card_fill": {
+          "label": "Card fill color (Filled only)",
+          "options__1": { "label": "Accent Cream" },
+          "options__2": { "label": "Warm Cream" },
+          "options__3": { "label": "Sage Water" },
+          "options__4": { "label": "Espresso" }
+        },
+        "icon_filter": {
+          "label": "Icon color",
+          "options__1": { "label": "Original" },
+          "options__2": { "label": "Force dark" },
+          "options__3": { "label": "Force light (white)" }
+        },
+        "header__spacing": { "content": "Spacing" },
+        "padding_top": { "label": "Padding top (px)" },
+        "padding_bottom": { "label": "Padding bottom (px)" },
+        "header__colors": { "content": "Colors" },
+        "bg_color": {
+          "label": "Background",
+          "options__1": { "label": "Warm Cream" },
+          "options__2": { "label": "Deep Espresso" },
+          "options__3": { "label": "Sage Water" },
+          "options__4": { "label": "Accent Cream" }
+        },
+        "text_color": {
+          "label": "Text color",
+          "options__1": { "label": "Espresso" },
+          "options__2": { "label": "Cream" }
+        },
+        "eyebrow_color": {
+          "label": "Eyebrow color",
+          "options__1": { "label": "Clay Blush" },
+          "options__2": { "label": "Warm Amber" },
+          "options__3": { "label": "Sage Water" }
+        }
+      },
+      "blocks": {
+        "value": {
+          "name": "Value card",
+          "settings": {
+            "icon": { "label": "Icon" },
+            "heading": { "label": "Heading" },
+            "body": { "label": "Body" }
+          }
+        }
+      },
+      "presets__1": { "name": "Values Grid" }
+    },
+    "allmy-timeline": {
+      "name": "Timeline",
+      "settings": {
+        "eyebrow": { "label": "Eyebrow" },
+        "heading": { "label": "Heading" },
+        "padding_top": { "label": "Padding top (px)" },
+        "padding_bottom": { "label": "Padding bottom (px)" },
+        "bg_color": {
+          "label": "Background",
+          "options__1": { "label": "Warm Cream" },
+          "options__2": { "label": "Deep Espresso" },
+          "options__3": { "label": "Sage Water" },
+          "options__4": { "label": "Accent Cream" }
+        },
+        "text_color": {
+          "label": "Text color",
+          "options__1": { "label": "Espresso" },
+          "options__2": { "label": "Cream" }
+        },
+        "eyebrow_color": {
+          "label": "Eyebrow color",
+          "options__1": { "label": "Clay Blush" },
+          "options__2": { "label": "Warm Amber" }
+        },
+        "accent_color": {
+          "label": "Dot & year color",
+          "options__1": { "label": "Warm Amber" },
+          "options__2": { "label": "Clay Blush" },
+          "options__3": { "label": "Sage Water" },
+          "options__4": { "label": "Espresso" }
+        }
+      },
+      "blocks": {
+        "event": {
+          "name": "Milestone",
+          "settings": {
+            "year": { "label": "Year / date label" },
+            "title": { "label": "Title" },
+            "body": { "label": "Description" }
+          }
+        }
+      },
+      "presets__1": { "name": "Timeline" }
+    },
+    "allmy-cta-strip": {
+      "name": "CTA Strip",
+      "settings": {
+        "eyebrow": { "label": "Eyebrow" },
+        "heading": { "label": "Heading" },
+        "subtext": { "label": "Subtext" },
+        "btn_label": { "label": "Button label" },
+        "btn_url": { "label": "Button URL" },
+        "btn_style": {
+          "label": "Button style",
+          "options__1": { "label": "Solid espresso" },
+          "options__2": { "label": "Solid cream" },
+          "options__3": { "label": "Solid amber" },
+          "options__4": { "label": "Outline espresso" },
+          "options__5": { "label": "Outline cream" }
+        },
+        "content_width": { "label": "Content max-width (px)" },
+        "padding_top": { "label": "Padding top (px)" },
+        "padding_bottom": { "label": "Padding bottom (px)" },
+        "bg_color": {
+          "label": "Background",
+          "options__1": { "label": "Deep Espresso" },
+          "options__2": { "label": "Warm Cream" },
+          "options__3": { "label": "Sage Water" },
+          "options__4": { "label": "Warm Amber" }
+        },
+        "text_color": {
+          "label": "Text color",
+          "options__1": { "label": "Cream" },
+          "options__2": { "label": "Espresso" }
+        },
+        "eyebrow_color": {
+          "label": "Eyebrow color",
+          "options__1": { "label": "Warm Amber" },
+          "options__2": { "label": "Clay Blush" },
+          "options__3": { "label": "Sage Water" },
+          "options__4": { "label": "Deep Espresso" }
+        }
+      },
+      "presets__1": { "name": "CTA Strip" }
+    },
     "collapsible_content": {
       "name": "Collapsible content",
       "settings": {

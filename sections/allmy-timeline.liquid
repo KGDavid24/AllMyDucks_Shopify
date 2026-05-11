@@ -1,0 +1,258 @@
+<style>
+  .allmy-tl-{{ section.id }} {
+    background: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top }}px 80px {{ section.settings.padding_bottom }}px;
+  }
+
+  .allmy-tl-{{ section.id }}__header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 72px;
+  }
+
+  .allmy-tl-{{ section.id }}__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: clamp(26px, 3vw, 40px);
+    line-height: 1.18;
+    color: {{ section.settings.text_color }};
+    margin: 0;
+  }
+
+  /* ── TRACK ── */
+  .allmy-tl-{{ section.id }}__track {
+    position: relative;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .allmy-tl-{{ section.id }}__track::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: rgba(43,39,36,0.14);
+    transform: translateX(-50%);
+  }
+
+  /* ── EVENT ── */
+  .allmy-tl-{{ section.id }}__event {
+    display: grid;
+    grid-template-columns: 1fr 48px 1fr;
+    align-items: start;
+    margin-bottom: 52px;
+  }
+
+  .allmy-tl-{{ section.id }}__event:last-child { margin-bottom: 0; }
+
+  /* Odd events: content left, empty right */
+  .allmy-tl-{{ section.id }}__event:nth-child(odd) > .allmy-tl-{{ section.id }}__content {
+    grid-column: 1;
+    text-align: right;
+    padding-right: 28px;
+  }
+
+  .allmy-tl-{{ section.id }}__event:nth-child(odd) > .allmy-tl-{{ section.id }}__spacer {
+    grid-column: 3;
+  }
+
+  /* Even events: empty left, content right */
+  .allmy-tl-{{ section.id }}__event:nth-child(even) > .allmy-tl-{{ section.id }}__content {
+    grid-column: 3;
+    grid-row: 1;
+    text-align: left;
+    padding-left: 28px;
+  }
+
+  .allmy-tl-{{ section.id }}__event:nth-child(even) > .allmy-tl-{{ section.id }}__dot-wrap {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .allmy-tl-{{ section.id }}__event:nth-child(even) > .allmy-tl-{{ section.id }}__spacer {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .allmy-tl-{{ section.id }}__dot-wrap {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    padding-top: 2px;
+  }
+
+  .allmy-tl-{{ section.id }}__dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: {{ section.settings.accent_color }};
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .allmy-tl-{{ section.id }}__year {
+    font-family: var(--font-body-family);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: {{ section.settings.accent_color }};
+    margin-bottom: 8px;
+  }
+
+  .allmy-tl-{{ section.id }}__title {
+    font-family: var(--font-heading-family);
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 10px;
+  }
+
+  .allmy-tl-{{ section.id }}__body {
+    font-family: var(--font-body-family);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.72;
+    color: {{ section.settings.text_color }};
+    opacity: 0.68;
+  }
+
+  /* ── MOBILE: single column ── */
+  @media screen and (max-width: 768px) {
+    .allmy-tl-{{ section.id }} { padding: 56px 24px; }
+
+    .allmy-tl-{{ section.id }}__track::before {
+      left: 7px;
+      transform: none;
+    }
+
+    .allmy-tl-{{ section.id }}__event {
+      grid-template-columns: 24px 1fr;
+      margin-bottom: 40px;
+    }
+
+    .allmy-tl-{{ section.id }}__event:nth-child(odd) > .allmy-tl-{{ section.id }}__content,
+    .allmy-tl-{{ section.id }}__event:nth-child(even) > .allmy-tl-{{ section.id }}__content {
+      grid-column: 2;
+      grid-row: 1;
+      text-align: left;
+      padding: 0 0 0 16px;
+    }
+
+    .allmy-tl-{{ section.id }}__event:nth-child(odd) > .allmy-tl-{{ section.id }}__dot-wrap,
+    .allmy-tl-{{ section.id }}__event:nth-child(even) > .allmy-tl-{{ section.id }}__dot-wrap {
+      grid-column: 1;
+      grid-row: 1;
+      justify-content: flex-start;
+    }
+
+    .allmy-tl-{{ section.id }}__spacer { display: none !important; }
+  }
+</style>
+
+<section class="allmy-tl-{{ section.id }}">
+  {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+    <div class="allmy-tl-{{ section.id }}__header">
+      {% render 'allmy-eyebrow', text: section.settings.eyebrow, color: section.settings.eyebrow_color %}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="allmy-tl-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="allmy-tl-{{ section.id }}__track">
+    {%- for block in section.blocks -%}
+      <div class="allmy-tl-{{ section.id }}__event" {{ block.shopify_attributes }}>
+        <div class="allmy-tl-{{ section.id }}__content">
+          {%- if block.settings.year != blank -%}
+            <p class="allmy-tl-{{ section.id }}__year">{{ block.settings.year }}</p>
+          {%- endif -%}
+          {%- if block.settings.title != blank -%}
+            <h3 class="allmy-tl-{{ section.id }}__title">{{ block.settings.title }}</h3>
+          {%- endif -%}
+          {%- if block.settings.body != blank -%}
+            <p class="allmy-tl-{{ section.id }}__body">{{ block.settings.body }}</p>
+          {%- endif -%}
+        </div>
+        <div class="allmy-tl-{{ section.id }}__dot-wrap">
+          <span class="allmy-tl-{{ section.id }}__dot"></span>
+        </div>
+        <div class="allmy-tl-{{ section.id }}__spacer"></div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.allmy-timeline.name",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "t:sections.allmy-timeline.settings.eyebrow.label", "default": "Our Journey" },
+    { "type": "text", "id": "heading", "label": "t:sections.allmy-timeline.settings.heading.label", "default": "How we got here." },
+    { "type": "range", "id": "padding_top", "label": "t:sections.allmy-timeline.settings.padding_top.label", "min": 40, "max": 160, "step": 8, "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "t:sections.allmy-timeline.settings.padding_bottom.label", "min": 40, "max": 160, "step": 8, "default": 96 },
+    {
+      "type": "select", "id": "bg_color", "label": "t:sections.allmy-timeline.settings.bg_color.label",
+      "options": [
+        { "value": "#F5F0E3", "label": "t:sections.allmy-timeline.settings.bg_color.options__1.label" },
+        { "value": "#2B2724", "label": "t:sections.allmy-timeline.settings.bg_color.options__2.label" },
+        { "value": "#dde6e3", "label": "t:sections.allmy-timeline.settings.bg_color.options__3.label" },
+        { "value": "#EDE8D9", "label": "t:sections.allmy-timeline.settings.bg_color.options__4.label" }
+      ],
+      "default": "#F5F0E3"
+    },
+    {
+      "type": "select", "id": "text_color", "label": "t:sections.allmy-timeline.settings.text_color.label",
+      "options": [
+        { "value": "#2B2724", "label": "t:sections.allmy-timeline.settings.text_color.options__1.label" },
+        { "value": "#F5F0E3", "label": "t:sections.allmy-timeline.settings.text_color.options__2.label" }
+      ],
+      "default": "#2B2724"
+    },
+    {
+      "type": "select", "id": "eyebrow_color", "label": "t:sections.allmy-timeline.settings.eyebrow_color.label",
+      "options": [
+        { "value": "#C9B2A3", "label": "t:sections.allmy-timeline.settings.eyebrow_color.options__1.label" },
+        { "value": "#e2b786", "label": "t:sections.allmy-timeline.settings.eyebrow_color.options__2.label" }
+      ],
+      "default": "#C9B2A3"
+    },
+    {
+      "type": "select", "id": "accent_color", "label": "t:sections.allmy-timeline.settings.accent_color.label",
+      "options": [
+        { "value": "#e2b786", "label": "t:sections.allmy-timeline.settings.accent_color.options__1.label" },
+        { "value": "#C9B2A3", "label": "t:sections.allmy-timeline.settings.accent_color.options__2.label" },
+        { "value": "#dde6e3", "label": "t:sections.allmy-timeline.settings.accent_color.options__3.label" },
+        { "value": "#2B2724", "label": "t:sections.allmy-timeline.settings.accent_color.options__4.label" }
+      ],
+      "default": "#e2b786"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "t:sections.allmy-timeline.blocks.event.name",
+      "settings": [
+        { "type": "text", "id": "year", "label": "t:sections.allmy-timeline.blocks.event.settings.year.label", "default": "2022" },
+        { "type": "text", "id": "title", "label": "t:sections.allmy-timeline.blocks.event.settings.title.label", "default": "The beginning" },
+        { "type": "textarea", "id": "body", "label": "t:sections.allmy-timeline.blocks.event.settings.body.label" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.allmy-timeline.presets__1.name",
+      "blocks": [
+        { "type": "event", "settings": { "year": "2021", "title": "The frustration", "body": "Two people standing in a supermarket aisle, staring at shelves of plastic bottles that were 90% water. There had to be a better way." } },
+        { "type": "event", "settings": { "year": "2022", "title": "First formula", "body": "Months of kitchen-table testing later — a concentrate that actually worked and felt gentle enough to use every day. The ducks started to align." } },
+        { "type": "event", "settings": { "year": "2023", "title": "First customers", "body": "Small batches. Real feedback. A community of people who were done with single-use plastic and wanted something that actually meant something." } },
+        { "type": "event", "settings": { "year": "2024", "title": "All My Ducks", "body": "The full range launches. Three products. Zero water shipped. All recycled packaging. The frustration becomes a brand." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,7 @@
+{%- comment -%}
+  Usage: {% render 'allmy-eyebrow', text: section.settings.eyebrow, color: '#C9B2A3' %}
+  Default color: Clay Blush (#C9B2A3)
+{%- endcomment -%}
+{%- if text != blank -%}
+  <p style="font-family:var(--font-body-family);font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:{{ color | default: '#C9B2A3' }};margin:0 0 16px;">{{ text }}</p>
+{%- endif -%}

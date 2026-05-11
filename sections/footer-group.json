@@ -13,7 +13,18 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "settings": {}
+      "settings": {
+        "tagline": "Premium doesn't have to mean pretentious. It can mean purposeful. Care doesn't have to cost the world. It can heal it.",
+        "menu_shop_label": "Shop",
+        "menu_shop": "left-menu",
+        "menu_company_label": "Company",
+        "menu_company": "main-menu",
+        "menu_help_label": "Help",
+        "menu_help": "right-menu",
+        "instagram_url": "",
+        "tiktok_url": "",
+        "facebook_url": ""
+      }
     }
   },
   "order": [

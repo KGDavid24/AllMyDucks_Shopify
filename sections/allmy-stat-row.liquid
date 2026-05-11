@@ -1,0 +1,178 @@
+<style>
+  .allmy-sr-{{ section.id }} {
+    background: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top }}px 80px {{ section.settings.padding_bottom }}px;
+  }
+
+  .allmy-sr-{{ section.id }}__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .allmy-sr-{{ section.id }}__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: clamp(22px, 2.8vw, 36px);
+    color: {{ section.settings.text_color }};
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .allmy-sr-{{ section.id }}__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size | at_most: 4 }}, 1fr);
+    gap: 24px;
+  }
+
+  .allmy-sr-{{ section.id }}__item {
+    text-align: center;
+    padding: 40px 20px;
+    {%- if section.settings.card_bordered %}
+      border: 1px solid rgba(43,39,36,0.1);
+    {%- endif %}
+  }
+
+  .allmy-sr-{{ section.id }}__accent {
+    width: 28px;
+    height: 2px;
+    background: {{ section.settings.accent_color }};
+    margin: 0 auto 24px;
+  }
+
+  .allmy-sr-{{ section.id }}__value {
+    font-family: var(--font-heading-family);
+    font-size: clamp(44px, 5.5vw, 68px);
+    font-weight: 700;
+    color: {{ section.settings.text_color }};
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .allmy-sr-{{ section.id }}__label {
+    font-family: var(--font-body-family);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: {{ section.settings.text_color }};
+    opacity: 0.6;
+    margin-bottom: 10px;
+  }
+
+  .allmy-sr-{{ section.id }}__desc {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: {{ section.settings.text_color }};
+    opacity: 0.5;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 768px) {
+    .allmy-sr-{{ section.id }} { padding: 56px 24px; }
+    .allmy-sr-{{ section.id }}__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+  }
+
+  @media screen and (max-width: 420px) {
+    .allmy-sr-{{ section.id }}__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="allmy-sr-{{ section.id }}">
+  {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+    <div class="allmy-sr-{{ section.id }}__header">
+      {% render 'allmy-eyebrow', text: section.settings.eyebrow, color: section.settings.eyebrow_color %}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="allmy-sr-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="allmy-sr-{{ section.id }}__grid">
+    {%- for block in section.blocks -%}
+      <div class="allmy-sr-{{ section.id }}__item" {{ block.shopify_attributes }}>
+        <div class="allmy-sr-{{ section.id }}__accent"></div>
+        <div class="allmy-sr-{{ section.id }}__value">{{ block.settings.value }}</div>
+        <div class="allmy-sr-{{ section.id }}__label">{{ block.settings.label }}</div>
+        {%- if block.settings.description != blank -%}
+          <p class="allmy-sr-{{ section.id }}__desc">{{ block.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.allmy-stat-row.name",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "t:sections.allmy-stat-row.settings.eyebrow.label" },
+    { "type": "text", "id": "heading", "label": "t:sections.allmy-stat-row.settings.heading.label" },
+    { "type": "checkbox", "id": "card_bordered", "label": "t:sections.allmy-stat-row.settings.card_bordered.label", "default": false },
+    { "type": "range", "id": "padding_top", "label": "t:sections.allmy-stat-row.settings.padding_top.label", "min": 40, "max": 160, "step": 8, "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "t:sections.allmy-stat-row.settings.padding_bottom.label", "min": 40, "max": 160, "step": 8, "default": 88 },
+    {
+      "type": "select", "id": "bg_color", "label": "t:sections.allmy-stat-row.settings.bg_color.label",
+      "options": [
+        { "value": "#dde6e3", "label": "t:sections.allmy-stat-row.settings.bg_color.options__1.label" },
+        { "value": "#F5F0E3", "label": "t:sections.allmy-stat-row.settings.bg_color.options__2.label" },
+        { "value": "#2B2724", "label": "t:sections.allmy-stat-row.settings.bg_color.options__3.label" },
+        { "value": "#EDE8D9", "label": "t:sections.allmy-stat-row.settings.bg_color.options__4.label" }
+      ],
+      "default": "#dde6e3"
+    },
+    {
+      "type": "select", "id": "text_color", "label": "t:sections.allmy-stat-row.settings.text_color.label",
+      "options": [
+        { "value": "#2B2724", "label": "t:sections.allmy-stat-row.settings.text_color.options__1.label" },
+        { "value": "#F5F0E3", "label": "t:sections.allmy-stat-row.settings.text_color.options__2.label" }
+      ],
+      "default": "#2B2724"
+    },
+    {
+      "type": "select", "id": "eyebrow_color", "label": "t:sections.allmy-stat-row.settings.eyebrow_color.label",
+      "options": [
+        { "value": "#C9B2A3", "label": "t:sections.allmy-stat-row.settings.eyebrow_color.options__1.label" },
+        { "value": "#e2b786", "label": "t:sections.allmy-stat-row.settings.eyebrow_color.options__2.label" },
+        { "value": "#2B2724", "label": "t:sections.allmy-stat-row.settings.eyebrow_color.options__3.label" }
+      ],
+      "default": "#C9B2A3"
+    },
+    {
+      "type": "select", "id": "accent_color", "label": "t:sections.allmy-stat-row.settings.accent_color.label",
+      "options": [
+        { "value": "#e2b786", "label": "t:sections.allmy-stat-row.settings.accent_color.options__1.label" },
+        { "value": "#C9B2A3", "label": "t:sections.allmy-stat-row.settings.accent_color.options__2.label" },
+        { "value": "#2B2724", "label": "t:sections.allmy-stat-row.settings.accent_color.options__3.label" }
+      ],
+      "default": "#e2b786"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "t:sections.allmy-stat-row.blocks.stat.name",
+      "settings": [
+        { "type": "text", "id": "value", "label": "t:sections.allmy-stat-row.blocks.stat.settings.value.label", "default": "90%" },
+        { "type": "text", "id": "label", "label": "t:sections.allmy-stat-row.blocks.stat.settings.label.label", "default": "Less plastic" },
+        { "type": "text", "id": "description", "label": "t:sections.allmy-stat-row.blocks.stat.settings.description.label" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.allmy-stat-row.presets__1.name",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "90%", "label": "Less plastic", "description": "Versus buying conventional single-use bottles" } },
+        { "type": "stat", "settings": { "value": "0%", "label": "Water shipped", "description": "You add it at home — so we don't have to" } },
+        { "type": "stat", "settings": { "value": "100%", "label": "Recycled packaging", "description": "Post-consumer plastic, every time" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

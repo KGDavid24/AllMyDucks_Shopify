@@ -5,7 +5,7 @@
     min-height: 600px;
   }
 
-  /* ── LEFT PANEL ── */
+  /* LEFT PANEL */
   .allmy-contact__left {
     background-color: #2B2724;
     padding: 80px 64px;
@@ -24,7 +24,7 @@
   }
 
   .allmy-contact__heading {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: var(--font-heading-family);
     font-weight: 700;
     font-size: clamp(28px, 3.5vw, 44px);
     line-height: 1.22;
@@ -97,7 +97,7 @@
     stroke-linejoin: round;
   }
 
-  /* ── RIGHT PANEL (FORM) ── */
+  /* RIGHT PANEL (FORM) */
   .allmy-contact__right {
     background-color: #F5F0E3;
     padding: 80px 64px;
@@ -180,15 +180,29 @@
     background-color: #3d3532;
   }
 
-  /* ── RESPONSIVE ── */
+  .allmy-contact__success {
+    color: #2B2724;
+    font-weight: 300;
+    padding: 20px 0;
+  }
+
+  .allmy-contact__error {
+    color: #c0392b;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  /* RESPONSIVE */
   @media screen and (max-width: 900px) {
-    .allmy-contact {
-      grid-template-columns: 1fr;
-    }
+    .allmy-contact { grid-template-columns: 1fr; }
     .allmy-contact__left,
-    .allmy-contact__right {
-      padding: 64px 28px;
-    }
+    .allmy-contact__right { padding: 64px 28px; }
+  }
+
+  @media screen and (max-width: 480px) {
+    .allmy-contact__left,
+    .allmy-contact__right { padding: 48px 20px; }
+    .allmy-contact__submit { width: 100%; text-align: center; }
   }
 </style>
 
@@ -223,7 +237,7 @@
 
     {% form 'contact' %}
       {% if form.posted_successfully? %}
-        <p style="color: #2B2724; font-weight: 300; padding: 20px 0;">{{ 'allmy.contact.success' | t: default: 'Thanks — we will be in touch soon.' }}</p>
+        <p class="allmy-contact__success">{{ 'allmy.contact.success' | t: default: 'Thanks -- we will be in touch soon.' }}</p>
       {% else %}
         <div class="allmy-contact__field">
           <label for="ContactFormName" class="allmy-contact__label">{{ 'allmy.contact.name_label' | t: default: 'Name' }}</label>
@@ -262,7 +276,7 @@
         </div>
 
         {% if form.errors %}
-          <p style="color: #c0392b; font-size: 14px; margin-bottom: 16px;">{{ form.errors | default_errors }}</p>
+          <p class="allmy-contact__error">{{ form.errors | default_errors }}</p>
         {% endif %}
 
         <button type="submit" class="allmy-contact__submit">{{ 'allmy.contact.submit' | t: default: 'Send message' }}</button>

@@ -2,7 +2,7 @@
   .allmy-grid {
     background: #F5F0E3;
     padding: 96px 50px 112px;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body-family);
   }
 
   .allmy-grid__header {
@@ -22,7 +22,7 @@
   }
 
   .allmy-grid__heading {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: var(--font-heading-family);
     font-weight: 700;
     font-size: clamp(26px, 3vw, 40px);
     line-height: 1.2;
@@ -49,14 +49,14 @@
     border-color: rgba(43,39,36,0.4);
   }
 
-  /* ── Grid ── */
+  /* Grid */
   .allmy-grid__products {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
   }
 
-  /* ── Card ── */
+  /* Card */
   .allmy-grid__card {
     display: block;
     text-decoration: none;
@@ -71,7 +71,7 @@
     border-right: none;
   }
 
-  /* ── Image + overlay container ── */
+  /* Image + overlay container */
   .allmy-grid__image-wrap {
     aspect-ratio: 4 / 5;
     overflow: hidden;
@@ -105,7 +105,7 @@
     pointer-events: none;
   }
 
-  /* ── Sold out badge ── */
+  /* Sold out badge */
   .allmy-grid__badge {
     position: absolute;
     top: 16px;
@@ -123,7 +123,7 @@
     backdrop-filter: blur(4px);
   }
 
-  /* ── Meta — sits inside the image at the bottom ── */
+  /* Meta - sits inside the image at the bottom */
   .allmy-grid__meta {
     position: absolute;
     bottom: 0;
@@ -164,7 +164,7 @@
     font-weight: 500;
   }
 
-  /* ── Footer CTA ── */
+  /* Footer CTA */
   .allmy-grid__footer {
     display: flex;
     justify-content: center;
@@ -197,19 +197,24 @@
 
   .allmy-grid__btn:hover .allmy-grid__btn-arrow { transform: translateX(4px); }
 
-  /* ── Responsive ── */
+  /* Responsive */
   @media screen and (max-width: 900px) {
-    .allmy-grid { padding: 72px 28px 88px; }
+    .allmy-grid { padding: 56px 24px 72px; }
     .allmy-grid__products { grid-template-columns: repeat(2, 1fr); gap: 0; }
     .allmy-grid__card:nth-child(3n) { border-right: 1px solid rgba(43,39,36,0.1); }
     .allmy-grid__card:nth-child(2n) { border-right: none; }
   }
 
   @media screen and (max-width: 540px) {
-    .allmy-grid__header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .allmy-grid { padding: 48px 16px 64px; }
+    .allmy-grid__header { flex-direction: column; align-items: flex-start; gap: 12px; }
     .allmy-grid__products { grid-template-columns: repeat(2, 1fr); }
-    .allmy-grid__card { padding: 0 10px 36px; }
-    .allmy-grid__meta { flex-direction: column; gap: 4px; }
+    .allmy-grid__card { padding: 0 6px; }
+    .allmy-grid__title { font-size: 13px; }
+    .allmy-grid__price { font-size: 12px; }
+    .allmy-grid__meta { padding: 12px 12px 14px; flex-direction: column; align-items: flex-start; gap: 2px; }
+    .allmy-grid__footer { margin-top: 28px; }
+    .allmy-grid__btn { padding: 14px 32px; font-size: 11px; }
   }
 </style>
 
@@ -224,7 +229,7 @@
     </div>
     {%- assign col = collections[section.settings.collection] -%}
     {%- if col != blank and section.settings.show_view_all -%}
-      <a href="{{ col.url }}" class="allmy-grid__header-link">{{ section.settings.view_all_label }} →</a>
+      <a href="{{ col.url }}" class="allmy-grid__header-link">{{ section.settings.view_all_label }} &#8594;</a>
     {%- endif -%}
   </div>
 
@@ -266,7 +271,7 @@
     <div class="allmy-grid__footer">
       <a href="{{ col.url }}" class="allmy-grid__btn">
         {{ section.settings.view_all_label }}
-        <span class="allmy-grid__btn-arrow" aria-hidden="true">→</span>
+        <span class="allmy-grid__btn-arrow" aria-hidden="true">&#8594;</span>
       </a>
     </div>
   {%- endif -%}

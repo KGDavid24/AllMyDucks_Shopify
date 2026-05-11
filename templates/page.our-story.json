@@ -1,0 +1,128 @@
+{
+  "sections": {
+    "hero": {
+      "type": "allmy-page-hero",
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "We got tired of paying for water.",
+        "subtext": "All My Ducks started with a simple frustration and a stubborn belief that things could be done differently.",
+        "btn_label": "",
+        "text_align": "center",
+        "vertical_align": "center",
+        "min_height": 480,
+        "content_width": 800,
+        "padding_top": 104,
+        "padding_bottom": 104,
+        "overlay_opacity": 0,
+        "bg_color": "#F5F0E3",
+        "text_color": "#2B2724",
+        "eyebrow_color": "#C9B2A3"
+      }
+    },
+    "origin": {
+      "type": "allmy-text-image",
+      "settings": {
+        "eyebrow": "Where it started",
+        "heading": "Two people. One very annoying shopping aisle.",
+        "body": "<p>We were buying the same cleaning products as everyone else — big plastic bottles, mostly water, gone in three weeks. The recycling bin filled up faster than the cabinet.</p><p>We started asking why no one had fixed this. The answer turned out to be: someone had to actually do it. So we did.</p>",
+        "btn_label": "",
+        "image_side": "right",
+        "image_focus": "center center",
+        "image_mobile": "above",
+        "min_height": 540,
+        "pad_v": 80,
+        "pad_h": 72,
+        "bg_color": "#2B2724",
+        "text_color": "#F5F0E3",
+        "eyebrow_color": "#e2b786",
+        "accent_color": "#e2b786",
+        "stat_bg": "rgba(43,39,36,0.06)"
+      }
+    },
+    "timeline": {
+      "type": "allmy-timeline",
+      "blocks": {
+        "ev-1": { "type": "event", "settings": { "year": "2021", "title": "The frustration", "body": "Two people standing in a supermarket aisle, staring at shelves of plastic bottles that were 90% water. There had to be a better way." } },
+        "ev-2": { "type": "event", "settings": { "year": "2022", "title": "First formula", "body": "Months of kitchen-table testing later — a concentrate that actually worked and felt gentle enough to use every day. The ducks started to align." } },
+        "ev-3": { "type": "event", "settings": { "year": "2023", "title": "First customers", "body": "Small batches. Real feedback. A community of people done with single-use plastic who wanted something that actually meant something." } },
+        "ev-4": { "type": "event", "settings": { "year": "2024", "title": "All My Ducks launches", "body": "The full range goes live. Three products. Zero water shipped. All recycled packaging. The frustration becomes a brand." } }
+      },
+      "block_order": ["ev-1", "ev-2", "ev-3", "ev-4"],
+      "settings": {
+        "eyebrow": "Our journey",
+        "heading": "How we got here.",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "bg_color": "#F5F0E3",
+        "text_color": "#2B2724",
+        "eyebrow_color": "#C9B2A3",
+        "accent_color": "#e2b786"
+      }
+    },
+    "mission": {
+      "type": "allmy-text-image",
+      "settings": {
+        "eyebrow": "What drives us",
+        "heading": "Premium doesn't have to mean pretentious.",
+        "body": "<p>We think you should be able to buy something genuinely good — good for you, good for the world — without paying luxury prices or wading through greenwashing claims.</p><p>Care doesn't have to cost the world. It can heal it. That is the idea behind every product we make.</p>",
+        "btn_label": "Why we go eco",
+        "btn_url": "/pages/why-eco",
+        "btn_style": "outline-dark",
+        "image_side": "left",
+        "image_focus": "center center",
+        "image_mobile": "above",
+        "min_height": 520,
+        "pad_v": 80,
+        "pad_h": 72,
+        "bg_color": "#dde6e3",
+        "text_color": "#2B2724",
+        "eyebrow_color": "#C9B2A3",
+        "accent_color": "#e2b786",
+        "stat_bg": "#F5F0E3"
+      }
+    },
+    "values": {
+      "type": "allmy-values-grid",
+      "blocks": {
+        "val-1": { "type": "value", "settings": { "heading": "Small team, real people", "body": "<p>We read every message. There are no bots, no ticket queues, no offshore support desks. If you have a question or a problem, you are talking to us.</p>" } },
+        "val-2": { "type": "value", "settings": { "heading": "We mean what we say", "body": "<p>No vague sustainability pledges, no offsetting tricks. We do not ship water. We use recycled plastic. We formulate gently. Full stop.</p>" } },
+        "val-3": { "type": "value", "settings": { "heading": "Built to last", "body": "<p>We are not here to sell you a new product every month. We want you to have one concentrate that lasts, works well, and sits quietly on your shelf for weeks.</p>" } }
+      },
+      "block_order": ["val-1", "val-2", "val-3"],
+      "settings": {
+        "eyebrow": "Who we are",
+        "heading": "What you can expect from us.",
+        "subtext": "",
+        "header_align": "center",
+        "columns": "3",
+        "gap": 40,
+        "card_style": "outlined",
+        "card_fill": "#EDE8D9",
+        "icon_filter": "dark",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "bg_color": "#EDE8D9",
+        "text_color": "#2B2724",
+        "eyebrow_color": "#C9B2A3"
+      }
+    },
+    "cta": {
+      "type": "allmy-cta-strip",
+      "settings": {
+        "eyebrow": "Join us",
+        "heading": "All the ducks. All in a row.",
+        "subtext": "Try one product. Keep the bottle. Refill it. That is the whole idea.",
+        "btn_label": "Shop the range",
+        "btn_url": "/collections/all",
+        "btn_style": "light",
+        "content_width": 640,
+        "padding_top": 104,
+        "padding_bottom": 104,
+        "bg_color": "#2B2724",
+        "text_color": "#F5F0E3",
+        "eyebrow_color": "#e2b786"
+      }
+    }
+  },
+  "order": ["hero", "origin", "timeline", "mission", "values", "cta"]
+}

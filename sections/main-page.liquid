@@ -240,7 +240,7 @@
 
             <a href="{{ product.url }}" class="mosaic-card {{ size_class }}">
               <div class="mosaic-card-bg">
-                <img src="{{ product.featured_image | img_url: '1000x' }}" alt="{{ product.title }}" loading="lazy">
+                <img src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title }}" loading="lazy">
               </div>
               <div class="mosaic-info" style="color: {{ card_color }};">
                 <h2 class="mosaic-product-name">{{ product.title }}</h2>

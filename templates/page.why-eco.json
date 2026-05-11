@@ -1,0 +1,132 @@
+{
+  "sections": {
+    "hero": {
+      "type": "allmy-page-hero",
+      "settings": {
+        "eyebrow": "Why Eco",
+        "heading": "The world doesn't need more soap. It needs better soap.",
+        "subtext": "Most cleaning products are 90% water. We stripped everything back to just what works — then let you add the water yourself.",
+        "btn_label": "Shop the range",
+        "btn_url": "/collections/all",
+        "btn_style": "light",
+        "text_align": "center",
+        "vertical_align": "center",
+        "min_height": 520,
+        "content_width": 840,
+        "padding_top": 112,
+        "padding_bottom": 112,
+        "overlay_opacity": 0,
+        "bg_color": "#2B2724",
+        "text_color": "#F5F0E3",
+        "eyebrow_color": "#e2b786"
+      }
+    },
+    "stats": {
+      "type": "allmy-stat-row",
+      "blocks": {
+        "stat-1": { "type": "stat", "settings": { "value": "90%", "label": "Less plastic", "description": "Versus buying conventional single-use bottles" } },
+        "stat-2": { "type": "stat", "settings": { "value": "0%", "label": "Water shipped", "description": "You add it at home — so we never have to" } },
+        "stat-3": { "type": "stat", "settings": { "value": "100%", "label": "Recycled packaging", "description": "Post-consumer plastic, every single time" } }
+      },
+      "block_order": ["stat-1", "stat-2", "stat-3"],
+      "settings": {
+        "eyebrow": "The numbers",
+        "heading": "Purposeful by design.",
+        "card_bordered": false,
+        "padding_top": 88,
+        "padding_bottom": 88,
+        "bg_color": "#dde6e3",
+        "text_color": "#2B2724",
+        "eyebrow_color": "#C9B2A3",
+        "accent_color": "#e2b786"
+      }
+    },
+    "how-it-works": {
+      "type": "allmy-text-image",
+      "settings": {
+        "eyebrow": "How it works",
+        "heading": "You add the water. We skip the shipping.",
+        "body": "<p>A concentrate contains only the active ingredients — the 10% that actually cleans. You add tap water at home into a reusable dispenser and get exactly the same result.</p><p>No shipping weight from water. No single-use bottle for every refill. No compromise on performance.</p>",
+        "stat_value": "10×",
+        "stat_label": "One bottle replaces up to ten conventional bottles",
+        "btn_label": "Read the FAQ",
+        "btn_url": "/pages/faq",
+        "btn_style": "outline-dark",
+        "image_side": "right",
+        "image_focus": "center center",
+        "image_mobile": "above",
+        "min_height": 560,
+        "pad_v": 80,
+        "pad_h": 72,
+        "bg_color": "#F5F0E3",
+        "text_color": "#2B2724",
+        "eyebrow_color": "#C9B2A3",
+        "accent_color": "#e2b786",
+        "stat_bg": "#EDE8D9"
+      }
+    },
+    "values": {
+      "type": "allmy-values-grid",
+      "blocks": {
+        "val-1": { "type": "value", "settings": { "heading": "No Water Shipped", "body": "<p>Up to 90% of most cleaning products is water. We skip it entirely. You add tap water at home and get the same performance — without the weight, waste, or emissions from shipping liquid.</p>" } },
+        "val-2": { "type": "value", "settings": { "heading": "Naturally Gentle Formula", "body": "<p>No harsh sulfates, synthetic fragrances, or aggressive preservatives. Every ingredient earns its place — effective on the surface, kind on skin, and safe to go down the drain.</p>" } },
+        "val-3": { "type": "value", "settings": { "heading": "Recycled Plastic Only", "body": "<p>Every bottle we ship is made from post-consumer recycled plastic. We refuse to introduce new plastic into the world for something people use once and throw away.</p>" } }
+      },
+      "block_order": ["val-1", "val-2", "val-3"],
+      "settings": {
+        "eyebrow": "Our commitments",
+        "heading": "Three things we will never compromise on.",
+        "subtext": "",
+        "header_align": "center",
+        "columns": "3",
+        "gap": 40,
+        "card_style": "lined",
+        "card_fill": "#EDE8D9",
+        "icon_filter": "dark",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "bg_color": "#EDE8D9",
+        "text_color": "#2B2724",
+        "eyebrow_color": "#C9B2A3"
+      }
+    },
+    "bigger-picture": {
+      "type": "allmy-text-image",
+      "settings": {
+        "eyebrow": "The bigger picture",
+        "heading": "Small changes. Measurable impact.",
+        "body": "<p>The beauty industry produces over 120 billion packaging units every year. Most of it is plastic. Most of it ends up in landfill.</p><p>We are not going to fix that alone. But if every product we make replaces ten single-use bottles, the math starts to matter.</p>",
+        "btn_label": "",
+        "image_side": "left",
+        "image_focus": "center center",
+        "image_mobile": "above",
+        "min_height": 500,
+        "pad_v": 80,
+        "pad_h": 72,
+        "bg_color": "#2B2724",
+        "text_color": "#F5F0E3",
+        "eyebrow_color": "#e2b786",
+        "accent_color": "#e2b786",
+        "stat_bg": "rgba(43,39,36,0.06)"
+      }
+    },
+    "cta": {
+      "type": "allmy-cta-strip",
+      "settings": {
+        "eyebrow": "Make the switch",
+        "heading": "Better for you. Better for the planet.",
+        "subtext": "Start with one product. You will not go back.",
+        "btn_label": "Shop now",
+        "btn_url": "/collections/all",
+        "btn_style": "dark",
+        "content_width": 680,
+        "padding_top": 104,
+        "padding_bottom": 104,
+        "bg_color": "#e2b786",
+        "text_color": "#2B2724",
+        "eyebrow_color": "#2B2724"
+      }
+    }
+  },
+  "order": ["hero", "stats", "how-it-works", "values", "bigger-picture", "cta"]
+}

@@ -19,7 +19,7 @@
   }
 
   .allmy-faq__heading {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: var(--font-heading-family);
     font-weight: 700;
     font-size: 38px;
     line-height: 1.22;
@@ -94,7 +94,7 @@
   }
 
   .allmy-faq__footer-heading {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: var(--font-heading-family);
     font-weight: 700;
     font-size: 24px;
     color: #F5F0E3;
@@ -127,6 +127,11 @@
     .allmy-faq { padding: 64px 24px; }
     .allmy-faq__heading { font-size: 28px; }
     .allmy-faq__footer { padding: 40px 24px; }
+  }
+
+  @media screen and (max-width: 480px) {
+    .allmy-faq { padding: 48px 16px; }
+    .allmy-faq__heading { font-size: 24px; }
   }
 </style>
 
